@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/fractal/fra_dim.c $: $Revision: #31 $, $Date: 2006/08/08 $";
+static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/fractal/fra_dim.c $: $Revision: #32 $, $Date: 2007/10/08 $";
 /* This is a self-documenting doc++ file */
 
 #include "fra_dim.h"
@@ -301,36 +301,36 @@ mutil_errcode frauniv_dimension_information(
   double         density;
   sint32_mat     nrow;
   sint32_mat     ncol;
-  
+
   MUTIL_INTERRUPT_INIT( intrp_ptr );
-  
+
   MUTIL_TRACE( "Start frauniv_dimension_information()" );
-  
+
   /* avoid lint warning */
-  
+
   ( void ) whatssi;
-  
+
   /* initialize memory list */
-  
+
   MEMLIST_INIT( list );
-  
+
   /* check inputs for errors */
-  
+
   err = frauniv_check_embedding_inputs(
     time_series, embedding_dimension, time_delay, orbital_lag,
     intrp_ptr, &is_delay_embedding, &n_embed );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+
   if ( MATUNIV_NELEM( time_series ) < 1000 ){
     MUTIL_ERROR( "Time series must be at least 1000 points long" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-  
+
   if ( n_density < 1 ){
     MUTIL_ERROR( "Number of densities must be positive" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-  
+
   switch( distance_metric ){
   case FRA_DISTANCE_L1:
   case FRA_DISTANCE_L2:
@@ -340,79 +340,79 @@ mutil_errcode frauniv_dimension_information(
     MUTIL_ERROR( "Unsupported distance metric" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-  
+
   if ( max_neighbors < 100 ){
     MUTIL_ERROR( "Maximum neighbors must be at least 100" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-  
+
   if ( max_neighbors > n_embed ){
     MUTIL_ERROR( "Maximum neighbors greater than the number of points in the embedding" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-  
+
   if ( n_reference < 10 ){
     MUTIL_ERROR( "Maximum neighbors must be at least 10" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-  
+
   if ( n_reference > n_embed ){
     MUTIL_ERROR( "Maximum neighbors greater than the number of points in the embedding" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-  
+
   if ( MUTIL_INTERRUPT( 3.0 * n_embed, intrp_ptr ) ) {
     MUTIL_ERROR( "user interrupt" );
     MUTIL_FREE_WARN( memlist, &list );
     return MUTIL_ERR_INTERRUPT;
   }
-  
+
   /* allocate memory */
-  
+
   err = mats32_malloc_register( &nrow, 1, 2, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+
   err = mats32_malloc_register( &ncol, 1, 2, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+
   err = matset_malloc_register( result, 1, &n_return, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+
   /* ... the D1 matrix */
-  
+
   nrow.data[0] = n_density;
   ncol.data[0] = embedding_dimension - 1;
-  
+
   /* ... the density vector */
-  
+
   nrow.data[1] = n_density;
   ncol.data[1] = 1;
-  
+
   /* ... allocate space for the matrix set and matrices */
-  
+
   err = matset_malloc_matrices_arbitrary_size(
     result, &nrow, &ncol, MUTIL_DOUBLE );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+
   /* form the log2 of the density vector (the values are linear
   in log2 space) */
-  
+
   logmin = MUTIL_LOG2( 1.0 / (double) n_density );
-  
+
   for ( i = 0; i < n_density; i++ ){
-    
+
     exponent = logmin * ( 1.0 - (double) i / ( (double) n_density - 1.0 ) );
-    
+
     result->mats[ 1 ].mat.dblmat.data[ i ] = exponent;
   }
-  
-  
+
+
   /* form the information dimension statistics for each embedding dimension  */
-  
+
   for ( dim = 2; dim <= embedding_dimension; dim++ ){
-    
+
     /* create embedding and register with the memory manager */
-    
+
     err = frauniv_embed( time_series, dim, time_delay, intrp_ptr, &embedding );
     MEMLIST_FREE_ON_ERROR( err, &list );
     err = memlist_member_register( &list, &embedding, MEMTYPE_MATUNIV );
@@ -420,24 +420,24 @@ mutil_errcode frauniv_dimension_information(
       MUTIL_FREE_WARN( matuniv, &embedding );
       MEMLIST_FREE_ON_ERROR( err, &list );
     }
-    
-    
+
+
     /* loop through each density and calculate the average neighborhood radius */
-    
+
     for ( i = 0; i < n_density; i++ ){
-      
+
       density = MUTIL_POW( 2.0, result->mats[ 1 ].mat.dblmat.data[ i ] );
-      
+
       /* as density is on (0,1], the variable n_neighbor is the
       associated number of neighbors we need to find
       for for each reference point in the analysis */
 
       n_neighbor = (sint32) ( density * (double) n_embed );
-      
+
       /* form the kd-tree for fast nearest neighbor searching
       and register the associated memory with the memory manager
       (this latter part is taken care of in the called local function). */
- 
+
       err = localfn_kdtree(
         n_neighbor,
         max_neighbors,
@@ -448,9 +448,9 @@ mutil_errcode frauniv_dimension_information(
         &kdtree,
         &list );
       MEMLIST_FREE_ON_ERROR( err, &list );
-      
+
       /* find the average radius of neighborhoods with a constant density */
-    
+
       err = localfn_average_neighborhood_radius_constant_density(
         &embedding,
         &kdtree,
@@ -461,14 +461,14 @@ mutil_errcode frauniv_dimension_information(
         intrp_ptr,
         &( result->mats[ 0 ].mat.dblmat.data[ i * ( embedding_dimension - 1 ) + dim - 2 ] ) );
       MEMLIST_FREE_ON_ERROR( err, &list );
-      
+
       /* free the kdtree */
 
       err = memlist_member_free( &kdtree, &list );
       MEMLIST_FREE_ON_ERROR( err, &list );
-      
+
     } /* end loop for each density */
-    
+
 
     /* free the memory for the current embedding */
     err = memlist_member_free( &embedding, &list );
@@ -479,17 +479,17 @@ mutil_errcode frauniv_dimension_information(
   /* free nodes corresponding to registered
   memory for the result, but do not free
   the memory itself */
-    
+
   err = memlist_member_unregister( result, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
-      
+
   /* free other malloced space and
   corresponding nodes in memory list */
-    
+
   MUTIL_FREE_WARN( memlist, &list );
-   
+
   MUTIL_TRACE( "Done with frauniv_dimension_information()" );
-    
+
   return MUTIL_ERR_OK;
 }
 
@@ -533,7 +533,7 @@ mutil_errcode frauniv_dimension_correlation_summation(
   sint32         j;
   sint32         k;
   sint32         max_lag;
-  sint32         exp_offset = 127;
+  sint32         exp_offset = 1022;
   sint32         n_embed;
   sint32         n_sample;
   sint32         n_scale;
@@ -543,7 +543,7 @@ mutil_errcode frauniv_dimension_correlation_summation(
   univ_mat       C2;
   univ_mat       scale;
   boolean        is_embedded;
-  sint32         maxexp = 128;
+  sint32         maxexp = 1024;
 
   MUTIL_INTERRUPT_INIT( intrp_ptr );
 
@@ -670,16 +670,26 @@ mutil_errcode frauniv_dimension_correlation_summation(
 
 	if ( distance > infinity_norm ) infinity_norm = distance;
 
-	/* calcuate scale index based on fast bitwise
+	/* NOTE: THIS SECTION IS UNSTABLE FOR SOME PLATFORMS AND
+           COMPILER COMBINATIONS. THEREFORE, THE DISTANCE
+           EXPONENT IS CALCULATED USING THE STANDARD MUTIL_LOG2 MACRO.
+
+	   calcuate scale index based on fast bitwise
 	   masking and shift operations to reveal
 	   base-2 exponent of point separation.
 	   these values are biased by +127 so that
 	   the index of scale can be found directly
 	   without exceeding the bounds of the vector: */
 
-	/*  	iscale = (sint32) ((*((uint32 *) &infinity_norm) & 0x7f800000) >> 23); */
+        /* 	iscale = (sint32) localdef_exponent_biased( (float) infinity_norm ); */
 
-	iscale = (sint32) localdef_exponent_biased( (float) infinity_norm );
+	iscale = (sint32) ( MUTIL_LOG2( infinity_norm ) ) + exp_offset;
+
+	/* perform index cheks just in case offset and maximum exponent are incorrect */
+
+        if ( iscale < 0 ) iscale = 0;
+
+        if ( iscale > n_scale - 1) iscale = n_scale - 1;
 
 	/* record maximum and minimum scale index */
 
@@ -786,7 +796,7 @@ mutil_errcode frauniv_dimension_correlation_summation(
 
   /* reassign pointers */
 
-  pd_corr   = result->mats[0].mat.dblmat.data;
+  pd_corr = result->mats[0].mat.dblmat.data;
 
   /* normalize the results by doing a cumulative
      summation over each column in the correlation
@@ -1432,9 +1442,9 @@ mutil_errcode frauniv_space_time_separation_plot(
     /* now we move through the embedding in temporal order, and always
        staying orbital_lags(m) time steps apart */
     limit = nembed - orbital_lags->mat.s32mat.data[ m ] - 1;
-    
+
     for ( n = 0; n < limit; n++ ) {
-      
+
       /* calculate the infinity norm of the current embedding vector pair */
       max = (double) 0;
       for ( tmp_idx = 0, i = 0; i < dim; i++, tmp_idx += delay ) {
@@ -1444,63 +1454,63 @@ mutil_errcode frauniv_space_time_separation_plot(
       }
       pt1_ptr++;
       pt2_ptr++;
-      
+
       /* calculate the histogram index */
       hist_idx = (sint32) ( ( neps - 1 ) * max / eps_max );
-      
+
       /* add 1 to the appropriate histogram bin */
       hist[ hist_idx ]++;
-      
+
     } /*  for ( n = 0; ... ) */
-    
+
     /* reset pointer to first embedding point */
     pt1_ptr = (double*) MATUNIV_DATA( time_series );
-        
+
     /* run a cumulative sum of the histogram, along the way filling in the
     contour line values for the current orbital lag */
     cumsum   = (sint32) 0;
     hist_idx = (sint32) 0;
     res_ptr  = (double*) MATUNIV_DATA( result ) + m;
-        
+
     for ( n = 0; n < nfracs; n++ ) {
-      
+
       target = (sint32) ( limit * ( n + 1 ) * frac_prob );
-      
+
       for ( i = hist_idx; i < neps; i++ ) {
-        
+
 		cumsum += (sint32) hist[ hist_idx ];
 
         if ( cumsum >= target ) {
-          
+
 		  /* fills column of result matrix, each column corresponds
 		  to the contour values for a particular orbital lag */
           *( res_ptr + n * nolags ) = eps_max * ( ( i + 1 ) / (double) neps );
-          
+
           break;
         }
 
 /*        cumsum += (sint32) hist[ hist_idx ]; */
-        
+
         hist_idx++;
-        
+
       } /* for ( i = hist_idx; ... ) */
-      
+
     } /* for ( n = 0; ... ) */
-    
-    
+
+
   } /* for ( m = 0; ... ) */
-  
-  
+
+
   /* Remove the output matrix from the memory management list */
   err = memlist_member_unregister( result, &mlist );
   MEMLIST_FREE_ON_ERROR( err, &mlist );
-  
-  
+
+
   /* Free all other memory */
   MUTIL_FREE_WARN( memlist, &mlist );
-  
+
   MUTIL_TRACE( "Done with frauniv_space_time_separation()" );
-  
+
   return MUTIL_ERR_OK;
 }
 
@@ -1582,7 +1592,7 @@ static mutil_errcode localfn_average_neighborhood_radius_constant_density(
 
   /* allocate memory */
 
-  err = matuniv_malloc_register( &sampled_embedding, n_reference, ncol, 
+  err = matuniv_malloc_register( &sampled_embedding, n_reference, ncol,
     MUTIL_DOUBLE, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
 
@@ -1604,10 +1614,10 @@ static mutil_errcode localfn_average_neighborhood_radius_constant_density(
        pd_sampled++;
        pd_embed++;
      }
-      
+
      pd_embed += iskip;
   }
-          
+
   /* find n_neighbor nearest neighbors for the uniformly
   sampled reference points */
 
@@ -1634,7 +1644,7 @@ static mutil_errcode localfn_average_neighborhood_radius_constant_density(
 
   err = memlist_member_free( &sampled_embedding, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
-          
+
   /*
      calculate the average neighborhood size.
      since the distances are sorted from smallest
@@ -1665,7 +1675,7 @@ static mutil_errcode localfn_average_neighborhood_radius_constant_density(
       return MUTIL_ERR_INTERRUPT;
     }
   }
-          
+
   *average_log2_radius /= (double) n_reference;
 
   MUTIL_FREE_WARN( matuniv, &neighbor_distances );
@@ -2507,7 +2517,7 @@ static mutil_errcode localfn_kdtree(
   desired density level */
 
   if ( k > max_neighbors ){
-    
+
     /* calculate the reduced size of the embedding in order to
     accomodate the current density given a fixed number of neighbors (k).
     we have to be careful here to also accommodate a restriction on the
@@ -2518,84 +2528,84 @@ static mutil_errcode localfn_kdtree(
     n_embed_reduced = (sint32) ( (double) max_neighbors / (double) k * (double) n_embed );
     k               = max_neighbors;
     n_embed_min     = k + 2 * orbital_lag - 1;
-    
+
     if ( n_embed_reduced < n_embed_min ){
-      
+
       n_embed_reduced = n_embed_min;
     }
-    
+
     /* randomly select n_embed_reduced points from the original
     embedding for the sampled_embedding matrix. use this ersatz
-    topology in forming the kd-tree. do this by creating a 
+    topology in forming the kd-tree. do this by creating a
     randomized index vector (without replacement)
     and register with the memory manager. the range of the values
     is on [0, N - 1] where N is the number of points in the emebdding.
     we will use the first n_embed_reduced of these indices to identify
     the points (rows) to copy from the original embedding matrix to the
     sampled_embedding matrix */
-    
+
     /* initiate random number generation */
-    
+
     err = mutil_rand_begin( &rand_ptr );
     MEMLIST_FREE_ON_ERROR( err, &mlist );
-    
+
     err = mutil_rand_set_seed( (void*) NULL, rand_ptr );
     MEMLIST_FREE_ON_ERROR( err, &mlist );
 
     err = matuniv_random_uniform_indices(
       n_embed, 1, FALSE, rand_ptr, intrp_ptr, &random_index );
     MEMLIST_FREE_ON_ERROR( err, &mlist );
-    
-    err = matuniv_malloc_register( &sampled_embedding, n_embed_reduced, dim, 
+
+    err = matuniv_malloc_register( &sampled_embedding, n_embed_reduced, dim,
       MUTIL_DOUBLE, &mlist );
     MEMLIST_FREE_ON_ERROR( err, &mlist );
-    
+
     pd_sampled = sampled_embedding.mat.dblmat.data;
     ps_index   = random_index.mat.s32mat.data;
-    
+
     for ( row = 0; row < n_embed_reduced; row++ ){
-      
+
       pd_embed = embedding->mat.dblmat.data + (*ps_index) * dim;
-      
+
       for ( col = 0; col < dim; col++ ){
-        
+
         *pd_sampled = *pd_embed;
         pd_sampled++;
         pd_embed++;
       }
-      
+
       ps_index++;
-      
+
     }
 
-    /* free the random index vector and 
+    /* free the random index vector and
     end random number generation */
 
     MUTIL_FREE_WARN( matuniv, &random_index );
-    
+
     err = mutil_rand_end( rand_ptr );
     if ( err ) {
       MUTIL_ERROR( "Problem ending random number generator" );
       return err;
     }
-    
+
     /* create the kd-tree with the sampled embedding */
-    
+
     err = mutil_kdtree_malloc_register(
       kdtree,
       &sampled_embedding,
       bucket_size,
       list );
     MEMLIST_FREE_ON_ERROR( err, &mlist );
-    
+
     /* free the sampled embedding */
-    
+
     err = memlist_member_free( &sampled_embedding, &mlist );
     MEMLIST_FREE_ON_ERROR( err, &mlist );
-    
+
   }
   else{  /* requested n_neighbor does not exceed specified max_neighbors */
-    
+
     err = mutil_kdtree_malloc_register(
       kdtree,
       embedding,
@@ -2603,7 +2613,7 @@ static mutil_errcode localfn_kdtree(
       list );
     MEMLIST_FREE_ON_ERROR( err, &mlist );
   }
-  
+
   /* Free all remaining memory */
 
   MUTIL_FREE_WARN( memlist, &mlist );
@@ -2611,7 +2621,7 @@ static mutil_errcode localfn_kdtree(
   MUTIL_TRACE( "Done with localfn_kdtree()" );
 
   return MUTIL_ERR_OK;
- 
+
 }
 
 /* Finding the proper embedding dimesion for     */
@@ -2712,7 +2722,7 @@ mutil_errcode frauniv_dimension_false_nearest_strands(
   pd_series = time_series->mat.dblmat.data;
 
   /* initialize variables */
-  
+
   n_sample = MATUNIV_NELEM( time_series );
 
   /* calculate false nearest neighbors */
@@ -2793,14 +2803,14 @@ mutil_errcode frauniv_dimension_false_nearest_strands(
     /* agglomerate the neighbor pairs into temporally correlated strands ... */
 
     /* ... allocate memory */
-    
+
     if ( memlist_member_exist( &strand_class, &list ) ){
       err = memlist_member_free( &strand_class, &list );
       MEMLIST_FREE_ON_ERROR( err, &list );
     }
     err = mats32_malloc_register( &strand_class, n_embed, 1, &list );
     MEMLIST_FREE_ON_ERROR( err, &list );
-    
+
     if ( memlist_member_exist( &n_pairs, &list ) ){
       err = memlist_member_free( &n_pairs, &list );
       MEMLIST_FREE_ON_ERROR( err, &list );
@@ -2818,7 +2828,7 @@ mutil_errcode frauniv_dimension_false_nearest_strands(
     /* ... initialize variables */
 
     n_strands = 1;
-  
+
     err = mats32_assign_scalar( 0, intrp_ptr, &strand_class );
     MEMLIST_FREE_ON_ERROR( err, &list );
     err = mats32_assign_scalar( 0, intrp_ptr, &n_pairs );
@@ -2853,48 +2863,48 @@ mutil_errcode frauniv_dimension_false_nearest_strands(
     /* form strands starting with the second point */
 
     for ( i = 1; i < n_embed; i++ ){
-	
+
       /* increment pointers */
 
       ps_original++;
       ps_neighbor++;
-	
+
 	    /* determine if the current point is already registered
       as an element of strand pair. if so, break and move onto next point */
 
       if ( strand_class.data[i] < 0){
         continue;
       }
-	
+
       /* determine whether the current [index,neighbor] pair is a temporal
       image of the last olag pairs registered in the current strand.
       if so, then add the current pair to that strand. otherwise,
       create a new strand with the current pair as its starting member */
 
       is_image = FALSE;
-	
+
       for ( j = i - 1; j >= MUTIL_MAX( 0, i - orbital_lag ); j-- ){
-        
+
       /* test to see if any of the preceding olag points belonging to the current
         strand are temporal iterates */
-        
-        if ( ( MUTIL_ABS( dindex.data[i] - dindex.data[j] ) <= iterate_tolerance	) && 
+
+        if ( ( MUTIL_ABS( dindex.data[i] - dindex.data[j] ) <= iterate_tolerance	) &&
           strand_class.data[j] == n_strands ){
 
           is_image = TRUE;
           break;
-        } 
+        }
       }
 
       /* calculated the projected (dim + 1)th distance between the current nearest neighbor pair */
 
       projected_distance = MUTIL_ABS( *(pd_series + *ps_original + lag) - *(pd_series + *ps_neighbor + lag) );
-	
+
       if ( is_image ){
 
-        /* add pair to current strand and nullify neighbor index 
+        /* add pair to current strand and nullify neighbor index
         to avoid symmetric pair formation in another strand */
-        
+
         strand_class.data[ *ps_neighbor ] = (sint32) -1;
 
         /* increment the number of pairs in current strand */
@@ -2911,7 +2921,7 @@ mutil_errcode frauniv_dimension_false_nearest_strands(
         /* perform the FNS test */
 
         /*printf("S(%ld) = %10.4f, sum(d+1)=%10.4f, n_pairs=%ld, n_strands=%ld, Ra=%10.4f, atol=%10.4f\n",
-       dim, strand_statistic / (double) n_pairs.data[ n_strands - 1] / attractor_size , 
+       dim, strand_statistic / (double) n_pairs.data[ n_strands - 1] / attractor_size ,
        strand_statistic, n_pairs.data[ n_strands - 1 ], n_strands, attractor_size, atol ); */
 
         if ( ( strand_statistic / (double) n_pairs.data[ n_strands - 1 ] / attractor_size ) > atol ){
@@ -2929,7 +2939,7 @@ mutil_errcode frauniv_dimension_false_nearest_strands(
         strand_statistic = projected_distance;
 
       }
-      
+
       /* assign strand class for current (original, neighbor) pair. we need this mainly
       as a check above to ensure that pair is a candidate for analysis (if not, then a negative
       index is assigned). here, we are just assigning a positive index, which happens to be
@@ -2937,29 +2947,29 @@ mutil_errcode frauniv_dimension_false_nearest_strands(
       current strand). */
 
       strand_class.data[i] = n_strands;
-    
+
     } /* end strand formation */
-        
-   
+
+
     /* normalize the current FNS tally by the number of recorded strands and multiply
     by 100 to form FNS percentage for current dimension */
 
-    (*pd_result) *= 100.0 / (double) n_strands; 
-    
+    (*pd_result) *= 100.0 / (double) n_strands;
+
     /* increment pointers */
 
     pd_result++;
-    
+
     /* check for interrupts */
-    
+
     if ( MUTIL_INTERRUPT( 3.0 * n_embed, intrp_ptr ) ) {
       MUTIL_ERROR( "user interrupt" );
       MUTIL_FREE_WARN( memlist, &list );
       return MUTIL_ERR_INTERRUPT;
     }
-     
+
   } /* end dimension loop */
-    
+
   /* free nodes corresponding to registered
   memory for the result, but do not free
   the memory itself */

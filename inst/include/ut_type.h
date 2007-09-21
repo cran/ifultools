@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/ut_type.h $: $Revision: #30 $, $Date: 2007/09/17 $  */
+/* @(#) $File: //depot/Research/mutils/include/ut_type.h $: $Revision: #34 $, $Date: 2007/10/08 $  */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_UT_TYPE_H_
@@ -12,8 +12,12 @@
 extern "C" {
 #endif
 
-#include "R.h"
-#include "Rinternals.h"
+/* USING S.h to differentiate R and SPLUS */
+
+#ifdef USE_RINTERNALS
+  #include "R.h"
+  #undef boolean
+#endif
 
 /** Enum of basic data types for the mutils library.
  * This lists the scalar-like types that can be used for

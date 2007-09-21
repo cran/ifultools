@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/ifultools/src/RS_fra_dim.c $: $Revision: #1 $, $Date: 2007/06/26 $ ";
+static char whatssi[] = "@(#) $File: //depot/Research/ifultools/src/RS_fra_dim.c $: $Revision: #2 $, $Date: 2007/10/08 $ ";
 
 /* This is a self-documenting doc++ file. */
 
@@ -17,29 +17,8 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/src/RS_fra_dim.c
    frauniv_space_time_separation_plot()
 */
 
-
 #include "fra_dim.h"
 #include "ut_RS.h"
-
-//#ifdef WIN32
-//
-//#include "windef.h"
-//BOOL APIENTRY DllMain( HANDLE hModule, 
-//                      DWORD  ul_reason_for_call, 
-//                       LPVOID lpReserved
-//					 )
-//{
-//	if (ul_reason_for_call == DLL_PROCESS_ATTACH)
-//	{
-//		_controlfp(_PC_64, _MCW_PC);
-//    //Rwin_fpset();
-//	}
-//
-//    return TRUE;
-//}
-//#endif
-
-
 #include "mat_set.h"
 #include "mat_umat.h"
 #include "mat_univ.h"
@@ -64,14 +43,14 @@ EXTERN_R SEXP RS_fractal_embed(
  SEXP pr_embedding_dimension,
  SEXP pr_time_lag )
 {
-  SEXP                  pr_ret_result;        
-  mutil_data_type       type;                 
-  mutil_errcode         err;                  
-  sint32                embedding_dimension;  
-  sint32                time_lag;             
-  univ_mat              result;               
-  univ_mat              time_series;          
-  void                  *VPNULL = NULL;       
+  SEXP                  pr_ret_result;
+  mutil_data_type       type;
+  mutil_errcode         err;
+  sint32                embedding_dimension;
+  sint32                time_lag;
+  univ_mat              result;
+  univ_mat              time_series;
+  void                  *VPNULL = NULL;
   memlist               list;
 
   /* Avoid lint warning */
@@ -98,7 +77,7 @@ EXTERN_R SEXP RS_fractal_embed(
     time_lag,
     VPNULL,
     &result );
-  CONVERT_MATRIX_AND_RETURN( frauniv_fdp_simulate, &result, &pr_ret_result );
+  CONVERT_MATRIX_AND_RETURN( frauniv_embed, &result, &pr_ret_result );
 }
 
 /** Information dimension statistics.
@@ -127,19 +106,19 @@ EXTERN_R SEXP RS_fractal_dimension_information(
  SEXP pr_max_neighbors,
  SEXP pr_n_reference )
 {
-  SEXP                  pr_ret_result;        
-  fra_distance_metric   distance_metric;      
-  mat_set               result;               
-  mutil_data_type       type;                 
-  mutil_errcode         err;                  
-  sint32                embedding_dimension;  
-  sint32                max_neighbors;        
-  sint32                n_density;            
-  sint32                n_reference;          
-  sint32                orbital_lag;          
-  sint32                time_lag;             
-  univ_mat              time_series;          
-  void                  *VPNULL = NULL;       
+  SEXP                  pr_ret_result;
+  fra_distance_metric   distance_metric;
+  mat_set               result;
+  mutil_data_type       type;
+  mutil_errcode         err;
+  sint32                embedding_dimension;
+  sint32                max_neighbors;
+  sint32                n_density;
+  sint32                n_reference;
+  sint32                orbital_lag;
+  sint32                time_lag;
+  univ_mat              time_series;
+  void                  *VPNULL = NULL;
   memlist               list;
 
   /* Avoid lint warning */
@@ -209,16 +188,16 @@ EXTERN_R SEXP RS_fractal_dimension_correlation_summation(
  SEXP pr_orbital_lag,
  SEXP pr_n_scale_octave )
 {
-  SEXP             pr_ret_result;   
-  mat_set          result;          
-  mutil_data_type  type;            
-  mutil_errcode    err;             
-  sint32           embedding_dimension;         
-  sint32           n_scale_octave;  
-  sint32           orbital_lag;     
-  sint32           time_lag;        
-  univ_mat         time_series;     
-  void             *VPNULL = NULL;  
+  SEXP             pr_ret_result;
+  mat_set          result;
+  mutil_data_type  type;
+  mutil_errcode    err;
+  sint32           embedding_dimension;
+  sint32           n_scale_octave;
+  sint32           orbital_lag;
+  sint32           time_lag;
+  univ_mat         time_series;
+  void             *VPNULL = NULL;
   memlist          list;
 
   /* Avoid lint warning */
@@ -279,17 +258,17 @@ EXTERN_R SEXP RS_fractal_dimension_false_nearest_neighbors(
  SEXP pr_rtol,
  SEXP pr_atol )
 {
-  SEXP                  pr_ret_result;        
-  double                atol;                 
-  double                rtol;                 
-  mutil_data_type       type;                 
-  mutil_errcode         err;                  
-  sint32                embedding_dimension;  
-  sint32                orbital_lag;          
-  sint32                time_lag;             
-  univ_mat              result;               
-  univ_mat              time_series;          
-  void                  *VPNULL = NULL;       
+  SEXP                  pr_ret_result;
+  double                atol;
+  double                rtol;
+  mutil_data_type       type;
+  mutil_errcode         err;
+  sint32                embedding_dimension;
+  sint32                orbital_lag;
+  sint32                time_lag;
+  univ_mat              result;
+  univ_mat              time_series;
+  void                  *VPNULL = NULL;
   memlist               list;
 
   /* Avoid lint warning */
@@ -355,17 +334,17 @@ EXTERN_R SEXP RS_fractal_dimension_false_nearest_strands(
  SEXP pr_iterate_tolerance,
  SEXP pr_atol )
 {
-  SEXP                  pr_ret_result;        
-  double                atol;                 
-  mutil_data_type       type;                 
-  mutil_errcode         err;                  
-  sint32                embedding_dimension;  
-  sint32                iterate_tolerance;    
-  sint32                orbital_lag;          
-  sint32                time_lag;             
-  univ_mat              result;               
-  univ_mat              time_series;          
-  void                  *VPNULL = NULL;       
+  SEXP                  pr_ret_result;
+  double                atol;
+  mutil_data_type       type;
+  mutil_errcode         err;
+  sint32                embedding_dimension;
+  sint32                iterate_tolerance;
+  sint32                orbital_lag;
+  sint32                time_lag;
+  univ_mat              result;
+  univ_mat              time_series;
+  void                  *VPNULL = NULL;
   memlist               list;
 
   /* Avoid lint warning */
@@ -423,17 +402,17 @@ EXTERN_R SEXP RS_fractal_poincare_map(
  SEXP pr_extrema_type,
  SEXP pr_denoise )
 {
-  SEXP                  pr_ret_extrema_amplitude;  
-  SEXP                  pr_ret_extrema_location;   
-  SEXP                  pr_ret_obj;                
-  boolean               denoise;                   
-  fra_extrema_type      extrema_type;              
-  mutil_data_type       type;                      
-  mutil_errcode         err;                       
-  univ_mat              extrema_amplitude;         
-  univ_mat              extrema_location;          
-  univ_mat              time_series;               
-  void                  *VPNULL = NULL;            
+  SEXP                  pr_ret_extrema_amplitude;
+  SEXP                  pr_ret_extrema_location;
+  SEXP                  pr_ret_obj;
+  boolean               denoise;
+  fra_extrema_type      extrema_type;
+  mutil_data_type       type;
+  mutil_errcode         err;
+  univ_mat              extrema_amplitude;
+  univ_mat              extrema_location;
+  univ_mat              time_series;
+  void                  *VPNULL = NULL;
   memlist               list;
 
   /* Avoid lint warning */
@@ -505,19 +484,19 @@ EXTERN_R SEXP RS_fractal_space_time_separation_plot(
  SEXP pr_orbital_lags,
  SEXP pr_frac_prob )
 {
-  SEXP             pr_ret_max_eps;  
-  SEXP             pr_ret_obj;      
-  SEXP             pr_ret_result;   
-  double           frac_prob;       
-  double           max_eps;         
-  mutil_data_type  type;            
-  mutil_errcode    err;             
-  sint32           time_lag;           
-  sint32           embedding_dimension;             
-  univ_mat         orbital_lags;    
-  univ_mat         result;          
-  univ_mat         time_series;     
-  void             *VPNULL = NULL;  
+  SEXP             pr_ret_max_eps;
+  SEXP             pr_ret_obj;
+  SEXP             pr_ret_result;
+  double           frac_prob;
+  double           max_eps;
+  mutil_data_type  type;
+  mutil_errcode    err;
+  sint32           time_lag;
+  sint32           embedding_dimension;
+  univ_mat         orbital_lags;
+  univ_mat         result;
+  univ_mat         time_series;
+  void             *VPNULL = NULL;
   memlist          list;
 
   /* Avoid lint warning */
@@ -568,7 +547,7 @@ EXTERN_R SEXP RS_fractal_space_time_separation_plot(
   SET_VECTOR_ELT( pr_ret_obj, 0, pr_ret_max_eps );
   SET_VECTOR_ELT( pr_ret_obj, 1, pr_ret_result );
   UNPROTECT(1);
- 
+
   /* free registered local memory */
   MUTIL_FREE_WARN( memlist, &list );
 

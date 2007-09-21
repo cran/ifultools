@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/ut_RS.h $: $Revision: #3 $, $Date: 2007/04/11 $  */
+/* @(#) $File: //depot/Research/mutils/include/ut_RS.h $: $Revision: #4 $, $Date: 2007/10/04 $  */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_UT_RS_H
@@ -882,6 +882,8 @@ MUTIL_WRAPEXPORT mutil_errcode null_object_from_R( SEXP robj,
  */
 #if defined(__unix)
 #define EXTERN_R extern
+#elif defined(__MACH__) && defined(__APPLE__)
+#define EXTERN_R extern
 #else
 #define EXTERN_R extern __declspec(dllexport)
 #endif /* ifdef/ifndef __unix */
@@ -889,6 +891,8 @@ MUTIL_WRAPEXPORT mutil_errcode null_object_from_R( SEXP robj,
 #else /* ifndef __cplusplus */
 
 #if defined(__unix)
+#define EXTERN_R extern "C"
+#elif defined(__MACH__) && defined(__APPLE__)
 #define EXTERN_R extern "C"
 #else
 #define EXTERN_R extern "C" __declspec(dllexport)
