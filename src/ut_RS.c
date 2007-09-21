@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/mutils/wrap_RS/ut_RS.c $: $Revision: #4 $, $Date: 2007/04/16 $  ";
+static char whatssi[] = "@(#) $File: //depot/Research/mutils/wrap_RS/ut_RS.c $: $Revision: #5 $, $Date: 2007/09/17 $  ";
 
 /* This is a self-documenting doc++ file. */
 
@@ -45,8 +45,8 @@ extern "C"{
 /********************************/
 
 static boolean R_extract_complex( SEXP robj, sint32 *ret_length, dcomplex **pz_data );
-static boolean R_extract_integer( SEXP robj, sint32 *ret_length, long **ps_data );
-static boolean R_extract_logical( SEXP robj, sint32 *ret_length, long **pl_data );
+static boolean R_extract_integer( SEXP robj, sint32 *ret_length, sint32 **ps_data );
+static boolean R_extract_logical( SEXP robj, sint32 *ret_length, sint32 **pl_data );
 static boolean R_extract_numeric( SEXP robj, sint32 *ret_length, double **pd_data );
 
 static boolean matnum_get_pieces( SEXP robj, sint32 *nrow,
@@ -600,7 +600,7 @@ mutil_errcode matuniv_from_R( SEXP robj,
   univ_mat         tmpmat2;
   void            *intrp_ptr = NULL;
   double          *dbldatptr;
-  long            *lngdatptr;
+  sint32          *lngdatptr;
   dcomplex        *cpxdatptr;
   boolean          need_free;
 
@@ -962,8 +962,8 @@ mutil_errcode scauniv_from_R( SEXP robj,
   mutil_data_type out_type, univ_scalar *usca )
 {
   double          *dbldat;
-  long            *lngdat;
-  long             num_elem;
+  sint32          *lngdat;
+  sint32          num_elem;
 
   MUTIL_TRACE( "Start scauniv_from_R()" );
 
@@ -1021,8 +1021,8 @@ mutil_errcode double_from_R( SEXP robj,
   double *num )
 {
   double    *dbldat;
-  long      *lngdat;
-  long       num_elem;
+  sint32    *lngdat;
+  sint32    num_elem;
 
   MUTIL_TRACE( "Start double_from_R()" );
 
@@ -1075,7 +1075,7 @@ mutil_errcode double_from_R( SEXP robj,
 mutil_errcode dcomplex_from_R( SEXP robj,
   dcomplex *num )
 {
-  long        num_elem;
+  sint32        num_elem;
 
   MUTIL_TRACE( "Start dcomplex_from_R()" );
 
@@ -1112,8 +1112,8 @@ mutil_errcode boolean_from_R( SEXP robj,
   boolean *num )
 {
   double    *dbldat;
-  long      *lngdat;
-  long       num_elem;
+  sint32    *lngdat;
+  sint32    num_elem;
 
   MUTIL_TRACE( "Start boolean_from_R()" );
 
@@ -1171,8 +1171,8 @@ mutil_errcode sint32_from_R( SEXP robj,
   sint32 *num )
 {
   double    *dbldat;
-  long      *lngdat;
-  long       num_elem;
+  sint32    *lngdat;
+  sint32    num_elem;
 
   MUTIL_TRACE( "Start sint32_from_R()" );
 
@@ -1219,7 +1219,7 @@ mutil_errcode sint32_from_R( SEXP robj,
 mutil_errcode scauniv_to_R( univ_scalar usca, SEXP *robj )
 {
   double    *dbldat;
-  long      *lngdat;
+  sint32    *lngdat;
 
   MUTIL_TRACE( "Start scauniv_to_R()" );
 
@@ -1235,7 +1235,7 @@ mutil_errcode scauniv_to_R( univ_scalar usca, SEXP *robj )
 
       /* cast to double */
 
-      if( vecnum_create( (sint32) 1, usca.type, robj, &dbldat ) ){
+      if( vecnum_create( (sint32) 1, usca.type, robj, (void **) &dbldat ) ){
         MUTIL_ERROR( "Unable to allocate R numeric object" );
         return MUTIL_ERR_MEM_ALLOC;
       }
@@ -1252,7 +1252,7 @@ mutil_errcode scauniv_to_R( univ_scalar usca, SEXP *robj )
     case MUTIL_UINT8:
 
       /* cast to sint32 */
-      if( vecnum_create( (sint32) 1, MUTIL_SINT32, robj, &lngdat ) ){
+      if( vecnum_create( (sint32) 1, MUTIL_SINT32, robj, (void **) &lngdat ) ){
         MUTIL_ERROR( "Unable to allocate R numeric object" );
         return MUTIL_ERR_MEM_ALLOC;
       }
@@ -1286,7 +1286,7 @@ mutil_errcode double_to_R( double num, SEXP *robj )
 
   /* create an R numeric vector, length 1, and initialize it */
 
-  if( vecnum_create( (sint32) 1, MUTIL_DOUBLE, robj, &dbldat ) ){
+  if( vecnum_create( (sint32) 1, MUTIL_DOUBLE, robj, (void **) &dbldat ) ){
     MUTIL_ERROR( "Unable to allocate R numeric object" );
     return MUTIL_ERR_MEM_ALLOC;
   }
@@ -1314,7 +1314,7 @@ mutil_errcode dcomplex_to_R( dcomplex num, SEXP *robj )
 
   /* create an R numeric vector, length 1, and initialize it */
 
-  if( vecnum_create( (sint32) 1, MUTIL_DCOMPLEX, robj, &cpxdat ) ){
+  if( vecnum_create( (sint32) 1, MUTIL_DCOMPLEX, robj, (void **) &cpxdat ) ){
     MUTIL_ERROR( "Unable to allocate R numeric object" );
     return MUTIL_ERR_MEM_ALLOC;
   }
@@ -1331,7 +1331,7 @@ mutil_errcode dcomplex_to_R( dcomplex num, SEXP *robj )
 /* Written by William Constantine    */
 mutil_errcode sint32_to_R( sint32 num, SEXP *robj )
 {
-  long    *lngdat;
+  sint32    *lngdat;
 
   MUTIL_TRACE( "Start sint32_to_R()" );
 
@@ -1342,7 +1342,7 @@ mutil_errcode sint32_to_R( sint32 num, SEXP *robj )
 
   /* create an R integer vector, length 1, and initialize it */
 
-  if( vecnum_create( (sint32) 1, MUTIL_SINT32, robj, &lngdat ) ){
+  if( vecnum_create( (sint32) 1, MUTIL_SINT32, robj, (void **) &lngdat ) ){
     MUTIL_ERROR( "Unable to allocate R integer object" );
     return MUTIL_ERR_MEM_ALLOC;
   }
@@ -1359,7 +1359,7 @@ mutil_errcode sint32_to_R( sint32 num, SEXP *robj )
 /* Written by William Constantine    */
 mutil_errcode boolean_to_R( boolean num, SEXP *robj )
 {
-  long *lngdat;
+  sint32 *lngdat;
 
   MUTIL_TRACE( "Start boolean_to_R()" );
 
@@ -1370,7 +1370,7 @@ mutil_errcode boolean_to_R( boolean num, SEXP *robj )
 
   /* create an R logical vector, length 1, and initialize it */
 
-  if( vecnum_create( (sint32) 1, MUTIL_SINT32, robj, &lngdat ) ){
+  if( vecnum_create( (sint32) 1, MUTIL_SINT32, robj, (void **) &lngdat ) ){
     MUTIL_ERROR( "Unable to allocate R logical object" );
     return MUTIL_ERR_MEM_ALLOC;
   }
@@ -1776,7 +1776,7 @@ static boolean R_extract_complex( SEXP robj, sint32 *ret_length, dcomplex **pz_d
   return (boolean) TRUE;
 }
 
-static boolean R_extract_integer( SEXP robj, sint32 *ret_length, long **ps_data )
+static boolean R_extract_integer( SEXP robj, sint32 *ret_length, sint32 **ps_data )
 {
 
   /* test for type integer */
@@ -1788,12 +1788,12 @@ static boolean R_extract_integer( SEXP robj, sint32 *ret_length, long **ps_data 
   /* obtain length and data pointer */
 
   *ret_length = (sint32) length(robj);
-  *ps_data    = (long *) INTEGER(robj);
+  *ps_data    = (sint32 *) INTEGER(robj);
   
   return (boolean) TRUE;
 }
 
-static boolean R_extract_logical( SEXP robj, sint32 *ret_length, long **pl_data )
+static boolean R_extract_logical( SEXP robj, sint32 *ret_length, sint32 **pl_data )
 {
 
   /* test for type logical */
@@ -1805,7 +1805,7 @@ static boolean R_extract_logical( SEXP robj, sint32 *ret_length, long **pl_data 
   /* obtain length and data pointer */
 
   *ret_length = (sint32) length(robj);
-  *pl_data    = (long *) LOGICAL(robj);
+  *pl_data    = (sint32 *) LOGICAL(robj);
   
   return (boolean) TRUE;
 }
@@ -1848,7 +1848,7 @@ static boolean R_extract_numeric( SEXP robj, sint32 *ret_length, double **pd_dat
 static boolean matnum_get_pieces( SEXP robj, sint32 *nrow,
   sint32 *ncol, mutil_data_type *type, void **data_ptr )
 {
-  long       lngth;
+  sint32     lngth;
   SEXP       dim;
 
   if( !robj || !nrow || !ncol || !type || !data_ptr ){
@@ -1883,7 +1883,7 @@ static boolean matnum_get_pieces( SEXP robj, sint32 *nrow,
 
   /* try to extract as integer */
 
-  if( R_extract_integer( robj, &lngth, (long **) data_ptr ) ){
+  if( R_extract_integer( robj, &lngth, (sint32 **) data_ptr ) ){
     *type = MUTIL_SINT32;
     MUTIL_ASSERT( *data_ptr );
     if( lngth != *nrow * *ncol ){
@@ -1929,7 +1929,7 @@ static int arrnum_get_pieces( SEXP robj, sint32 *ndim,
   mutil_data_type *type, void **data_ptr, sint32 **dims )
 {
   sint32     elem;
-  long       lngth;
+  sint32     lngth;
   sint32     dimprod;
   SEXP       rdim;
 
@@ -1978,7 +1978,7 @@ static int arrnum_get_pieces( SEXP robj, sint32 *ndim,
 
   /* try to extract data as integer */
 
-  if( R_extract_integer( robj, &lngth, (long **) data_ptr ) ){
+  if( R_extract_integer( robj, &lngth, (sint32 **) data_ptr ) ){
     *type = MUTIL_SINT32;
     MUTIL_ASSERT( *data_ptr );
     if( lngth != dimprod ){

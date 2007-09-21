@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/wavelets/wav_var.c $: $Revision: #35 $, $Date: 2006/12/01 $  ";
+static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/wavelets/wav_var.c $: $Revision: #36 $, $Date: 2007/09/20 $  ";
 /* This is a self-documenting doc++ file. */
 
 #include "wav_var.h"
@@ -831,6 +831,7 @@ mutil_errcode wavuniv_variance_edof(
       }
 
       if ( use_edof2 ){
+
         err = matuniv_realloc_register( &Fourier, num_fourier,
           1, &list );
         MEMLIST_FREE_ON_ERROR( err, &list );
@@ -1345,6 +1346,7 @@ static mutil_errcode localfn_wavuniv_variance_input_check(
   case WAV_FILTER_LEAST_ASYMMETRIC:
   case WAV_FILTER_BEST_LOCALIZED:
   case WAV_FILTER_COIFLET:
+  case WAV_FILTER_HAAR:
     break;
   default:
     MUTIL_ERROR( "Filter type is unsupported" );

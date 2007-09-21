@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/ut_type.h $: $Revision: #29 $, $Date: 2006/01/04 $  */
+/* @(#) $File: //depot/Research/mutils/include/ut_type.h $: $Revision: #30 $, $Date: 2007/09/17 $  */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_UT_TYPE_H_
@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+#include "R.h"
+#include "Rinternals.h"
 
 /** Enum of basic data types for the mutils library.
  * This lists the scalar-like types that can be used for
@@ -128,7 +130,7 @@ typedef signed short sint16;
 
 /** 32-bit unsigned integer.
  * This type is defined to be the ANSI
- * unsigned long data type, which is guaranteed to be at least 4 bytes.
+ * unsigned Sint data type, which is guaranteed to be at least 4 bytes.
  * It could actually be larger on some platforms.
  *
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
@@ -139,12 +141,15 @@ typedef signed short sint16;
  * @see _uint32_mat
  * @see Data Type Characterization
  */
-typedef unsigned long uint32;
-
+#ifdef USING_R
+	typedef unsigned int uint32;
+#else 
+	typedef unsigned long uint32;
+#endif
 
 /** 32-bit signed integer.
  * This type is defined to be the ANSI
- * signed long data type, which is guaranteed to be at least 4 bytes.
+ * signed Sint data type, which is guaranteed to be at least 4 bytes.
  * It could actually be larger on some platforms.
  *
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
@@ -155,8 +160,11 @@ typedef unsigned long uint32;
  * @see _sint32_mat
  * @see Data Type Characterization
  */
-typedef signed long sint32;
-
+#ifdef USING_R
+	typedef signed int sint32;
+#else
+  typedef signed long sint32;
+#endif
 
 /** Struct for complex number.
  * The complex number is a struct with double real and imaginary parts.
