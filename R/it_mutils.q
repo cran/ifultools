@@ -102,7 +102,8 @@
       stop("Input SDF function must have as its first argument the variable \"f\"")
 
     f  <- seq(from=0, to=1/2, length=n.freq) / sampling.interval
-    Sx <- do.call("sdf", c(list(f=f), sdfargs))
+    tmpargs <- c(list(f=f), sdfargs)
+    Sx <- do.call("sdf", tmpargs)
 
     attr(Sx, "frequency") <- f
   }

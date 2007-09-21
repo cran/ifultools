@@ -33,8 +33,8 @@ static mutil_errcode localfn_wavuniv_filters_daubechies_input_check(
 
 static mutil_errcode localfn_filter_matrices_check(
   sint32    filter_length,
-  univ_mat *wavelet_filter,
-  univ_mat *scaling_filter );
+  const univ_mat *wavelet_filter,
+  const univ_mat *scaling_filter );
 
 static mutil_errcode localfn_filter_fill(
   sint32  filter_length,
@@ -1011,8 +1011,8 @@ mutil_errcode wavuniv_filters_daubechies_verify(
 
   err = localfn_filter_matrices_check(
     L,
-    (univ_mat *) wavelet_filter,
-    (univ_mat *) scaling_filter);
+    wavelet_filter,
+    scaling_filter);
 
   if ( err ) return err;
 
@@ -1879,8 +1879,8 @@ static mutil_errcode localfn_wavuniv_filters_daubechies_input_check(
 
 static mutil_errcode localfn_filter_matrices_check(
   sint32    filter_length,
-  univ_mat *wavelet_filter,
-  univ_mat *scaling_filter )
+  const univ_mat *wavelet_filter,
+  const univ_mat *scaling_filter )
 {
 
   mutil_errcode err;

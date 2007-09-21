@@ -26,7 +26,7 @@ subsequent truncation results in consistent value(s) across platforms.}
 \item{base}{a positive or complex number: the base with respect to which logarithms are computed. Default: \code{2}.}
 
 \item{eps}{a small numeric value that is added to the \code{logb} result prior to truncation via \code{as.integer}.
-Default: \code{.Machine$double.eps * 1e9}.}
+Default: \code{.Machine\$double.eps * 1e9}.}
 }
 
 \value{

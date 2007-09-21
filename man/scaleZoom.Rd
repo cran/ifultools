@@ -73,7 +73,7 @@ a named list containing the following components:
 \item{ylab}{A character string defining an appropriate y-label for the zoomed y-coordinate output.}
 }
 \seealso{
-\code{\link{image}}, \code{\link{stackPlot}}.}
+\code{\link[graphics]{image}}, \code{\link{stackPlot}}.}
 
 \examples{
 ## create an image 

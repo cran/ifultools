@@ -1,5 +1,5 @@
 ################################################
-# S+IFULTools utility functions
+# IFULTools package utility functions
 #
 # ACVStoPACS
 # aggregateData
@@ -128,8 +128,12 @@
 
   # In R, class(5) is "numeric", not "integer" so we
   # have to accomodate
-  if (is.R() && isType == "integer"){
-  	if (!is.numeric(x) || length(x) > 1)
+  #
+  # also, if S-PLUS in R parse mode, then integers are converted to floats (1 to 1.)
+  # so we accomodate that as well. (set.parse.mode(-1) == 1) means that S-PLUS is in
+  # "R" parse mode
+  if ((is.R() || (!is.R() && as.logical(set.parse.mode(-1)))) && isType == "integer"){
+    if (!is.numeric(x) || length(x) > 1)
       stop(deparseText(substitute(x)), " must be scalar of class ", isType)
   }
   else{
@@ -149,13 +153,18 @@
 
   # In R, class(c(1,3:5) is "numeric", not "integer" so we
   # have to accomodate
-  if (is.R() && isType == "integer"){
-  	if (!isVectorAtomic(x) || !is.numeric(x))
+  #
+  # also, if S-PLUS in R parse mode, then integers are converted to floats (1 to 1.)
+  # so we accomodate that as well. (set.parse.mode(-1) == 1) means that S-PLUS is in
+  # "R" parse mode
+  if ((is.R() || (!is.R() && as.logical(set.parse.mode(-1)))) && isType == "integer"){
+
+    if (!isVectorAtomic(x) || !is.numeric(x))
       stop(deparseText(substitute(x)), " must be a vector of class ", isType)
   }
   else{
 
-  	if (!isVectorAtomic(x) || !eval(parse(text=paste("is.", isType, "(x)", sep=""))))
+    if (!isVectorAtomic(x) || !eval(parse(text=paste("is.", isType, "(x)", sep=""))))
       stop(deparseText(substitute(x)), " must be a vector of class ", isType)
   }
 

@@ -30,7 +30,7 @@ Allows the user to calculate the biased/unbiased variance of the input
 and provides the option to eliminate NA values as well.
 }
 \seealso{
-\code{\link{var}}.}
+\code{\link[stats]{var}}.}
 
 \examples{
 set.seed(100)

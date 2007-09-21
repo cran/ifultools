@@ -29,7 +29,7 @@
 the aggregated series.
 }
 \seealso{
-\code{\link{aggregate}}.}
+\code{\link[stats:agg_def]{aggregate}}.}
 
 \examples{
 ## Group a simple series into blocks containing 8 

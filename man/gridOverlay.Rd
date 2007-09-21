@@ -24,7 +24,7 @@
 \item{lty}{line type ala \code{par} function. Default: \code{"dotted"}.}
 }
 \seealso{
-\code{\link{par}}.}
+\code{\link[graphics]{par}}.}
 
 \examples{
 ## plot the chaotic beam data and overlay a grid 

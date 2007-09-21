@@ -34,7 +34,7 @@ Default: \code{NULL} (\code{scale.ratio} is used instead).}
 a numeric vector containing the scales.
 }
 \seealso{
-\code{\link{scale}}, \code{\link{ilogb}}.}
+\code{\link[base]{scale}}, \code{\link{ilogb}}.}
 
 \examples{
 logScale(scale.min = 1, scale.max=34, scale.ratio=4)

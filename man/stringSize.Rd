@@ -38,7 +38,7 @@ in the corresponding direction.
 \note{A graphics window will open up if one is not already opened.}
 
 \seealso{
-\code{\link{par}}, \code{\link{autoKey}}, \code{\link{autoText}}, \code{\link{em}}.}
+\code{\link[graphics]{par}}, \code{\link{autoKey}}, \code{\link{autoText}}, \code{\link{em}}.}
 
 \examples{
 stringSize("What's for dinner?", adj=0, srt=45, cex=1.5)

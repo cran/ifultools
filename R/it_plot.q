@@ -52,7 +52,8 @@
     do.call("legend",args=newargs)
   }
   else{
-    do.call("key",args=mergeList(args., pos))
+  	tmpargs <- mergeList(args., pos)
+    do.call("key",args=tmpargs)
   }
 
   invisible(NULL)

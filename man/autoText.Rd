@@ -47,7 +47,7 @@ no output is returned.
 region of the specified data set.}
 
 \seealso{
-\code{\link{text}}, \code{\link{autoKey}}, \code{\link{sparsestQuadrant}}, \code{\link{mergeList}}.}
+\code{\link[graphics]{text}}, \code{\link{autoKey}}, \code{\link{sparsestQuadrant}}, \code{\link{mergeList}}.}
 
 \examples{
 ## quadratic 
