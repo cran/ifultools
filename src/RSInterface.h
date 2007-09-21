@@ -70,7 +70,7 @@ EXTERN_R SEXP RS_fractal_time_delayed_mutual_information(SEXP, SEXP);
 // wmtsa\src\RS_mth_var.c or sapa\src\RS_math_acvs.c
 EXTERN_R SEXP RS_math_acvs(SEXP, SEXP, SEXP);
 
-// RS_sig_win.c 
+// RS_sig_win.c
 EXTERN_R SEXP RS_signal_taper(SEXP, SEXP, SEXP, SEXP, SEXP);
 
 // RS_wav_boot.c
@@ -111,10 +111,10 @@ EXTERN_R SEXP RS_wavelets_variance_edof(
  SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 
 // RS_wav_wtmm.c
-EXTERN_R SEXP RS_wavelets_transform_continuous_wavelet_modulus_maxima(SEXP, SEXP);
+EXTERN_R SEXP RS_wavelets_transform_continuous_wavelet_modulus_maxima(SEXP, SEXP, SEXP);
 EXTERN_R SEXP RS_wavelets_transform_continuous_wavelet_modulus_maxima_tree(
  SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
- 
+
 // RS_wav_xform.c
 EXTERN_R SEXP RS_wavelets_transform_continuous_wavelet(
  SEXP, SEXP, SEXP, SEXP, SEXP);

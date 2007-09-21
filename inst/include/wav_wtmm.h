@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/wav_wtmm.h $: $Revision: #5 $, $Date: 2006/01/04 $ */
+/* @(#) $File: //depot/Research/mutils/include/wav_wtmm.h $: $Revision: #6 $, $Date: 2007/11/14 $ */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_WAV_WTMM_H_
@@ -9,6 +9,7 @@
 #include "ut_err.h"
 #include "ut_plat.h"
 #include "ut_type.h"
+#include "wav_type.h"
 
 /* This file contains function declarations the wavelet mutils library. */
 
@@ -41,7 +42,7 @@ extern "C" {
  * @include wav\_wtmm.h
  * @source wav\_wtmm.c
  * @library wavelets
- * @usage #err = wavuniv_transform_continuous_wavelet_modulus_maxima( &cwt, &tolerance, intrp_ptr, &itime, &iscale );#
+ * @usage #err = wavuniv_transform_continuous_wavelet_modulus_maxima( &cwt, &tolerance, peaktype intrp_ptr, &itime, &iscale );#
  * @return Standard mutils error/OK code.
  * @param  cwt         Pointer to a pre-allocated universal matrix containing
  *                     a continuous wavelet transform. This matrix must be
@@ -62,6 +63,7 @@ extern "C" {
  *                     will contain a concatenated list of the index locations
  *                     in scale where the CWT modulus maxima were found.
  *                     The memory for this matrix is allocated by the function.
+ * @param peaktype     Enum defining the peak: extrema, minima, extrema.
  *
  * @see wavuniv_transform_continuous_wavelet
  * @see wavuniv_transform_continuous_wavelet_modulus_maxima_tree
@@ -69,6 +71,7 @@ extern "C" {
 MUTIL_LIBEXPORT mutil_errcode wavuniv_transform_continuous_wavelet_modulus_maxima(
   const univ_mat        *cwt,
   const univ_mat        *tolerance,
+  const wav_transform_peak peak_type,
   void                  *intrp_ptr,
   sint32_mat            *itime,
   sint32_mat            *iscale );

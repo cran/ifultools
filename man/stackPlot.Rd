@@ -139,8 +139,7 @@ no output.
 \note{A stack plot is produced.}
 
 \seealso{
-\code{\link{splitplot}}.
-}
+\code{\link{splitplot}}.}
 
 \examples{
 ## stack-plot the sunspots series and a random 

@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/wrap_RS/RS_mac.h $: $Revision: #1 $, $Date: 2007/02/02 $ */
+/* @(#) $File: //depot/Research/mutils/wrap_RS/RS_mac.h $: $Revision: #2 $, $Date: 2007/11/14 $ */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_RS_MAC_H_
@@ -94,6 +94,10 @@ extern "C" {
 #define WAV_TRANSFORM_FROM_R( IN_PTR, OUTPTR ) \
   err = wav_transform_from_R( IN_PTR, OUTPTR ); \
   MEMLIST_FREE_ON_ERROR_SPLUS( err, &list, Unable to convert wav_transform type argument IN_PTR to OUTPTR )
+
+#define WAV_TRANSFORM_PEAK_FROM_R( IN_PTR, OUTPTR ) \
+  err = wav_transform_peak_from_R( IN_PTR, OUTPTR ); \
+  MEMLIST_FREE_ON_ERROR_SPLUS( err, &list, Unable to convert wav_transform_peak type argument IN_PTR to OUTPTR )
 
 #define WAV_SHRINK_THRESHOLD_FROM_R( IN_PTR, OUTPTR ) \
   err = wav_shrink_threshold_from_R( IN_PTR, OUTPTR ); \

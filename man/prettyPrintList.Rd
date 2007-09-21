@@ -28,8 +28,7 @@ objects in the list. Choices are \code{"none"}, \code{"left"}, \code{"right"} an
 corresponding values.}
 }
 \seealso{
-\code{\link{isVectorAtomic}}.
-}
+\code{\link{isVectorAtomic}}.}
 
 \examples{
 ## develop menu 

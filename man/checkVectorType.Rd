@@ -29,10 +29,7 @@ no output is returned. If these tests fail, a \code{stop} condition
 is executed.
 }
 \seealso{
-\code{\link{isVectorAtomic}},
-\code{\link{checkScalarType}},
-\code{\link{checkRange}}.
-}
+\code{\link{isVectorAtomic}}, \code{\link{checkScalarType}}, \code{\link{checkRange}}.}
 
 \examples{
 ## expect no output from the following calls 

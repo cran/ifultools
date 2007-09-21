@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/wavelets/wav_filt.c $: $Revision: #17 $, $Date: 2007/01/02 $";
+static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/wavelets/wav_filt.c $: $Revision: #18 $, $Date: 2007/11/14 $";
 
 #include "wav_filt.h"
 #include "wav_type.h"
@@ -1136,7 +1136,7 @@ mutil_errcode wavuniv_filters_daubechies_verify(
   return MUTIL_ERR_OK;
 }
 
-/* The square gained functions for Daubechies */
+/* The squared gain functions for Daubechies  */
 /* wavelet and scaling filters.               */
 /* Documented in wav_filt.h                   */
 /* Written by William Constantine             */
@@ -1152,47 +1152,29 @@ mutil_errcode wavuniv_filters_daubechies_gain(
   univ_mat         *gain_wavelet,
   univ_mat         *gain_scaling)
 {
-  dcomplex          temp;           /* temporary variable used to
-                                       store complex math operations */
-  dcomplex         *G1;             /* pointer to level 1 scaling
-                                       filter gain function          */
-  dcomplex         *G;              /* pointer to current level's
-                                       scaling filter gain function  */
-  dcomplex         *Glast;          /* pointer to previous level's
-                                       scaling filter gain function  */
-  dcomplex         *H1;             /* pointer to level 1 wavelet
-                                       filter gain function          */
-  dcomplex         *H;              /* pointer to current level's
-                                       wavelet filter gain function  */
-  double            dfreq;          /* the frequency interval between
-                                       Fourier coefficients          */
-  double            freq;           /* current Fourier frequency     */
-  double            num_ops = 0.0;  /* used for user interrupts
-                                       (number of operations count)  */
-  mat_set           filters;        /* wavelet and scaling filter
-                                       matrix set                    */
-  mutil_errcode     err;            /* MUTIL error code              */
-  sint32            f;              /* counting index for looping
-                                       through Fourier frequencies   */
-  sint32            index;          /* index for (circular) Fourier
-                                       coefficients                  */
-  sint32            j;              /* counting index                */
-  sint32            l;              /* counting index                */
-  double            magnification;  /* variable related to scale of
-                                       current decomposition level   */
-  sint32            num_pad = LOCALDEF_MAX( filter_length, num_fft);
-                                    /* total length of zero padded
-                                       filters                       */
-  univ_mat          Gone;           /* pointer to first level scaling
-                                       filter gain function          */
-  univ_mat          Hone;           /* pointer to first level wavelet
-                                       filter gain function          */
-  univ_mat          g;              /* vector containing scaling
-                                       filter (impulse response)
-                                       (complex)                     */
-  univ_mat          h;              /* vector containing wavelet
-                                       filter (impulse response)
-                                       (complex)                     */
+  dcomplex          temp;           /* temporary variable used to store complex math operations        */
+  dcomplex         *G1;             /* pointer to level 1 scaling filter gain function                 */
+  dcomplex         *G;              /* pointer to current level's scaling filter gain function         */
+  dcomplex         *Glast;          /* pointer to previous level's scaling filter gain function        */
+  dcomplex         *H1;             /* pointer to level 1 wavelet filter gain function                 */
+  dcomplex         *H;              /* pointer to current level's wavelet filter gain function         */
+  double            dfreq;          /* the frequency interval between Fourier coefficients             */
+  double            freq;           /* current Fourier frequency                                       */
+  double            num_ops = 0.0;  /* used for user interrupts (number of operations count)           */
+  mat_set           filters;        /* wavelet and scaling filter matrix set                           */
+  mutil_errcode     err;            /* MUTIL error code                                                */
+  sint32            f;              /* counting index for looping through Fourier frequencies          */
+  sint32            index;          /* index for (circular) Fourier coefficients                       */
+  sint32            j;              /* counting index                                                  */
+  sint32            l;              /* counting index                                                  */
+  double            magnification;  /* variable related to scale of current decomposition level        */
+  sint32            num_pad = LOCALDEF_MAX( filter_length, num_fft); /* total length of zero padded filters */
+  univ_mat          Gone;           /* first level scaling filter gain function                        */
+  univ_mat          Hone;           /* first level wavelet filter gain function                        */
+  univ_mat          GoneTranspose;
+  univ_mat          HoneTranspose;
+  univ_mat          g;              /* vector containing scaling filter (impulse response) (complex)   */
+  univ_mat          h;              /* vector containing wavelet filter (impulse response) (complex)   */
   memlist           list;
 
   MUTIL_INTERRUPT_INIT( intrp_ptr );
@@ -1242,6 +1224,14 @@ mutil_errcode wavuniv_filters_daubechies_gain(
     MUTIL_DCOMPLEX, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
 
+  err = matuniv_malloc_register( &GoneTranspose, 1, num_pad,
+    MUTIL_DCOMPLEX, &list );
+  MEMLIST_FREE_ON_ERROR( err, &list );
+
+  err = matuniv_malloc_register( &HoneTranspose, 1, num_pad,
+    MUTIL_DCOMPLEX, &list );
+  MEMLIST_FREE_ON_ERROR( err, &list );
+
   /* obtain filters and register with memory manager */
 
   err = wavuniv_filters_daubechies(
@@ -1286,19 +1276,19 @@ mutil_errcode wavuniv_filters_daubechies_gain(
      1D (row) vectors, the output of the transpose function can be written
      to the same data location as the input */
 
-  err = matuniv_transpose( &Gone, intrp_ptr, &Gone );
+  err = matuniv_transpose( &Gone, intrp_ptr, &GoneTranspose );
   MEMLIST_FREE_ON_ERROR( err, &list );
 
-  err = matuniv_transpose( &Hone, intrp_ptr, &Hone );
+  err = matuniv_transpose( &Hone, intrp_ptr, &HoneTranspose );
   MEMLIST_FREE_ON_ERROR( err, &list );
 
   /* copy the first level gain functions into the appropriate
     rows in the result matrices   */
 
-  err = matuniv_assign_submat( &Gone, 0, 0, intrp_ptr, gain_scaling );
+  err = matuniv_assign_submat( &GoneTranspose, 0, 0, intrp_ptr, gain_scaling );
   MEMLIST_FREE_ON_ERROR( err, &list );
 
-  err = matuniv_assign_submat( &Hone, 0, 0, intrp_ptr, gain_wavelet );
+  err = matuniv_assign_submat( &HoneTranspose, 0, 0, intrp_ptr, gain_wavelet );
   MEMLIST_FREE_ON_ERROR( err, &list );
 
   /* create pointers */
@@ -1312,8 +1302,6 @@ mutil_errcode wavuniv_filters_daubechies_gain(
   dfreq = 1.0 / ( double ) num_pad;
 
   MUTIL_TRACE( "Starting loop over each level." );
-
-  /* calculate the DWT coefficients */
 
   for( j = 1; j < num_levels; j++ ){
 
@@ -1340,7 +1328,7 @@ mutil_errcode wavuniv_filters_daubechies_gain(
         gain_frequency->mat.dblmat.data[ f ] = freq;
       }
 
-      /*  G_j(f) = G(2^{j-1} * f) * G_{j-1}(f) */
+      /* G_j(f) = G(2^{j-1} * f) * G_{j-1}(f) */
 
       MUTIL_CPX_MULT( G1[ index ], Glast[ f ], temp );
 
@@ -1772,11 +1760,11 @@ mutil_errcode wavuniv_filters_zero_phase(
             return MUTIL_ERR_ILLEGAL_VALUE;
         }
       }
-      else if ( filter_type == WAV_FILTER_COIFLET ){ 
+      else if ( filter_type == WAV_FILTER_COIFLET ){
         shift = Lj - ( filter_length - 3 ) / 3 *
           ( tauj - Sjn -1/2 ) + 1/2;
       }
-      else{ /* Extremal phase or Haar */ 
+      else{ /* Extremal phase or Haar */
         shift = Lj + tauj - Sjn;
       }
 

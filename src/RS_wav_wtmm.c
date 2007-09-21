@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/ifultools/src/RS_wav_wtmm.c $: $Revision: #1 $, $Date: 2007/06/26 $ ";
+static char whatssi[] = "@(#) $File: //depot/Research/ifultools/src/RS_wav_wtmm.c $: $Revision: #2 $, $Date: 2007/11/14 $ ";
 
 /* This is a self-documenting doc++ file. */
 
@@ -13,6 +13,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/src/RS_wav_wtmm.
 */
 
 #include "wav_wtmm.h"
+#include "wav_type.h"
 #include "ut_RS.h"
 #include "mat_set.h"
 #include "mat_umat.h"
@@ -34,19 +35,21 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/src/RS_wav_wtmm.
 */
 EXTERN_R SEXP RS_wavelets_transform_continuous_wavelet_modulus_maxima(
  SEXP pr_cwt,
- SEXP pr_tolerance )
+ SEXP pr_tolerance,
+ SEXP pr_peak_type )
 {
-  SEXP             pr_ret_iscale;   
-  SEXP             pr_ret_itime;    
-  SEXP             pr_ret_obj;      
-  mutil_data_type  type;            
-  mutil_errcode    err;             
-  univ_mat         iscale;          
-  univ_mat         itime;           
-  univ_mat         cwt;             
-  univ_mat         tolerance;       
-  void             *VPNULL = NULL;  
+  SEXP             pr_ret_iscale;
+  SEXP             pr_ret_itime;
+  SEXP             pr_ret_obj;
+  mutil_data_type  type;
+  mutil_errcode    err;
+  univ_mat         iscale;
+  univ_mat         itime;
+  univ_mat         cwt;
+  univ_mat         tolerance;
+  void             *VPNULL = NULL;
   memlist          list;
+  wav_transform_peak peak_type;
 
   /* Avoid lint warning */
   (void) whatssi;
@@ -62,10 +65,14 @@ EXTERN_R SEXP RS_wavelets_transform_continuous_wavelet_modulus_maxima(
   /* ... pr_tolerance to tolerance */
   READ_MATRIX_REGISTER( pr_tolerance, &tolerance );
 
+  /* ... pr_peak_type to peak_type */
+  WAV_TRANSFORM_PEAK_FROM_R( pr_peak_type, &peak_type );
+
   /* Call the function */
   err = wavuniv_transform_continuous_wavelet_modulus_maxima(
     &cwt,
     &tolerance,
+    peak_type,
     VPNULL,
     &(itime.mat.s32mat),
     &(iscale.mat.s32mat) );
@@ -147,7 +154,7 @@ EXTERN_R SEXP RS_wavelets_transform_continuous_wavelet_modulus_maxima_tree(
   memlist            list;
   mutil_data_type    type;
   mutil_errcode      err;
-  SEXP               pr_ret_result;        
+  SEXP               pr_ret_result;
   univ_mat           cwt;
   univ_mat           cwt_scale;
   univ_mat           cwt_time;

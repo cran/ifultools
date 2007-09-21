@@ -26,12 +26,7 @@ Supported values are 1, 2 and \code{Inf}.}
 an integer representing the equivalent MUTILS enumerated type for the specifed metric.
 }
 \seealso{
-\code{\link{mutilsFilterType}},
-\code{\link{mutilsFilterTypeContinuous}},
-\code{\link{mutilsTransformType}},
-\code{\link{mutilsWSShrinkageFunction}},
-\code{\link{mutilsWSThresholdFunction}}.
-}
+\code{\link{mutilsFilterType}}, \code{\link{mutilsFilterTypeContinuous}}, \code{\link{mutilsSDF}}, \code{\link{mutilsTransformPeakType}}, \code{\link{mutilsTransformType}}, \code{\link{mutilsWSShrinkageFunction}}, \code{\link{mutilsWSThresholdFunction}}.}
 
 \examples{
 mutilsDistanceMetric(Inf)

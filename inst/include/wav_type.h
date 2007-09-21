@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/wav_type.h $: $Revision: #41 $, $Date: 2006/01/04 $ */
+/* @(#) $File: //depot/Research/mutils/include/wav_type.h $: $Revision: #42 $, $Date: 2007/11/14 $ */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_WAV_TYPE_H
@@ -271,6 +271,29 @@ enum _wav_transform
 
 /* See above documentation for _wav_filter_type for explanation. */
 typedef enum _wav_transform wav_transform;
+
+/** Enum of wavelet transform local extrema type
+ *
+ * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
+ * @include wav\_type.h
+ * @source wav\_type.h
+ * @library wavelets
+ * @same #typedef enum _wav_transform_peak#
+ */
+enum _wav_transform_peak
+{
+  /** Local maxima and minima. */
+  WAV_TRANSFORM_PEAK_EXTREMA,
+
+  /** Local maxima. */
+  WAV_TRANSFORM_PEAK_MAXIMA,
+
+  /** Local minima. */
+  WAV_TRANSFORM_PEAK_MINIMA
+};
+
+/* See above documentation for _wav_transform_peak for explanation. */
+typedef enum _wav_transform_peak wav_transform_peak;
 
 /** Struct for parameters in a hidden Markov tree (HMT) model.
  * After declaring a \Ref{_wav_hmt_model} structure variable it

@@ -41,8 +41,7 @@ Cambridge University Press, 1993, Section 9.4.
 }
 
 \seealso{
-\code{\link{ar.yw}}.
-}
+\code{\link{ar.yw}}.}
 
 \examples{
 ACVStoPACS(c(3,2,1))

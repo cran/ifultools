@@ -19,8 +19,7 @@
 a two-element vector containing the width and height, respectively, of the letter 'm' in user coordinates for the current font.
 }
 \seealso{
-\code{\link{stringSize}}.
-}
+\code{\link{stringSize}}.}
 
 \examples{
 em()

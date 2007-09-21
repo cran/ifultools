@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/ifultools/src/RS_wav_filt.c $: $Revision: #1 $, $Date: 2007/06/26 $ ";
+static char whatssi[] = "@(#) $File: //depot/Research/ifultools/src/RS_wav_filt.c $: $Revision: #2 $, $Date: 2007/11/14 $ ";
 
 /* This is a self-documenting doc++ file. */
 
@@ -23,6 +23,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/src/RS_wav_filt.
 #include "mat_univ.h"
 #include "ut_debug.h"
 #include "ut_intrn.h"
+#include "RS_mac.h"
 
 /** Daubechies wavelet and scaling filters.
  * @source RS\_wav\_filt.c
@@ -45,13 +46,13 @@ EXTERN_R SEXP RS_wavelets_filters_daubechies(
  SEXP pr_filter_type,
  SEXP pr_normalize )
 {
-  SEXP             pr_ret_result;   
-  boolean          normalize;       
-  mat_set          result;          
-  mutil_errcode    err;             
-  sint32           filter_length;   
-  void             *VPNULL = NULL;  
-  wav_filter_type  filter_type;     
+  SEXP             pr_ret_result;
+  boolean          normalize;
+  mat_set          result;
+  mutil_errcode    err;
+  sint32           filter_length;
+  void             *VPNULL = NULL;
+  wav_filter_type  filter_type;
 
   /* Avoid lint warning */
   (void) whatssi;
@@ -118,55 +119,44 @@ EXTERN_R SEXP RS_wavelets_filters_daubechies_gain(
  SEXP pr_num_fft,
  SEXP pr_normalize )
 {
-  SEXP                    pr_ret_gain_frequency;  
-  SEXP                    pr_ret_gain_scaling;    
-  SEXP                    pr_ret_gain_wavelet;    
-  SEXP                    pr_ret_obj;             
-  boolean                 normalize;              
-  mutil_errcode           err;                    
-  sint32                  filter_length;          
-  sint32                  num_fft;                
-  sint32                  num_levels;             
-  univ_mat                gain_frequency;         
-  univ_mat                gain_scaling;           
-  univ_mat                gain_wavelet;           
-  void                    *VPNULL = NULL;         
-  wav_filter_type         filter_type;            
+  SEXP             pr_ret_gain_frequency;
+  SEXP             pr_ret_gain_scaling;
+  SEXP             pr_ret_gain_wavelet;
+  SEXP             pr_ret_obj;
+  boolean          normalize;
+  mutil_errcode    err;
+  sint32           filter_length;
+  sint32           num_fft;
+  sint32           num_levels;
+  univ_mat         gain_frequency;
+  univ_mat         gain_scaling;
+  univ_mat         gain_wavelet;
+  void             *VPNULL = NULL;
+  wav_filter_type  filter_type;
+  memlist          list;
 
   /* Avoid lint warning */
   (void) whatssi;
 
+  /* initialize memory list */
+  MEMLIST_INIT( list );
+
   /* Conversion of input data ... */
 
   /* ... pr_filter_type to filter_type */
-  err = wav_filter_type_from_R( pr_filter_type, &filter_type );
-  if ( err ){
-    PROBLEM "Unable to convert wav_filter_type type argument pr_filter_type to filter_type" ERROR;
-  }
+  WAV_FILTER_TYPE_FROM_R( pr_filter_type, &filter_type );
 
   /* ... pr_filter_length to filter_length */
-  err = sint32_from_R( pr_filter_length, &filter_length );
-  if ( err ){
-    PROBLEM "Unable to convert sint32 type argument pr_filter_length to filter_length" ERROR;
-  }
+  SINT32_FROM_R( pr_filter_length, &filter_length );
 
   /* ... pr_num_levels to num_levels */
-  err = sint32_from_R( pr_num_levels, &num_levels );
-  if ( err ){
-    PROBLEM "Unable to convert sint32 type argument pr_num_levels to num_levels" ERROR;
-  }
+  SINT32_FROM_R( pr_num_levels, &num_levels );
 
   /* ... pr_num_fft to num_fft */
-  err = sint32_from_R( pr_num_fft, &num_fft );
-  if ( err ){
-    PROBLEM "Unable to convert sint32 type argument pr_num_fft to num_fft" ERROR;
-  }
+  SINT32_FROM_R( pr_num_fft, &num_fft );
 
   /* ... pr_normalize to normalize */
-  err = boolean_from_R( pr_normalize, &normalize );
-  if ( err ){
-    PROBLEM "Unable to convert boolean type argument pr_normalize to normalize" ERROR;
-  }
+  BOOLEAN_FROM_R( pr_normalize, &normalize );
 
   /* Call the function */
   err = wavuniv_filters_daubechies_gain(
@@ -179,39 +169,34 @@ EXTERN_R SEXP RS_wavelets_filters_daubechies_gain(
     &gain_frequency,
     &gain_wavelet,
     &gain_scaling );
-  if ( err ){
-    PROBLEM "Problem calling wavuniv_filters_daubechies_gain() function" ERROR;
-  }
+  MEMLIST_FREE_ON_ERROR_SPLUS( err, &list, "Problem calling wavuniv_filters_daubechies_gain() function" );
+  err = memlist_member_register( &list, &gain_frequency, MEMTYPE_MATUNIV);
+  MEMLIST_FREE_ON_ERROR_REGISTER( err, &list );
+  err = memlist_member_register( &list, &gain_wavelet, MEMTYPE_MATUNIV);
+  MEMLIST_FREE_ON_ERROR_REGISTER( err, &list );
+  err = memlist_member_register( &list, &gain_scaling, MEMTYPE_MATUNIV);
+  MEMLIST_FREE_ON_ERROR_REGISTER( err, &list );
 
   /* create the output R object */
 
   err = matuniv_to_R( &gain_frequency, (mutil_R_class_type) MUTIL_R_MATRIX, &pr_ret_gain_frequency );
-  MUTIL_FREE_WARN( matuniv, &gain_frequency );
-  if ( err ) {
-    MUTIL_FREE_WARN( matuniv, &gain_wavelet );
-    MUTIL_FREE_WARN( matuniv, &gain_scaling );
-    PROBLEM "Unable to convert output data to R format" ERROR;
-  }
+  MEMLIST_FREE_ON_ERROR_SPLUS( err, &list, "Unable to convert output data to R format" );
 
   err = matuniv_to_R( &gain_wavelet, (mutil_R_class_type) MUTIL_R_MATRIX, &pr_ret_gain_wavelet );
-  MUTIL_FREE_WARN( matuniv, &gain_wavelet );
-  if ( err ) {
-    MUTIL_FREE_WARN( matuniv, &gain_scaling );
-    PROBLEM "Unable to convert output data to R format" ERROR;
-  }
+  MEMLIST_FREE_ON_ERROR_SPLUS( err, &list, "Unable to convert output data to R format" );
 
   err = matuniv_to_R( &gain_scaling, (mutil_R_class_type) MUTIL_R_MATRIX, &pr_ret_gain_scaling );
-  MUTIL_FREE_WARN( matuniv, &gain_scaling );
-  if ( err ) {
-      PROBLEM "Unable to convert output data to R format" ERROR;
-  }
+  MEMLIST_FREE_ON_ERROR_SPLUS( err, &list, "Unable to convert output data to R format" );
 
   PROTECT( pr_ret_obj = allocVector( VECSXP, 3 ) );
   SET_VECTOR_ELT( pr_ret_obj, 0, pr_ret_gain_frequency );
   SET_VECTOR_ELT( pr_ret_obj, 1, pr_ret_gain_wavelet );
   SET_VECTOR_ELT( pr_ret_obj, 2, pr_ret_gain_scaling );
   UNPROTECT(1);
-  
+
+  /* free registered local memory */
+  MUTIL_FREE_WARN( memlist, &list );
+
   return pr_ret_obj;
 }
 
@@ -233,13 +218,13 @@ EXTERN_R SEXP RS_wavelets_filter_zero_phase(
  SEXP pr_filter_length,
  SEXP pr_n_level )
 {
-  SEXP             pr_ret_result;   
-  mat_set          result;          
-  mutil_errcode    err;             
-  sint32           filter_length;   
-  sint32           n_level;         
-  void             *VPNULL = NULL;  
-  wav_filter_type  filter_type;     
+  SEXP             pr_ret_result;
+  mat_set          result;
+  mutil_errcode    err;
+  sint32           filter_length;
+  sint32           n_level;
+  void             *VPNULL = NULL;
+  wav_filter_type  filter_type;
 
   /* Avoid lint warning */
   (void) whatssi;
@@ -302,14 +287,14 @@ EXTERN_R SEXP RS_wavelets_filters_continuous(
  SEXP pr_filter_arg,
  SEXP pr_frequency )
 {
-  SEXP             pr_ret_result;   
-  double           filter_arg;      
-  mutil_data_type  type;            
-  mutil_errcode    err;             
-  univ_mat         frequency;       
-  univ_mat         result;          
-  void             *VPNULL = NULL;  
-  wav_filter_type  filter_type;     
+  SEXP             pr_ret_result;
+  double           filter_arg;
+  mutil_data_type  type;
+  mutil_errcode    err;
+  univ_mat         frequency;
+  univ_mat         result;
+  void             *VPNULL = NULL;
+  wav_filter_type  filter_type;
 
   /* Avoid lint warning */
   (void) whatssi;
@@ -390,14 +375,14 @@ EXTERN_R SEXP RS_wavelets_transform_coefficient_boundaries(
  SEXP pr_n_sample,
  SEXP pr_transform_type )
 {
-  SEXP             pr_ret_result;   
-  mat_set          result;          
-  mutil_errcode    err;             
-  sint32           filter_length;   
-  sint32           n_level;         
-  sint32           n_sample;        
-  void             *VPNULL = NULL;  
-  wav_transform    transform_type;  
+  SEXP             pr_ret_result;
+  mat_set          result;
+  mutil_errcode    err;
+  sint32           filter_length;
+  sint32           n_level;
+  sint32           n_sample;
+  void             *VPNULL = NULL;
+  wav_transform    transform_type;
 
   /* Avoid lint warning */
   (void) whatssi;

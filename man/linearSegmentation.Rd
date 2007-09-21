@@ -71,8 +71,7 @@ Default: \code{FALSE}.}
 a vector containing the result.
 }
 \seealso{
-\code{\link{lm}}.
-}
+\code{\link{lm}}.}
 
 \examples{
 ## obtain some data with approximately 

@@ -25,12 +25,7 @@ corresponding enum type in MUTILS.}
 an integer corresponding to the MUTILS enum.
 }
 \seealso{
-\code{\link{mutilsDistanceMetric}},
-\code{\link{mutilsFilterType}},
-\code{\link{mutilsTransformType}},
-\code{\link{mutilsWSShrinkageFunction}},
-\code{\link{mutilsWSThresholdFunction}}.
-}
+\code{\link{mutilsDistanceMetric}}, \code{\link{mutilsFilterType}}, \code{\link{mutilsSDF}}, \code{\link{mutilsTransformPeakType}}, \code{\link{mutilsTransformType}}, \code{\link{mutilsWSShrinkageFunction}}, \code{\link{mutilsWSThresholdFunction}}.}
 
 \examples{
 ## map the Morlet filter 

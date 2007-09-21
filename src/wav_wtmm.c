@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/wavelets/wav_wtmm.c $: $Revision: #10 $, $Date: 2007/06/19 $  ";
+static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/wavelets/wav_wtmm.c $: $Revision: #11 $, $Date: 2007/11/14 $  ";
 /* This is a self-documenting doc++ file. */
 
 #include "wav_wtmm.h"
@@ -39,6 +39,9 @@ static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/wavelets/wav_wt
 
 #define LOCALDEF_CWT_MODULUS( TIME, SCALE ) \
 MUTIL_CPX_ABS( cwt->mat.cpxmat.data[(TIME) * n_scale + (SCALE)] )
+
+#define LOCALDEF_CWT_REAL( TIME, SCALE ) \
+cwt->mat.cpxmat.data[(TIME) * n_scale + (SCALE)].re
 
 #define LOCALDEF_REVERSE_VECTOR( MAT_PTR, MAT_FN_TYPE ) \
  if ( MATANY_IS_VEC_COL( MAT_PTR ) ){ \
@@ -81,6 +84,7 @@ MUTIL_CPX_ABS( cwt->mat.cpxmat.data[(TIME) * n_scale + (SCALE)] )
 mutil_errcode wavuniv_transform_continuous_wavelet_modulus_maxima(
   const univ_mat        *cwt,
   const univ_mat        *tolerance,
+  const wav_transform_peak peak_type,
   void                  *intrp_ptr,
   sint32_mat            *itime,
   sint32_mat            *iscale )
@@ -98,6 +102,7 @@ mutil_errcode wavuniv_transform_continuous_wavelet_modulus_maxima(
   boolean       up;
   sint32        plateau;
   sint32        count;
+  double        cwtreal;
 
   MUTIL_INTERRUPT_INIT( intrp_ptr );
 
@@ -160,6 +165,17 @@ mutil_errcode wavuniv_transform_continuous_wavelet_modulus_maxima(
     return MUTIL_ERR_ILLEGAL_SIZE;
   }
 
+  /*** check peak type ... ***/
+  switch( peak_type ){
+    case WAV_TRANSFORM_PEAK_EXTREMA:
+    case WAV_TRANSFORM_PEAK_MAXIMA:
+    case WAV_TRANSFORM_PEAK_MINIMA:
+      break;
+    default:
+      MUTIL_ERROR( "Wavelet transform peak type is unsupported" );
+      return MUTIL_ERR_FEATURE_NOT_IMPLEMENTED;
+  }
+
   /* allocate space for temporary matrices */
 
   err = matdbl_malloc_register( &modcwt, n_sample, 1, &list );
@@ -184,7 +200,19 @@ mutil_errcode wavuniv_transform_continuous_wavelet_modulus_maxima(
     /* copy the modulus of the current scale's CWT coefficients into a vector */
 
     for ( t = 0; t < n_sample; t++ ){
-      modcwt.data[t] = LOCALDEF_CWT_MODULUS( t, j );
+      switch( peak_type ){
+      case WAV_TRANSFORM_PEAK_EXTREMA:
+        modcwt.data[t] = LOCALDEF_CWT_MODULUS( t, j );
+        break;
+      case WAV_TRANSFORM_PEAK_MAXIMA:
+        cwtreal = LOCALDEF_CWT_REAL( t, j );
+        modcwt.data[t] = ( ( cwtreal > 0.0 ) ? cwtreal : (double) 0.0 );
+        break;
+      case WAV_TRANSFORM_PEAK_MINIMA:
+        cwtreal = LOCALDEF_CWT_REAL( t, j );
+        modcwt.data[t] = ( ( cwtreal < 0.0 ) ? MUTIL_ABS(cwtreal) : (double) 0.0 );
+        break;
+      }
     }
 
     /* initialize variables */
@@ -569,7 +597,7 @@ mutil_errcode wavuniv_transform_continuous_wavelet_modulus_maxima_tree(
       n_branch++;
 
       LOCALDEF_UPDATE_BRANCH( itime, iscale, ifound );
-      
+
 			//begin Lixin Gong
 			/* initialize the length of the new branch */
 			branch_length.data[n_branch-1] = 1;

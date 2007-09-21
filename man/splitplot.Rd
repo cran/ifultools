@@ -37,8 +37,7 @@ The user can use this to reset \code{plt} to its original values.
 \note{The \code{plt} option of the \code{par} function is altered.}
 
 \seealso{
-\code{\link{stackPlot}}.
-}
+\code{\link{stackPlot}}.}
 
 \examples{
 ## establish a 2x2 plot grid and select the first 

@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/ut_RS.h $: $Revision: #4 $, $Date: 2007/10/04 $  */
+/* @(#) $File: //depot/Research/mutils/include/ut_RS.h $: $Revision: #5 $, $Date: 2007/11/14 $  */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_UT_RS_H
@@ -135,6 +135,21 @@ MUTIL_WRAPEXPORT mutil_errcode sig_taper_type_from_R( SEXP robj,
  */
 MUTIL_WRAPEXPORT mutil_errcode wav_white_test_from_R( SEXP robj,
   wav_white_test *type );
+
+/** wav_transform_peak enum mapping.
+ * Maps an integer from R to the corresponding enum type.
+ *
+ * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
+ * @include ut\_RS.h
+ * @source ut\_RS.c
+ * @library wrap\_RS
+ * @usage  #err_code = wav_transform_peak_from_R(robj, &type);#
+ * @return      Standard mutils error/OK code.
+ * @param robj  The R object to check.
+ * @param type  The corresponding enum type.
+ */
+MUTIL_WRAPEXPORT mutil_errcode wav_transform_peak_from_R( SEXP robj,
+  wav_transform_peak *type );
 
 /** fra_distance_metric enum mapping.
  * Maps an integer from R to the corresponding enum type.

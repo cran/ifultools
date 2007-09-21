@@ -71,8 +71,7 @@ number of samples in the time series. Default: 5.}
 the regression model.
 }
 \seealso{
-\code{\link{logScale}}.
-}
+\code{\link{logScale}}.}
 
 \examples{
 ## obtain some data with approximately 

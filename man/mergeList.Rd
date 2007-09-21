@@ -24,8 +24,7 @@ List X is returned as the merged list.}
 
 }
 \seealso{
-\code{\link{prettyPrintList}}.
-}
+\code{\link{prettyPrintList}}.}
 
 \examples{
 ## develop lists 

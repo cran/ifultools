@@ -41,10 +41,7 @@ no output is returned. If these tests fail, a \code{stop} condition
 is executed.
 }
 \seealso{
-\code{\link{isVectorAtomic}},
-\code{\link{checkVectorType}},
-\code{\link{checkScalarType}}.
-}
+\code{\link{isVectorAtomic}}, \code{\link{checkVectorType}}, \code{\link{checkScalarType}}.}
 
 \examples{
 ## expect no output from the following calls 

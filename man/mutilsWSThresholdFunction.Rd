@@ -28,12 +28,7 @@ containing an integer corresponding to the MUTILS enum and name
 of the waveshrink threshold function, respectively.
 }
 \seealso{
-\code{\link{mutilsDistanceMetric}},
-\code{\link{mutilsFilterType}},
-\code{\link{mutilsFilterTypeContinuous}},
-\code{\link{mutilsTransformType}},
-\code{\link{mutilsWSShrinkageFunction}}.
-}
+\code{\link{mutilsDistanceMetric}}, \code{\link{mutilsFilterType}}, \code{\link{mutilsFilterTypeContinuous}}, \code{\link{mutilsSDF}}, \code{\link{mutilsTransformPeakType}}, \code{\link{mutilsTransformType}}, \code{\link{mutilsWSShrinkageFunction}}.}
 
 \examples{
 ## obtain MUTILS enum map for the adaptive 

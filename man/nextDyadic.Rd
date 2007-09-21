@@ -24,9 +24,7 @@ returns the next power of two that is greater than, or equal to,
 the input x. If x is negative, 1 is returned.
 }
 \seealso{
-\code{\link{isVectorAtomic}},
-\code{\link{decibel}}.
-}
+\code{\link{isVectorAtomic}}, \code{\link{decibel}}.}
 
 \examples{
 nextDyadic(15)

@@ -26,12 +26,7 @@ Choices are \code{"modwt"}, \code{"modwpt"}, \code{"dwt"}, and \code{"dwpt"}.}
 an integer corresponding to the MUTILS enum.
 }
 \seealso{
-\code{\link{mutilsDistanceMetric}},
-\code{\link{mutilsFilterType}},
-\code{\link{mutilsFilterTypeContinuous}},
-\code{\link{mutilsWSShrinkageFunction}},
-\code{\link{mutilsWSThresholdFunction}}.
-}
+\code{\link{mutilsDistanceMetric}}, \code{\link{mutilsFilterType}}, \code{\link{mutilsFilterTypeContinuous}}, \code{\link{mutilsSDF}}, \code{\link{mutilsTransformPeakType}}, \code{\link{mutilsWSShrinkageFunction}}, \code{\link{mutilsWSThresholdFunction}}.}
 
 \examples{
 ## map the MODWPT 

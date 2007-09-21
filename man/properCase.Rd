@@ -35,8 +35,7 @@ a vector of character strings containing the result. The length
 of this vector is equal to \code{length(x)}.
 }
 \seealso{
-\code{\link{ordinal}}.
-}
+\code{\link{ordinal}}.}
 
 \examples{
 ## produces "myBasketBall" "mySoccerBall" 

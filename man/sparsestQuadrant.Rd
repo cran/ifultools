@@ -47,9 +47,7 @@ and is and farthest (in an L-inf sense) from quadrants
 containing a population greater than pmin.
 }
 \seealso{
-\code{\link{autoKey}},
-\code{\link{autoText}}.
-}
+\code{\link{autoKey}}, \code{\link{autoText}}.}
 
 \examples{
 ## find the sparset quadrant in a circle 

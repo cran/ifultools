@@ -61,10 +61,7 @@ span of the data to place the key. In this case, the user
 should explicitly place the key as usual.
 }
 \seealso{
-\code{\link{autoText}},
-\code{\link{sparsestQuadrant}},
-\code{\link{mergeList}}.
-}
+\code{\link{autoText}}, \code{\link{sparsestQuadrant}}, \code{\link{mergeList}}.}
 
 \examples{
 zkey <- list(x=-1,y=-1,

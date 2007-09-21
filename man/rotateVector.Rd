@@ -24,8 +24,7 @@ A negative value implies a negative (leftward) shift of the data.}
 a numeric vector containing the result.
 }
 \seealso{
-\code{\link{isVectorAtomic}}.
-}
+\code{\link{isVectorAtomic}}.}
 
 \examples{
 rotateVector(1:5, 2)

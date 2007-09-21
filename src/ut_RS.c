@@ -1,12 +1,12 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/mutils/wrap_RS/ut_RS.c $: $Revision: #5 $, $Date: 2007/09/17 $  ";
+static char whatssi[] = "@(#) $File: //depot/Research/mutils/wrap_RS/ut_RS.c $: $Revision: #6 $, $Date: 2007/11/14 $  ";
 
 /* This is a self-documenting doc++ file. */
 
 /* This file contains definitions of functions used to convert
    R objects to and from MUTILS data structures, so that
    R functions can access MUTILS libraries.  The functions are
-   declared in ut_R.h.
+   declared in ut_RS.h.
 */
 
 #include "ut_RS.h"
@@ -41,7 +41,7 @@ extern "C"{
 /********************************/
 /*                              */
 /* STATIC FUNCTION DECLARATIONS */
-/*                              */ 
+/*                              */
 /********************************/
 
 static boolean R_extract_complex( SEXP robj, sint32 *ret_length, dcomplex **pz_data );
@@ -55,7 +55,7 @@ static mutil_errcode vecnum_create( sint32 nelem,
   mutil_data_type type, SEXP *robj, void **data_ptr );
 static int arrnum_get_pieces( SEXP robj, sint32 *ndim,
   mutil_data_type *type, void **data_ptr, sint32 **dims );
-static void matset_index( sint32 R_arr_indx, sint32 nmats, 
+static void matset_index( sint32 R_arr_indx, sint32 nmats,
   sint32 ndim, sint32 *dims, sint32 *mat_set_indx );
 static int matnum_create( sint32 nrow, sint32 ncol,
   mutil_data_type type, SEXP *robj, void **data_ptr );
@@ -63,7 +63,7 @@ static int matnum_create( sint32 nrow, sint32 ncol,
 /*******************************/
 /*                             */
 /*      MACRO DEFINITIONS      */
-/*                             */ 
+/*                             */
 /*******************************/
 
 #undef ISNAN
@@ -74,13 +74,13 @@ static int matnum_create( sint32 nrow, sint32 ncol,
 /*******************************/
 /*                             */
 /*    FUNCTION DEFINITIONS     */
-/*                             */ 
+/*                             */
 /*******************************/
 
 
 /* wav_white_test enum mapping      */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode wav_white_test_from_R( SEXP robj,
   wav_white_test *type )
@@ -113,9 +113,41 @@ mutil_errcode wav_white_test_from_R( SEXP robj,
   return MUTIL_ERR_OK;
 }
 
+/* wav_transform_peak enum mapping      */
+/*                                  */
+/* Documented in ut_RS.h             */
+/* Written by William Constantine   */
+mutil_errcode wav_transform_peak_from_R( SEXP robj,
+  wav_transform_peak *type )
+{
+  if( !robj || !type ){
+    MUTIL_ERROR( "NULL pointer for input or output" );
+    return MUTIL_ERR_NULL_POINTER;
+  }
+
+  /* map the enum */
+
+  switch( asInteger(robj) ){
+    case 0:
+      *type = WAV_TRANSFORM_PEAK_EXTREMA;
+      break;
+    case 1:
+      *type = WAV_TRANSFORM_PEAK_MAXIMA;
+      break;
+    case 2:
+      *type = WAV_TRANSFORM_PEAK_MINIMA;
+      break;
+    default:
+      PROBLEM "Unsupported wavelet transform local peak type" ERROR;
+      break;
+  }
+
+  return MUTIL_ERR_OK;
+}
+
 /* sig_taper_type enum mapping      */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode sig_taper_type_from_R( SEXP robj,
   sig_taper_type *type )
@@ -184,7 +216,7 @@ mutil_errcode sig_taper_type_from_R( SEXP robj,
 
 /* fra_distance_metric enum mapping */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode fra_distance_metric_from_R( SEXP robj,
   fra_distance_metric *type )
@@ -216,7 +248,7 @@ mutil_errcode fra_distance_metric_from_R( SEXP robj,
 
 /* fra_extrema_type enum mapping    */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode fra_extrema_type_from_R( SEXP robj,
   fra_extrema_type *type )
@@ -248,7 +280,7 @@ mutil_errcode fra_extrema_type_from_R( SEXP robj,
 
 /* wav_filter_type enum mapping     */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode wav_filter_type_from_R( SEXP robj,
   wav_filter_type *type )
@@ -296,7 +328,7 @@ mutil_errcode wav_filter_type_from_R( SEXP robj,
 
 /* fra_surrogate enum mapping       */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode fra_surrogate_from_R( SEXP robj,
   fra_surrogate *type )
@@ -325,7 +357,7 @@ mutil_errcode fra_surrogate_from_R( SEXP robj,
 
 /* mutil_boundary_type enum mapping */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode mutil_boundary_type_from_R( SEXP robj,
   mutil_boundary_type *type )
@@ -360,7 +392,7 @@ mutil_errcode mutil_boundary_type_from_R( SEXP robj,
 
 /* wav_transform enum mapping       */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode wav_transform_from_R( SEXP robj,
   wav_transform *type )
@@ -395,7 +427,7 @@ mutil_errcode wav_transform_from_R( SEXP robj,
 
 /* wav_shrink_threshold enum mapping       */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode wav_shrink_threshold_from_R( SEXP robj,
   wav_shrink_threshold *type )
@@ -427,7 +459,7 @@ mutil_errcode wav_shrink_threshold_from_R( SEXP robj,
 
 /* wav_shrink_function enum mapping       */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode wav_shrink_function_from_R( SEXP robj,
   wav_shrink_function *type )
@@ -459,7 +491,7 @@ mutil_errcode wav_shrink_function_from_R( SEXP robj,
 
 /* wav_fdp_estimator enum mapping       */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode wav_fdp_estimator_from_R( SEXP robj,
   wav_fdp_estimator *type )
@@ -489,7 +521,7 @@ mutil_errcode wav_fdp_estimator_from_R( SEXP robj,
 /* Verify and obtain supported R    */
 /* object class                     */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode mutil_type_from_R_class( SEXP robj,
   mutil_R_class_type *class_type )
@@ -526,7 +558,7 @@ mutil_errcode mutil_type_from_R_class( SEXP robj,
 
 /* Return equivalent MUTILS data type */
 /*                                    */
-/* Documented in ut_R.h               */
+/* Documented in ut_RS.h               */
 /* Written by William Constantine     */
 mutil_errcode mutil_R_type( const SEXP robj,
   mutil_data_type *type )
@@ -553,27 +585,27 @@ mutil_errcode mutil_R_type( const SEXP robj,
 
   /* see if it is a vector, matrix, or array */
 
-  if ( isInteger(robj) || isLogical(robj) || isReal(robj) || isComplex(robj) 
+  if ( isInteger(robj) || isLogical(robj) || isReal(robj) || isComplex(robj)
     || isMatrix(robj) || isArray(robj) ){
-    
+
     if( isInteger(robj) || isLogical(robj) ){
       *type = MUTIL_SINT32;
       MUTIL_TRACE( "Done with mutil_R_type()" );
       return MUTIL_ERR_OK;
     }
-    
+
     if( isReal(robj) ){
       *type = MUTIL_DOUBLE;
       MUTIL_TRACE( "Done with mutil_R_type()" );
       return MUTIL_ERR_OK;
     }
-    
+
     if( isComplex(robj) ){
       *type = MUTIL_DCOMPLEX;
       MUTIL_TRACE( "Done with mutil_R_type()" );
       return MUTIL_ERR_OK;
     }
-    
+
   }
 
   /* do not know what this is */
@@ -586,7 +618,7 @@ mutil_errcode mutil_R_type( const SEXP robj,
 /* Convert an R matrix or vector    */
 /* to a universal matrix.           */
 /*                                  */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode matuniv_from_R( SEXP robj,
   mutil_data_type out_type, univ_mat *umat )
@@ -728,7 +760,7 @@ mutil_errcode matuniv_from_R( SEXP robj,
 /* Convert an R matrix or vector  */
 /* to a universal matrix.         */
 /*                                */
-/* Documented in ut_R.h           */
+/* Documented in ut_RS.h           */
 /* Written by William Constantine */
 mutil_errcode matuniv_to_R( univ_mat *umat,
   mutil_R_class_type class_type, SEXP *robj )
@@ -747,7 +779,7 @@ mutil_errcode matuniv_to_R( univ_mat *umat,
 
 /* Convert matuniv to an R vector. */
 /*                                 */
-/* Documented in ut_R.h            */
+/* Documented in ut_RS.h            */
 /* Written by William Constantine  */
 mutil_errcode matuniv_to_R_vector( const univ_mat *umat, SEXP *robj )
 {
@@ -852,7 +884,7 @@ mutil_errcode matuniv_to_R_vector( const univ_mat *umat, SEXP *robj )
 
 /* Convert matuniv to an R matrix. */
 /*                                 */
-/* Documented in ut_R.h            */
+/* Documented in ut_RS.h            */
 /* Written by William Constantine  */
 mutil_errcode matuniv_to_R_matrix( const univ_mat *umat,
   SEXP *robj )
@@ -956,7 +988,7 @@ mutil_errcode matuniv_to_R_matrix( const univ_mat *umat,
 /* Convert an R scalar to a universal */
 /* scalar of a specified type.        */
 /*                                    */
-/* Documented in ut_R.h               */
+/* Documented in ut_RS.h               */
 /* Written by William Constantine     */
 mutil_errcode scauniv_from_R( SEXP robj,
   mutil_data_type out_type, univ_scalar *usca )
@@ -989,22 +1021,22 @@ mutil_errcode scauniv_from_R( SEXP robj,
            R_extract_logical( robj, &num_elem, &lngdat ) ){
 
     /* make sure it's a 1-element vector and put it into return object */
-    
+
     if( num_elem != 1 ){
       MUTIL_ERROR( "R object for scalar must have exactly 1 element" );
       return MUTIL_ERR_ILLEGAL_SIZE;
     }
     MUTIL_ASSERT( lngdat );
-    
+
     /* create univ_scalar and convert to correct output type */
     /*LINTED: cast OK, checked range */
-    
+
     SCAUNIV_INIT( *usca, out_type, *lngdat );
   }
   else{
-    
+
     /* no other types are supported */
-    
+
     MUTIL_ERROR( "Unable to read R object as a scalar" );
     return MUTIL_ERR_ILLEGAL_TYPE;
   }
@@ -1015,7 +1047,7 @@ mutil_errcode scauniv_from_R( SEXP robj,
 
 /* Convert an R scalar to a double */
 /*                                 */
-/* Documented in ut_R.h            */
+/* Documented in ut_RS.h            */
 /* Written by William Constantine  */
 mutil_errcode double_from_R( SEXP robj,
   double *num )
@@ -1034,9 +1066,9 @@ mutil_errcode double_from_R( SEXP robj,
   /* try to read it as an S numeric, integer, or logical */
 
   if( R_extract_numeric( robj, &num_elem, &dbldat ) ){
-    
+
     /* make sure it's a 1-element vector and put it into return object */
-    
+
     if( num_elem != 1 ){
       MUTIL_ERROR( "R object for scalar must have exactly 1 element" );
       return MUTIL_ERR_ILLEGAL_SIZE;
@@ -1048,7 +1080,7 @@ mutil_errcode double_from_R( SEXP robj,
            R_extract_logical( robj, &num_elem, &lngdat ) ){
 
     /* make sure it's a 1-element vector and put it into return object */
- 
+
     if( num_elem != 1 ){
       MUTIL_ERROR( "R object for scalar must have exactly 1 element" );
       return MUTIL_ERR_ILLEGAL_SIZE;
@@ -1059,7 +1091,7 @@ mutil_errcode double_from_R( SEXP robj,
   else{
 
     /* no other types are supported */
-    
+
     MUTIL_ERROR( "Unable to read R object as a scalar" );
     return MUTIL_ERR_ILLEGAL_TYPE;
   }
@@ -1070,7 +1102,7 @@ mutil_errcode double_from_R( SEXP robj,
 
 /* Convert an R scalar to a dcomplex */
 /*                                   */
-/* Documented in ut_R.h              */
+/* Documented in ut_RS.h              */
 /* Written by William Constantine    */
 mutil_errcode dcomplex_from_R( SEXP robj,
   dcomplex *num )
@@ -1106,7 +1138,7 @@ mutil_errcode dcomplex_from_R( SEXP robj,
 
 /* Convert an R scalar to a boolean  */
 /*                                   */
-/* Documented in ut_R.h              */
+/* Documented in ut_RS.h              */
 /* Written by William Constantine    */
 mutil_errcode boolean_from_R( SEXP robj,
   boolean *num )
@@ -1165,7 +1197,7 @@ mutil_errcode boolean_from_R( SEXP robj,
 
 /* Convert an R scalar to a sint32   */
 /*                                   */
-/* Documented in ut_R.h              */
+/* Documented in ut_RS.h              */
 /* Written by William Constantine    */
 mutil_errcode sint32_from_R( SEXP robj,
   sint32 *num )
@@ -1214,7 +1246,7 @@ mutil_errcode sint32_from_R( SEXP robj,
 
 /* Convert a universal scalar to an  */
 /* R scalar                          */
-/* Documented in ut_R.h              */
+/* Documented in ut_RS.h              */
 /* Written by William Constantine    */
 mutil_errcode scauniv_to_R( univ_scalar usca, SEXP *robj )
 {
@@ -1271,7 +1303,7 @@ mutil_errcode scauniv_to_R( univ_scalar usca, SEXP *robj )
 }
 
 /* Convert a double to an R scalar */
-/* Documented in ut_R.h            */
+/* Documented in ut_RS.h            */
 /* Written by William Constantine  */
 mutil_errcode double_to_R( double num, SEXP *robj )
 {
@@ -1299,7 +1331,7 @@ mutil_errcode double_to_R( double num, SEXP *robj )
 }
 
 /* Convert a dcomplex to an R scalar */
-/* Documented in ut_R.h              */
+/* Documented in ut_RS.h              */
 /* Written by William Constantine    */
 mutil_errcode dcomplex_to_R( dcomplex num, SEXP *robj )
 {
@@ -1327,7 +1359,7 @@ mutil_errcode dcomplex_to_R( dcomplex num, SEXP *robj )
 }
 
 /* Convert a sint32 to an R scalar   */
-/* Documented in ut_R.h              */
+/* Documented in ut_RS.h              */
 /* Written by William Constantine    */
 mutil_errcode sint32_to_R( sint32 num, SEXP *robj )
 {
@@ -1355,7 +1387,7 @@ mutil_errcode sint32_to_R( sint32 num, SEXP *robj )
 }
 
 /* Convert a boolean to an R scalar  */
-/* Documented in ut_R.h              */
+/* Documented in ut_RS.h              */
 /* Written by William Constantine    */
 mutil_errcode boolean_to_R( boolean num, SEXP *robj )
 {
@@ -1383,7 +1415,7 @@ mutil_errcode boolean_to_R( boolean num, SEXP *robj )
 }
 
 /* Convert an R list to a matset  */
-/* Documented in ut_R.h           */
+/* Documented in ut_RS.h           */
 /* Written by William Constantine */
 mutil_errcode matset_from_R( SEXP robj, mutil_data_type type,
   mat_set *outset )
@@ -1435,14 +1467,14 @@ mutil_errcode matset_from_R( SEXP robj, mutil_data_type type,
 
       trouble = matuniv_from_R( VECTOR_ELT( robj, imat ), type,
         &(outset->mats[imat]) );
-  
+
 
       if( trouble ){
 
         /* free allocated matrices and return */
-        
+
         nmats = imat;
-        
+
         for ( imat = 0; imat < nmats; imat++ ){
           MUTIL_FREE_WARN( matuniv, &(outset->mats[imat] ) );
         }
@@ -1587,7 +1619,7 @@ mutil_errcode matset_from_R( SEXP robj, mutil_data_type type,
 
 
     } /* end of loop over data */
-  
+
 
     if( intype != type ){
       MUTIL_FREE_WARN( matuniv, &tmpmat2 );
@@ -1620,7 +1652,7 @@ mutil_errcode matset_from_R( SEXP robj, mutil_data_type type,
 
 /* Convert a matset to an R vector, */
 /* matrix, array, or list.          */
-/* Documented in ut_R.h             */
+/* Documented in ut_RS.h             */
 /* Written by William Constantine   */
 mutil_errcode matset_to_R( mat_set *set,
   mutil_R_class_type class_type, SEXP *robj )
@@ -1642,7 +1674,7 @@ mutil_errcode matset_to_R( mat_set *set,
 }
 
 /* Convert a matset to an R list. */
-/* Documented in ut_R.h           */
+/* Documented in ut_RS.h           */
 /* Written by William Constantine */
 mutil_errcode matset_to_R_list( const mat_set *inset,
   SEXP *robj )
@@ -1693,7 +1725,7 @@ mutil_errcode matset_to_R_list( const mat_set *inset,
 }
 
 /* Extract boundary type from R object. */
-/* Documented in ut_R.h                 */
+/* Documented in ut_RS.h                 */
 /* Written by William Constantine       */
 mutil_errcode mutil_boundary_from_R( SEXP robj,
     mutil_boundary_type *boundary )
@@ -1732,7 +1764,7 @@ mutil_errcode mutil_boundary_from_R( SEXP robj,
 }
 
 /* Determine if an R object contains NULL. */
-/* Documented in ut_R.h                    */
+/* Documented in ut_RS.h                   */
 /* Written by William Constantine          */
 mutil_errcode null_object_from_R( SEXP robj, boolean *is_null )
 {
@@ -1756,7 +1788,7 @@ mutil_errcode null_object_from_R( SEXP robj, boolean *is_null )
 /*******************************/
 /*                             */
 /* STATIC FUNCTION DEFINITIONS */
-/*                             */ 
+/*                             */
 /*******************************/
 
 static boolean R_extract_complex( SEXP robj, sint32 *ret_length, dcomplex **pz_data )
@@ -1772,7 +1804,7 @@ static boolean R_extract_complex( SEXP robj, sint32 *ret_length, dcomplex **pz_d
 
   *ret_length = (sint32) length(robj);
   *pz_data    = (dcomplex *) COMPLEX(robj);
-  
+
   return (boolean) TRUE;
 }
 
@@ -1789,7 +1821,7 @@ static boolean R_extract_integer( SEXP robj, sint32 *ret_length, sint32 **ps_dat
 
   *ret_length = (sint32) length(robj);
   *ps_data    = (sint32 *) INTEGER(robj);
-  
+
   return (boolean) TRUE;
 }
 
@@ -1806,7 +1838,7 @@ static boolean R_extract_logical( SEXP robj, sint32 *ret_length, sint32 **pl_dat
 
   *ret_length = (sint32) length(robj);
   *pl_data    = (sint32 *) LOGICAL(robj);
-  
+
   return (boolean) TRUE;
 }
 
@@ -1823,7 +1855,7 @@ static boolean R_extract_numeric( SEXP robj, sint32 *ret_length, double **pd_dat
 
   *ret_length = (sint32) length(robj);
   *pd_data    = (double *) REAL(robj);
-  
+
   return (boolean) TRUE;
 }
 

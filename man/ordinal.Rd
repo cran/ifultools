@@ -23,8 +23,7 @@
 a character string denoting the nearest ordinal value.
 }
 \seealso{
-\code{\link{properCase}}.
-}
+\code{\link{properCase}}.}
 
 \examples{
 ordinal(1)

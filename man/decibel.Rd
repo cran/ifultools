@@ -29,9 +29,7 @@ and \eqn{20 * log10(x)} isued for \code{type=2}.}
 the decibel equivalent of the input \code{x}.
 }
 \seealso{
-\code{\link{nextDyadic}},
-\code{\link{isVectorAtomic}}.
-}
+\code{\link{nextDyadic}}, \code{\link{isVectorAtomic}}.}
 
 \examples{
 decibel(c(1,10,100,1000), type=1)

@@ -38,8 +38,7 @@ output. Default: 100.}
 a \code{data.frame} containing the estimated system response variables.
 }
 \seealso{
-\code{\link{par}}.
-}
+\code{\link{par}}.}
 
 \examples{
 ## estimate response of the chaotic Lorenz system 

@@ -8,6 +8,7 @@
 # checkVectorType
 # decibel
 # em
+# ilogb
 # isVectorAtomic
 # linearFit
 # linearSegmentation
@@ -191,6 +192,13 @@
 
 "em" <- function()
   ifelse1(is.R(), c(strwidth("m"), strheight("m")), par("1em"))
+
+###
+# ilogb
+###
+
+"ilogb" <- function(x, base=2, eps=.Machine$double.eps * 1e9)
+  as.integer(logb(x, base=base) + eps)
 
 ###
 # isVectorAtomic

@@ -43,9 +43,7 @@ a vector of character strings containing the result. The length
 of this vector is equal to \code{length(x)}.
 }
 \seealso{
-\code{\link{rotateVector}},
-\code{\link{mergeList}}.
-}
+\code{\link{rotateVector}}, \code{\link{mergeList}}.}
 
 \examples{
 ## cases where isVectorAtomic returns TRUE 

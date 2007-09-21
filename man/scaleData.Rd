@@ -25,9 +25,7 @@ the scaled data is returned with an attribute \code{"scalestr"} attached, which 
 the scaling treatment used on the input data.
 }
 \seealso{
-\code{\link{logb}},
-\code{\link{decibel}}.
-}
+\code{\link{logb}}, \code{\link{decibel}}.}
 
 \examples{
 scaleData(c(1,10,100,1000),scale="db")
