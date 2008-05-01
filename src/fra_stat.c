@@ -122,12 +122,12 @@ mutil_errcode frauniv_stationarity_priestley_subba_rao(
   LOCALDEF_CHECK_NULL_POINTER_STAT( time_series, univ_mat, matuniv );
   
   /* ... if number of elements is positive */
-  
+
   if ( MATUNIV_NELEM( time_series ) < 1 ){
     MUTIL_ERROR( "Number of elements in input time series matrix must be positive." );
     return MUTIL_ERR_ILLEGAL_SIZE;
   }
-  
+  printf("1\n");    
   /* ... if it is long enough, based on the blocking
   scheme and the number of tapers to ensure Gaussianity,
   we need at least 2 * (12 * sampling_interval - 1) elements */
@@ -137,7 +137,7 @@ mutil_errcode frauniv_stationarity_priestley_subba_rao(
       "at least 2 * ( 12 * sampling_interval - 1 )" );
     return MUTIL_ERR_ILLEGAL_SIZE;
   }
-
+  printf("2\n"); 
   /* ... if the type is double */
   
   if ( time_series->type != MUTIL_DOUBLE ){
@@ -158,43 +158,48 @@ mutil_errcode frauniv_stationarity_priestley_subba_rao(
     MUTIL_ERROR( "Sampling interval must be positive" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-
+  printf("3\n"); 
   /* ... number of tapers */
 
   if ( n_taper < 5 ){
      MUTIL_ERROR( "Number of tapers must be >= 5" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-   
+  printf("4\n");   
   if ( n_taper > MATUNIV_NELEM( time_series ) ){
      MUTIL_ERROR( "Number of tapers cannot exceed number of samples in time series" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-   
+  printf("5\n");    
   /* ... number of blocks not too small */
 
   if ( n_block < 2 ){
     MUTIL_ERROR( "Number of blocks must be at least two" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-  
+  printf("6\n");   
   /* check that maximum block size is not exceeded */
 
   n_block_max = (sint32) ceil( (double) MATUNIV_NELEM( time_series ) / 
      ( 12.0 * sampling_interval - 1.0 ) );
 
+  printf("N = %ld, nblock = %ld, n_block_max = %ld, dt = %10.4f\n", MATUNIV_NELEM( time_series ), n_block, n_block_max, sampling_interval);
+  
   if ( n_block > n_block_max ){
      MUTIL_ERROR( "Number of blocks too large" );
      return MUTIL_ERR_ILLEGAL_VALUE;
   }
+  
 
+  
+  printf("7\n"); 
   /* ... significance */
 
-  if ( significance <= 0.0 || significance >= 1.0 ){
+  if ( significance <= 0.0 || significance >= 1.0 ){	
     MUTIL_ERROR( "Significance must be on the interval (0,1)" );
     return MUTIL_ERR_ILLEGAL_VALUE;
   }
-
+  printf("8\n"); 
   /* initialize variables:
     
       deltaf is the spectral resolution returned by the frauniv_sdf()
@@ -219,7 +224,7 @@ mutil_errcode frauniv_stationarity_priestley_subba_rao(
   
   err = mats32_malloc_register( &nrow, 1, 3, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+  printf("9\n"); 
   err = mats32_malloc_register( &ncol, 1, 3, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
   
@@ -244,19 +249,19 @@ mutil_errcode frauniv_stationarity_priestley_subba_rao(
   
   err = matset_malloc_register( result, 1, &dims, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+  printf("10\n"); 
   err = matset_malloc_matrices_arbitrary_size(
     result, &nrow, &ncol, MUTIL_DOUBLE );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+  printf("11\n"); 
   err = matdbl_malloc_register( &time_series_recentered, n_sample, 1, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+  printf("12\n"); 
   /* initialize ANOVA matrix */
   
   err = matdbl_assign_scalar( 0.0, intrp_ptr, &( result->mats[ 1 ].mat.dblmat ) );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+  printf("13\n"); 
   /* set pointers */
   
   pd_test  = result->mats[ 0 ].mat.dblmat.data;
@@ -274,7 +279,7 @@ mutil_errcode frauniv_stationarity_priestley_subba_rao(
   
   err = matdbl_sum( &( time_series->mat.dblmat ), intrp_ptr, &mean );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+  printf("14\n"); 
   mean /= (double) n_sample;
   
   for ( i = 0; i < n_sample; i++ ){
@@ -290,7 +295,7 @@ mutil_errcode frauniv_stationarity_priestley_subba_rao(
 
   err = memlist_member_register( &list, &taper, MEMTYPE_MATUNIV );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+  printf("15\n"); 
   /* initialize block parameters: impose single-column structure */
 
   block.type             = MUTIL_DOUBLE;
@@ -350,7 +355,7 @@ mutil_errcode frauniv_stationarity_priestley_subba_rao(
      err = memlist_member_free( &sdf_block, &list );
      MEMLIST_FREE_ON_ERROR( err, &list );
   }
-  
+  printf("16\n"); 
   /* calculate ANOVA row, column and grand means */
   
   pd_anova      = result->mats[ 1 ].mat.dblmat.data;
@@ -437,13 +442,13 @@ mutil_errcode frauniv_stationarity_priestley_subba_rao(
   
   err = memlist_member_unregister( result, &list );
   MEMLIST_FREE_ON_ERROR( err, &list );
-  
+  printf("17\n"); 
   /* free other malloced space and
   corresponding nodes in memory list */
   
   MUTIL_FREE_WARN( memlist, &list );
   
   MUTIL_TRACE( "Done with frauniv_embed()" );
-  
+  printf("18\n"); 
   return MUTIL_ERR_OK;
 }
