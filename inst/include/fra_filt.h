@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/fra_filt.h $: $Revision: #4 $, $Date: 2006/01/04 $ */
+/* @(#) $File: //depot/Research/ifultools/pkg/ifultools/inst/include/fra_filt.h $: $Revision: #1 $, $Date: 2008/03/21 $ */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_FRA_FILT_H_

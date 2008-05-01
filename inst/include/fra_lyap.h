@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/fra_lyap.h $: $Revision: #11 $, $Date: 2006/02/19 $ */
+/* @(#) $File: //depot/Research/ifultools/pkg/ifultools/inst/include/fra_lyap.h $: $Revision: #1 $, $Date: 2008/03/21 $ */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_FRA_LYAP_H_

@@ -214,7 +214,7 @@
 ###
 
 "isVectorAtomic" <- function(x)
-  return(is.atomic(x) & any(c(numRows(x),numCols(x)) == 1))
+  return(is.atomic(x) & any(c(NROW(x),NCOL(x)) == 1))
 
 ###
 # linearSegmentation

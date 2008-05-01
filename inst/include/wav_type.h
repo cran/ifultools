@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/wav_type.h $: $Revision: #42 $, $Date: 2007/11/14 $ */
+/* @(#) $File: //depot/Research/ifultools/pkg/ifultools/inst/include/wav_type.h $: $Revision: #1 $, $Date: 2008/03/21 $ */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_WAV_TYPE_H

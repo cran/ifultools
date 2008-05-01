@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/src/wavelets/wav_look.h $: $Revision: #5 $, $Date: 2006/01/04 $ */
+/* @(#) $File: //depot/Research/ifultools/pkg/ifultools/src/wav_look.h $: $Revision: #1 $, $Date: 2008/03/21 $ */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_WAV_LOOK_H_

@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/mth_var.h $: $Revision: #3 $, $Date: 2006/12/05 $  */
+/* @(#) $File: //depot/Research/ifultools/pkg/ifultools/inst/include/mth_var.h $: $Revision: #1 $, $Date: 2008/03/21 $  */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_MATH_VAR_H

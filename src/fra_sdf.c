@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/fractal/fra_sdf.c $: $Revision: #12 $, $Date: 2006/06/06 $";
+static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/src/fra_sdf.c $: $Revision: #1 $, $Date: 2008/03/21 $";
 /* This is a self-documenting doc++ file */
 
 #include "fra_sdf.h"

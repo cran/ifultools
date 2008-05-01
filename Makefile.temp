@@ -1,5 +1,0 @@
-VERSION = $(shell grep Version DESCRIPTION | sed "s/Version://")
-
-
-all :
-	@echo $(VERSION)

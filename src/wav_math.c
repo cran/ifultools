@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/wavelets/wav_math.c $: $Revision: #13 $, $Date: 2006/01/04 $";
+static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/src/wav_math.c $: $Revision: #1 $, $Date: 2008/03/21 $";
 
 #include "wav_math.h"
 #include "mat_stat.h"

@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/mutils/wrap_RS/ut_rand.c $: $Revision: #2 $, $Date: 2007/01/10 $  ";
+static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/src/ut_rand.c $: $Revision: #1 $, $Date: 2008/03/21 $  ";
 
 /* This is a self-documenting doc++ file. */
 

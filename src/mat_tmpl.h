@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/src/matrix/mat_tmpl.h $: $Revision: #76 $, $Date: 2006/01/04 $ */
+/* @(#) $File: //depot/Research/ifultools/pkg/ifultools/src/mat_tmpl.h $: $Revision: #1 $, $Date: 2008/03/21 $ */
 
 /* This is a self-documenting doc++ file. */
 

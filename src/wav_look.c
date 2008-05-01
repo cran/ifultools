@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/wavelets/wav_look.c $: $Revision: #6 $, $Date: 2006/01/04 $ "; */
+/* static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/src/wav_look.c $: $Revision: #1 $, $Date: 2008/03/21 $ "; */
 /* This is a self-documenting doc++ file. */
 
 /* This file contains global lookup table variables for wavelet

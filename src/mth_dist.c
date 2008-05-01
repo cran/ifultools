@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-static char whatssi[] = "@(#) $File: //depot/Research/mutils/src/math/mth_dist.c $: $Revision: #3 $, $Date: 2006/01/04 $";
+static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/src/mth_dist.c $: $Revision: #1 $, $Date: 2008/03/21 $";
 
 #include "mth_dist.h"
 #include "mth_stat.h"

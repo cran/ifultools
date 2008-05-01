@@ -1,5 +1,5 @@
 /* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
-/* @(#) $File: //depot/Research/mutils/include/ut_RS.h $: $Revision: #5 $, $Date: 2007/11/14 $  */
+/* @(#) $File: //depot/Research/ifultools/pkg/ifultools/inst/include/ut_RS.h $: $Revision: #1 $, $Date: 2008/03/21 $  */
 /* This is a self-documenting doc++ file. */
 
 #ifndef IN_UT_RS_H
