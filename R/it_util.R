@@ -1,5 +1,5 @@
 ################################################
-# IFULTools package utility functions
+# IFULTOOLS package utility functions
 #
 # ACVStoPACS
 # aggregateData
@@ -127,12 +127,14 @@
     stop("isType must be an object of class character")
 
   # In R, class(5) is "numeric", not "integer" so we
-  # have to accomodate
+  # have to accommodate
   #
   # also, if S-PLUS in R parse mode, then integers are converted to floats (1 to 1.)
-  # so we accomodate that as well. (set.parse.mode(-1) == 1) means that S-PLUS is in
+  # so we accommodate that as well. (set.parse.mode(-1) == 1) means that S-PLUS is in
   # "R" parse mode
-  if ((is.R() || (!is.R() && as.logical(set.parse.mode(-1)))) && isType == "integer"){
+  #if ((is.R() || (!is.R() && as.logical(set.parse.mode(-1)))) && isType == "integer"){
+  if (isType == "integer")
+  {
     if (!is.numeric(x) || length(x) > 1)
       stop(deparseText(substitute(x)), " must be scalar of class ", isType)
   }
@@ -152,12 +154,14 @@
   checkScalarType(isType,"character")
 
   # In R, class(c(1,3:5) is "numeric", not "integer" so we
-  # have to accomodate
+  # have to accommodate
   #
   # also, if S-PLUS in R parse mode, then integers are converted to floats (1 to 1.)
-  # so we accomodate that as well. (set.parse.mode(-1) == 1) means that S-PLUS is in
+  # so we accommodate that as well. (set.parse.mode(-1) == 1) means that S-PLUS is in
   # "R" parse mode
-  if ((is.R() || (!is.R() && as.logical(set.parse.mode(-1)))) && isType == "integer"){
+  #if ((is.R() || (!is.R() && as.logical(set.parse.mode(-1)))) && isType == "integer"){
+  if (isType == "integer")
+  {
 
     if (!isVectorAtomic(x) || !is.numeric(x))
       stop(deparseText(substitute(x)), " must be a vector of class ", isType)
@@ -200,7 +204,7 @@
 ###
 
 "em" <- function()
-  ifelse1(is.R(), c(strwidth("m"), strheight("m")), par("1em"))
+  c(strwidth("m"), strheight("m"))
 
 ###
 # ilogb
@@ -244,8 +248,9 @@
     y <- y[-bad]
   }
 
-  # reverse if x not in increasing montonic order
-  if (any(diff(x)) < 0){
+  # reverse if x not in increasing monotonic order
+  if (any(diff(x) < 0))
+  {
     x <- rev(x)
     y <- rev(y)
   }
@@ -589,15 +594,8 @@
 
   N <- numRows(x)
 
-  if (is.R()){
-
-    v <- var(x,na.rm=na.rm)
-    if (!unbiased)
-      v <- v*(N-1)/N
-  }
-  else{
-    v <- var(x, na.method=ifelse1(na.rm, "omit", "fail"), unbiased=unbiased)
-  }
+  v <- var(x,na.rm=na.rm)
+  if (!unbiased) v <- v*(N-1)/N
 
   v
 }

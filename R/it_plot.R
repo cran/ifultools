@@ -1,5 +1,5 @@
 ################################################
-## S+IFULTools plot functions
+## IFULTOOLS plot functions
 ##
 ##   autoKey
 ##   autoText
@@ -45,16 +45,9 @@
   pos <- sparsestQuadrant(x, y, nquadrant=nquadrant)
 
   # place the key
-  if (is.R()){
-    # R has no key function
-    args <- mergeList(args., pos)
-    newargs <- c(args[c("x","y")], list(legend=""))
-    do.call("legend",args=newargs)
-  }
-  else{
-  	tmpargs <- mergeList(args., pos)
-    do.call("key",args=tmpargs)
-  }
+  args <- mergeList(args., pos)
+  newargs <- c(args[c("x","y")], list(legend=""))
+  do.call("legend",args=newargs)
 
   invisible(NULL)
 }
@@ -284,19 +277,12 @@
   zx <- levels(xcut)[xquad]
   zy <- levels(ycut)[yquad]
 
-  if (is.R()){
-   token  <- ","
-   zx <- substring(zx,2,nchar(zx)-1)
-   zy <- substring(zy,2,nchar(zy)-1)
-   xrange <- as.numeric(unlist(strsplit(zx, token)))
-   yrange <- as.numeric(unlist(strsplit(zy, token)))
-  }
-  else{
-    token  <- "\\+ thru "
-    xrange <- as.numeric(unlist(strsplit(zx, token)))
-    yrange <- as.numeric(unlist(strsplit(zy, token)))
-  }
-
+  token  <- ","
+  zx <- substring(zx,2,nchar(zx)-1)
+  zy <- substring(zy,2,nchar(zy)-1)
+  xrange <- as.numeric(unlist(strsplit(zx, token)))
+  yrange <- as.numeric(unlist(strsplit(zy, token)))
+ 
   # map ranges to key() corner and x,y values
   # use linear interpolation to locate legend
   # reference point and placement on the graph
@@ -353,7 +339,7 @@
 ###
 
 "stackPlot" <- function(x, y=NULL, xlty=NULL,
-  bty="n", lty=1, col=1:8, lwd=1, rescale=TRUE, add=FALSE, cex=1, xaxs=ifelse1(is.R(),"r","e"), xpd=TRUE,
+  bty="n", lty=1, col=1:8, lwd=1, rescale=TRUE, add=FALSE, cex=1, xaxs="r", xpd=TRUE,
   yaxis=list(add=TRUE, ndigit=3, col=1:8, lty=1, lwd=3, side="left", cex=1),
   xlab=list(text="", cex=1, srt=0, col=1),
   ylab=list(text=NULL, cex=1, srt=0, col=1:8, side="right"),
@@ -598,7 +584,7 @@
     stop("adj must be on [0,1]")
 
   srt  <- srt * pi / 180
-  em.size <- ifelse1(is.R(), c(strwidth("m"), strheight("m")), par("1em"))
+  em.size <- c(strwidth("m"), strheight("m"))
   span <- equivalentEms(x) * em.size * c(cos(srt), sin(srt))
   sgn  <- sign(span)
 

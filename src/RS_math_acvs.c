@@ -1,4 +1,4 @@
-/* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
+
 static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/src/RS_math_acvs.c $: $Revision: #1 $, $Date: 2008/03/21 $ ";
 
 /* This is a self-documenting doc++ file. */

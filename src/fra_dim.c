@@ -1,4 +1,4 @@
-/* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
+
 static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/src/fra_dim.c $: $Revision: #1 $, $Date: 2008/03/21 $";
 /* This is a self-documenting doc++ file */
 
@@ -2519,7 +2519,7 @@ static mutil_errcode localfn_kdtree(
   if ( k > max_neighbors ){
 
     /* calculate the reduced size of the embedding in order to
-    accomodate the current density given a fixed number of neighbors (k).
+    accommodate the current density given a fixed number of neighbors (k).
     we have to be careful here to also accommodate a restriction on the
     size of the embedding in the nearest neighbors program which states that
     (for a fixed number of neighbors, k) the number of points in the embedding

@@ -1,4 +1,4 @@
-/* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
+
 /* @(#) $File: //depot/Research/ifultools/pkg/ifultools/inst/include/str_type.h $: $Revision: #1 $, $Date: 2008/03/21 $ */
 /* This is a self-documenting doc++ file. */
 

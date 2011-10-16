@@ -12,12 +12,11 @@
 \title{Stack plot}
 \concept{utilities}
 \usage{stackPlot(x, y = NULL, xlty = NULL, bty = "n", lty = 1, col = 1:8,
-    lwd = 1, rescale = TRUE, add = FALSE, cex = 1, xaxs = ifelse1(is.R(),
-       "r", "e"), xpd = TRUE, yaxis = list(add = TRUE, ndigit = 3,
-       col = 1:8, lty = 1, lwd = 3, side = "left", cex = 1),
+    lwd = 1, rescale = TRUE, add = FALSE, cex = 1, xaxs = "r", xpd = TRUE, yaxis = list(add = TRUE, ndigit = 3,
+    col = 1:8, lty = 1, lwd = 3, side = "left", cex = 1),
     xlab = list(text = "", cex = 1, srt = 0, col = 1), ylab = list(text = NULL,
-       cex = 1, srt = 0, col = 1:8, side = "right"), main = list(text = "",
-       cex = 1, srt = 0, col = 1, adj = 0.5), ylim = NULL)}
+    cex = 1, srt = 0, col = 1:8, side = "right"), main = list(text = "",
+    cex = 1, srt = 0, col = 1, adj = 0.5), ylim = NULL)}
 \description{Plots input data as a stack of plots.}
 
 \arguments{

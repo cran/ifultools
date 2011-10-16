@@ -1,4 +1,4 @@
-/* @(#) Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved. */
+
 static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/src/fra_fdp.c $: $Revision: #1 $, $Date: 2008/03/21 $";
 
 #include "fra_fdp.h"
