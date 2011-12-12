@@ -1,7 +1,6 @@
-4a9bddb25aab5165ec7bc8fb59acffc7 *DESCRIPTION
+9aa246ef610d886be97ab7275f60594e *DESCRIPTION
 c9850ffb9d3f0bd6d1290c12055ff782 *NAMESPACE
-d9a7e696b3a6f2cccc4619e68bb60369 *R/it_mutils.R
-822ee31d6d0b2d65eacb2f768cf21e7a *R/it_pkg.R
+93bbff47a90008bba0d39bd0898935f8 *R/it_mutils.R
 0aaceae3361009e2a1e814f457c144e4 *R/it_plot.R
 ed2b6ed0530a5849463080378cea5c13 *R/it_util.R
 0cc64890e9b6f8b1209b09d17fa79ebc *inst/include/fra_dim.h
@@ -156,7 +155,7 @@ b6c3e81afd46b6e01441699e1f943246 *src/fra_lyap.c
 61f901a633ea89f3874bbe78a061f356 *src/fra_neig.c
 c6f60935b4370565ded4d9a7f38d2069 *src/fra_scale.c
 a25ab459a69e63e35548d2d6e7109b2d *src/fra_sdf.c
-4dfcadc4d046dedce861adeba43ed262 *src/fra_stat.c
+0183fc88bf42b86b1c108e4dd1a23086 *src/fra_stat.c
 96c36f0255f9eb695e7b6806d348b872 *src/fra_surr.c
 51368a1ef8ec340a1f332f03c86be8d9 *src/fra_tdmi.c
 7eed144f7416e46c06654b8f4df6d9a8 *src/fra_util.c

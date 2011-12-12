@@ -92,8 +92,8 @@
 
     checkScalarType(n.freq,"integer")
     checkScalarType(sampling.interval,"numeric")
-    checkRange(n.freq, range=c(2,Inf))
-    checkRange(sampling.interval, range=c(0,Inf), inclusion=c(FALSE,TRUE))
+    checkRange(n.freq, range.=c(2,Inf))
+    checkRange(sampling.interval, range.=c(0,Inf), inclusion=c(FALSE,TRUE))
     if (!is.null(sdfargs) && !is.list(sdfargs))
       stop("sdfargs must either be NULL or a list of named additional inputs for the supplied SDF function")
 
