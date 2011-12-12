@@ -94,7 +94,7 @@ static mutil_errcode localfn_check_sdf(
   err = wavuniv_variance_confidence(                             \
     &variance_block->mats[ 1 ],                                  \
     &edof->mats[ EDOF_ROW ],                                     \
-    ( double ) 0.95,                                             \
+    ( double ) 0.975,                                            \
     intrp_ptr,                                                   \
     &conf );                                                     \
   MEMLIST_FREE_ON_ERROR( err, &list );                           \
@@ -214,7 +214,7 @@ mutil_errcode wavuniv_variance(
   calculate_edof = ( edof != (mat_set *) NULL );
   calculate_confidence = ( confidence != (mat_set *) NULL );
 
-  /* force the calcualtion of the EDOF if confidence intervals
+  /* force the calculation of the EDOF if confidence intervals
   are desired */
 
   if ( calculate_confidence && !calculate_edof ){
@@ -224,7 +224,7 @@ mutil_errcode wavuniv_variance(
   }
 
   /* ensure that confidence intervals and EDOF are
-  not calculated if the tranform is not a MODWT */
+  not calculated if the transform is not a MODWT */
 
   if ( ( transform_type != (wav_transform) WAV_TRANSFORM_MODWT ) &&
     ( calculate_confidence || calculate_edof ) ){
@@ -1062,20 +1062,20 @@ mutil_errcode wavuniv_variance_confidence(
 
     /* calculate the chi-square quantiles */
 
-    qchisq_low  = mth_qchisq( 1.0 - probability,  pedof[ j ] );
-    qchisq_high = mth_qchisq( probability,  pedof[ j ] );
+    qchisq_low  = mth_qchisq( probability,  pedof[ j ] );
+    qchisq_high = mth_qchisq( 1.0 - probability,  pedof[ j ] );
 
     low[ j ]  = pedof[ j ] * pvar[ j ] / qchisq_low;
     high[ j ] = pedof[ j ] * pvar[ j ] / qchisq_high;
 
     /* ensure low < high. if not, swap */
 
-    if ( low[ j ] > high[ j ] ){
+   /* if ( low[ j ] > high[ j ] ){
 
       temp      = low[ j ];
       low[ j ]  = high[ j ];
       high[ j ] = temp;
-    }
+    }*/
 
     /* Check for interrupt */
 

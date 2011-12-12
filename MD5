@@ -1,4 +1,4 @@
-eba7ab62cba2b47b8743be264d14160d *DESCRIPTION
+4a9bddb25aab5165ec7bc8fb59acffc7 *DESCRIPTION
 c9850ffb9d3f0bd6d1290c12055ff782 *NAMESPACE
 d9a7e696b3a6f2cccc4619e68bb60369 *R/it_mutils.R
 822ee31d6d0b2d65eacb2f768cf21e7a *R/it_pkg.R
@@ -147,7 +147,7 @@ c5a88441a03ab292478eaf3795e22365 *src/RS_wav_filt.c
 81c4a54f0a9562257f6fd9197ee638c5 *src/RS_wav_var.c
 bc30609da78a7e63242e078cf85d9fe5 *src/RS_wav_wtmm.c
 5a1dcddd8b3a012cefd1e78627ed619e *src/RS_wav_xform.c
-7cef7d3c4250b0af997b784b5511cd64 *src/fra_dim.c
+25d005f8f05ce6292af4ebe587fdaccf *src/fra_dim.c
 1d0e6285f1a3434ca1f0fc2e0e9932bf *src/fra_fdp.c
 19bf25b73d97a1290c9dc802ec358e23 *src/fra_filt.c
 62062154dbf84ba001dca3d3f1bfe48c *src/fra_kde.c
@@ -199,5 +199,5 @@ caae40ce0c020742d79ec054fafb75b4 *src/wav_look.h
 c42a5e198df7c292bde66eb1a11eeb73 *src/wav_math.h
 55d8b3f3b1fc6851a182f2ed5871d6ce *src/wav_modw.c
 57a2efba92d63f8edf6340e80676f961 *src/wav_shrk.c
-b669e849cc450c1f9f4a4847ef4ac396 *src/wav_var.c
+9b7203fd3d13bb015e11f765a3c8bac2 *src/wav_var.c
 a655ff99ed008b2893909268c8b06465 *src/wav_wtmm.c

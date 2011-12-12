@@ -1569,7 +1569,7 @@ static mutil_errcode localfn_average_neighborhood_radius_constant_density(
   double        *pd_sampled;
   sint32         nrow  = MATUNIV_NROW( embedding );
   sint32         ncol  = MATUNIV_NCOL( embedding );
-  sint32         nelem = MATUNIV_NELEM( embedding );
+  //sint32         nelem = MATUNIV_NELEM( embedding );
   univ_mat       original_indices;
   univ_mat       neighbor_indices;
   univ_mat       neighbor_distances;
