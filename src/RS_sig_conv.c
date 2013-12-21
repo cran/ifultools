@@ -24,7 +24,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** One- or two-dimensional signal correlation, with arbitrary step and phase.
  * @source RS\_sig\_conv.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_signal_correlate", in.sig, kernel, row.step, col.step, row.overlap, col.overlap, boundary
+ * @usage #itCall( "RS_signal_correlate", in.sig, kernel, row.step, col.step, row.overlap, col.overlap, boundary
  * @return             An RS ... containing ...
  * @param in.sig       Pointer to an RS object containing ... in.sig
  * @param kernel       Pointer to an RS object containing ... kernel

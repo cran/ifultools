@@ -24,7 +24,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Stationarity tests for a time series.
  * @source RS\_fra\_stat.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_stationarity_priestley_subba_rao", time.series, sampling.interval, n.taper, n.block, significance, center, recenter))#
+ * @usage #itCall( "RS_fractal_stationarity_priestley_subba_rao", time.series, sampling.interval, n.taper, n.block, significance, center, recenter))#
  * @return                   An R ... containing ...
  * @param time.series        Pointer to an R object containing ... time.series
  * @param sampling.interval  Pointer to an R object containing ... sampling.interval

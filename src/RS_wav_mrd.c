@@ -24,7 +24,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Calculate the detail sequence for a specified crystal of a 1-D wavelet transform.
  * @source RS\_wav\_mrd.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_packet_detail", transform, filters, level, node, xformtype))#
+ * @usage #itCall( "RS_wavelets_transform_packet_detail", transform, filters, level, node, xformtype))#
  * @return           An R ... containing ...
  * @param transform  Pointer to an R object containing ... transform
  * @param filters    Pointer to an R object containing ... filters

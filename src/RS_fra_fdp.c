@@ -25,7 +25,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Function to simulate an FD process with time varying model parameters.
  * @source RS\_fra\_fdp.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_fdp_simulate", delta, innovation.variance))#
+ * @usage #itCall( "RS_wavelets_fdp_simulate", delta, innovation.variance))#
  * @return                     An R ... containing ...
  * @param delta                Pointer to an R object containing ... delta
  * @param innovation.variance  Pointer to an R object containing ... innovation.variance
@@ -70,7 +70,7 @@ EXTERN_R SEXP RS_wavelets_fdp_simulate(
 /** Function to generate the weights for a time varying FD process simulation.
  * @source RS\_fra\_fdp.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_fdp_simulate_weights", delta, innovation.variance))#
+ * @usage #itCall( "RS_wavelets_fdp_simulate_weights", delta, innovation.variance))#
  * @return                     An R ... containing ...
  * @param delta                Pointer to an R object containing ... delta
  * @param innovation.variance  Pointer to an R object containing ... innovation.variance

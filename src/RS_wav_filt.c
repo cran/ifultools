@@ -28,7 +28,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Daubechies wavelet and scaling filters.
  * @source RS\_wav\_filt.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_filters_daubechies", filter.length, filter.type, normalize))#
+ * @usage #itCall( "RS_wavelets_filters_daubechies", filter.length, filter.type, normalize))#
  * @return               An R ... containing ...
  * @param filter.length  Pointer to an R object containing ... filter.length
  * @param filter.type    Pointer to an R object containing ... filter.type
@@ -101,7 +101,7 @@ EXTERN_R SEXP RS_wavelets_filters_daubechies(
 /** The gain functions for Daubechies wavelet and scaling filters.
  * @source RS\_wav\_filt.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_filters_daubechies_gain", filter.type, filter.length, num.levels, num.fft, normalize))#
+ * @usage #itCall( "RS_wavelets_filters_daubechies_gain", filter.type, filter.length, num.levels, num.fft, normalize))#
  * @return               An R ... containing ...
  * @param filter.type    Pointer to an R object containing ... filter.type
  * @param filter.length  Pointer to an R object containing ... filter.length
@@ -203,7 +203,7 @@ EXTERN_R SEXP RS_wavelets_filters_daubechies_gain(
 /** Zero phase shift factors for Daubechies symmlet and Coiflet filters.
  * @source RS\_wav\_filt.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_filter_zero_phase", filter.type, filter.length, n.level, transform.type, normalize))#
+ * @usage #itCall( "RS_wavelets_filter_zero_phase", filter.type, filter.length, n.level, transform.type, normalize))#
  * @return               An R ... containing ...
  * @param filter.type    Pointer to an R object containing ... filter.type
  * @param filter.length  Pointer to an R object containing ... filter.length
@@ -274,7 +274,7 @@ EXTERN_R SEXP RS_wavelets_filter_zero_phase(
 /** Creates frequency domain filters for the continuous wavelet transform.
  * @source RS\_wav\_filt.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_filters_continuous", filter.type, filter.arg, frequency, transform.type, normalize))#
+ * @usage #itCall( "RS_wavelets_filters_continuous", filter.type, filter.arg, frequency, transform.type, normalize))#
  * @return             An R ... containing ...
  * @param filter.type  Pointer to an R object containing ... filter.type
  * @param filter.arg   Pointer to an R object containing ... filter.arg
@@ -359,7 +359,7 @@ EXTERN_R SEXP RS_wavelets_filters_continuous(
 /** Boundary and interior wavelet coefficient identification for the DWT and MODWT.
  * @source RS\\_wav\_coef.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_coefficient_boundaries", n.level, filter.length, n.sample, transform.type, normalize))#
+ * @usage #itCall( "RS_wavelets_coefficient_boundaries", n.level, filter.length, n.sample, transform.type, normalize))#
  * @return                An R ... containing ...
  * @param n.level         Pointer to an R object containing ... n.level
  * @param filter.length   Pointer to an R object containing ... filter.length

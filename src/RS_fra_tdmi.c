@@ -24,7 +24,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Time delayed mutual information.
  * @source RS\_fra\_tdmi.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_time_delayed_mutual_information", time.series, lags))#
+ * @usage #itCall( "RS_fractal_time_delayed_mutual_information", time.series, lags))#
  * @return             An R ... containing ...
  * @param time.series  Pointer to an R object containing ... time.series
  * @param lags         Pointer to an R object containing ... lags

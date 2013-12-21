@@ -27,7 +27,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Nonparametric cross-spectral density function estimation.
  * @source RS\_fra\_sdf.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_spectral_density_function_direct", time.series, taper, center, recenter, single.sided, npad))#
+ * @usage #itCall( "RS_fractal_spectral_density_function_direct", time.series, taper, center, recenter, single.sided, npad))#
  * @return              An R ... containing ...
  * @param time.series   Pointer to an R object containing ... time.series
  * @param taper         Pointer to an R object containing ... taper
@@ -104,7 +104,7 @@ EXTERN_R SEXP RS_fractal_spectral_density_function_direct(
 /** Nonparametric cross-spectral density function estimation.
  * @source RS\_fra\_sdf.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_spectral_density_function_lag_window", time.series, lag.window, taper, center, recenter, single.sided, npad))#
+ * @usage #itCall( "RS_fractal_spectral_density_function_lag_window", time.series, lag.window, taper, center, recenter, single.sided, npad))#
  * @return              An R ... containing ...
  * @param time.series   Pointer to an R object containing ... time.series
  * @param lag.window    Pointer to an R object containing ... lag.window
@@ -188,7 +188,7 @@ EXTERN_R SEXP RS_fractal_spectral_density_function_lag_window(
 /** Nonparametric cross-spectral density function estimation.
  * @source RS\_fra\_sdf.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_spectral_density_function_wosa", time.series, taper, overlap, center, recenter, single.sided, npad))#
+ * @usage #itCall( "RS_fractal_spectral_density_function_wosa", time.series, taper, overlap, center, recenter, single.sided, npad))#
  * @return              An R ... containing ...
  * @param time.series   Pointer to an R object containing ... time.series
  * @param taper         Pointer to an R object containing ... taper
@@ -272,7 +272,7 @@ EXTERN_R SEXP RS_fractal_spectral_density_function_wosa(
 /** Nonparametric cross-spectral density function estimation.
  * @source RS\_fra\_sdf.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_spectral_density_function_multitaper", time.series, taper, center, recenter, single.sided, npad, npad))#
+ * @usage #itCall( "RS_fractal_spectral_density_function_multitaper", time.series, taper, center, recenter, single.sided, npad, npad))#
  * @return              An R ... containing ...
  * @param time.series   Pointer to an R object containing ... time.series
  * @param taper         Pointer to an R object containing ... taper

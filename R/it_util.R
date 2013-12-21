@@ -264,11 +264,12 @@
   angle.tolerance <- angle.tolerance / aspect.ratio
 
   # initialize break vector
-  breaks <- as.vector(.Call("RS_fractal_piecwise_linear_segmentation",
-    matrix(as.double(x)), matrix(as.double(y)), n.fit, angle.tolerance,
-    COPY=rep(FALSE,4),
-    CLASSES=c("matrix", "matrix", "integer", "numeric"),
-    PACKAGE="ifultools")) + 1
+  breaks <- as.vector(itCall("RS_fractal_piecwise_linear_segmentation",
+    matrix(as.double(x)), matrix(as.double(y)), n.fit, angle.tolerance)
+    #COPY=rep(FALSE,4),
+    #CLASSES=c("matrix", "matrix", "integer", "numeric"),
+    #PACKAGE="ifultools")
+    ) + 1
 
   attr(breaks, "smooth") <- y
 

@@ -25,7 +25,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Find the nearest neighbors of a multidimensional embedding of data in the phase space.
  * @source RS\_fra\_neig.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_neighbor_find", embedding, n.neighbor, distance.max, distance.metric, pdmatrix, sort.distances, orbital.lag))#
+ * @usage #itCall( "RS_fractal_neighbor_find", embedding, n.neighbor, distance.max, distance.metric, pdmatrix, sort.distances, orbital.lag))#
  * @return                 An R ... containing ...
  * @param embedding        Pointer to an R object containing ... embedding
  * @param n.neighbor       Pointer to an R object containing ... n.neighbor

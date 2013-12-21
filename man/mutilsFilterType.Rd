@@ -12,7 +12,7 @@
 \title{Converts wavelet filter string to MUTILS enum type}
 \concept{utilities}
 \usage{mutilsFilterType(wavelet="s8")}
-\description{MUTILS is a C library used for certain \code{.Call} functions.
+\description{MUTILS is a C library used for certain \code{itCall} functions.
 This function maps a wavelet filter character string to the
 corresponding enum type in MUTILS.}
 

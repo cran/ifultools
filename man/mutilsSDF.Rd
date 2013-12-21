@@ -12,7 +12,7 @@
 \title{SDF evaluation over a discrete uniform grid of frequencies}
 \concept{utilities}
 \usage{mutilsSDF(sdf=NULL, sdfargs=NULL, n.freq=1024, sampling.interval=1)}
-\description{MUTILS is a C library used for certain \code{.Call} functions.
+\description{MUTILS is a C library used for certain \code{itCall} functions.
 This function evaluates an input SDF function over frequencies on
 the interval [0, Nyquist], i.e., normalized frequencies [0, 1/2].}
 

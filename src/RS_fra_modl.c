@@ -24,7 +24,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Detecting determinism in a time series.
  * @source RS\_fra\_modl.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_determinism_delta_epsilon", time.series, embedding.dimension, time.lag, orbital.lag, image.lag, scale.min, scale.max, resolution, minimize))#
+ * @usage #itCall( "RS_fractal_determinism_delta_epsilon", time.series, embedding.dimension, time.lag, orbital.lag, image.lag, scale.min, scale.max, resolution, minimize))#
  * @return                     An R ... containing ...
  * @param time.series          Pointer to an R object containing ... time.series
  * @param embedding.dimension  Pointer to an R object containing ... embedding.dimension

@@ -35,7 +35,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** The continuous wavelet transform.
  * @source RS\_wav\_xform.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_continuous_wavelet", time.series, sampling.interval, filter.type, filter.arg, scale))#
+ * @usage #itCall( "RS_wavelets_transform_continuous_wavelet", time.series, sampling.interval, filter.type, filter.arg, scale))#
  * @return                   An R ... containing ...
  * @param time.series        Pointer to an R object containing ... time.series
  * @param sampling.interval  Pointer to an R object containing ... sampling.interval
@@ -106,7 +106,7 @@ EXTERN_R SEXP RS_wavelets_transform_continuous_wavelet(
 /** The discrete wavelet transform using convolution style filtering.
  * @source RS\_wav\_dwtc.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_discrete_wavelet_convolution", time.series, filters, n.level))#
+ * @usage #itCall( "RS_wavelets_transform_discrete_wavelet_convolution", time.series, filters, n.level))#
  * @return             An R ... containing ...
  * @param time.series  Pointer to an R object containing ... time.series
  * @param filters      Pointer to an R object containing ... filters
@@ -165,7 +165,7 @@ EXTERN_R SEXP RS_wavelets_transform_discrete_wavelet_convolution(
 /** The discrete wavelet packet transform using convolution style filtering.
  * @source RS\_wav\_dwtc.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_packet", time.series, filters, n.level))#
+ * @usage #itCall( "RS_wavelets_transform_packet", time.series, filters, n.level))#
  * @return             An R ... containing ...
  * @param time.series  Pointer to an R object containing ... time.series
  * @param filters      Pointer to an R object containing ... filters
@@ -220,7 +220,7 @@ EXTERN_R SEXP RS_wavelets_transform_packet(
 /** The inverse discrete wavelet transform using convolution style filtering.
  * @source RS\_wav\_dwtc.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_discrete_wavelet_convolution_inverse", dwt, filters, n.level))#
+ * @usage #itCall( "RS_wavelets_transform_discrete_wavelet_convolution_inverse", dwt, filters, n.level))#
  * @return         An R ... containing ...
  * @param dwt      Pointer to an R object containing ... dwt
  * @param filters  Pointer to an R object containing ... filters
@@ -267,7 +267,7 @@ EXTERN_R SEXP RS_wavelets_transform_discrete_wavelet_convolution_inverse(
 /** Conversion and validation of wavelet packet indices.
  * @source RS\_wav\_dwtc.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_packet_convert_indices", transform.indices, filters, n.level))#
+ * @usage #itCall( "RS_wavelets_transform_packet_convert_indices", transform.indices, filters, n.level))#
  * @return                   An R ... containing ...
  * @param transform.indices  Pointer to an R object containing ... transform.indices
  * @see wavuniv_transform_packet
@@ -341,7 +341,7 @@ EXTERN_R SEXP RS_wavelets_transform_packet_convert_indices(
 /** Extracts a discrete wavelet packet transform subset.
  * @source RS\_wav\_dwtc.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_packet_basis", dwpt, transform.indices, n.level))#
+ * @usage #itCall( "RS_wavelets_transform_packet_basis", dwpt, transform.indices, n.level))#
  * @return                   An R ... containing ...
  * @param dwpt               Pointer to an R object containing ... dwpt
  * @param transform.indices  Pointer to an R object containing ... transform.indices
@@ -472,7 +472,7 @@ EXTERN_R SEXP RS_wavelets_transform_packet_basis(
 /** Discrete wavelet packet transform subset inverse.
  * @source RS\_wav\_dwtc.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_packet_inverse", dwpt.basis, extra, transform.indices, filters))#
+ * @usage #itCall( "RS_wavelets_transform_packet_inverse", dwpt.basis, extra, transform.indices, filters))#
  * @return                   An R ... containing ...
  * @param dwpt.basis         Pointer to an R object containing ... dwpt.basis
  * @param extra              Pointer to an R object containing ... extra
@@ -588,7 +588,7 @@ EXTERN_R SEXP RS_wavelets_transform_packet_inverse(
 /** The maximum overlap discrete wavelet transform (MODWT).
  * @source RS\_wav\_modw.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_maximum_overlap", time.series, filters, n.level))#
+ * @usage #itCall( "RS_wavelets_transform_maximum_overlap", time.series, filters, n.level))#
  * @return             An R ... containing ...
  * @param time.series  Pointer to an R object containing ... time.series
  * @param filters      Pointer to an R object containing ... filters
@@ -643,7 +643,7 @@ EXTERN_R SEXP RS_wavelets_transform_maximum_overlap(
 /** The maximum overlap discrete wavelet packet transform (MODWPT).
  * @source RS\_wav\_modw.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_maximum_overlap_packet", time.series, filters, n.level))#
+ * @usage #itCall( "RS_wavelets_transform_maximum_overlap_packet", time.series, filters, n.level))#
  * @return             An R ... containing ...
  * @param time.series  Pointer to an R object containing ... time.series
  * @param filters      Pointer to an R object containing ... filters
@@ -697,7 +697,7 @@ EXTERN_R SEXP RS_wavelets_transform_maximum_overlap_packet(
 /** The inverse maximum overlap discrete wavelet transform (IMODWT).
  * @source RS\_wav\_modw.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_maximum_overlap_inverse", modwt, filters, level, node, xformtype))#
+ * @usage #itCall( "RS_wavelets_transform_maximum_overlap_inverse", modwt, filters, level, node, xformtype))#
  * @return         An R ... containing ...
  * @param modwt    Pointer to an R object containing ... modwt
  * @param filters  Pointer to an R object containing ... filters

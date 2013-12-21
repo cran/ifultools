@@ -24,7 +24,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Non-parametric kernel density estimation.
  * @source RS\_fra\_kde.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_kernel_density_estimate", data, points))#
+ * @usage #itCall( "RS_fractal_kernel_density_estimate", data, points))#
  * @return        An R ... containing ...
  * @param data    Pointer to an R object containing ... data
  * @param points  Pointer to an R object containing ... points

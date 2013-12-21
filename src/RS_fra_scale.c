@@ -24,7 +24,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Piecewise linear segmentation of a time series.
  * @source RS\_fra\_scale.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_piecwise_linear_segmentation", xdata, ydata, n.fit, angle.tolerance))#
+ * @usage #itCall( "RS_fractal_piecwise_linear_segmentation", xdata, ydata, n.fit, angle.tolerance))#
  * @return                 An R ... containing ...
  * @param xdata            Pointer to an R object containing ... xdata
  * @param ydata            Pointer to an R object containing ... ydata

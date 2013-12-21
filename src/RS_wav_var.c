@@ -26,7 +26,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Discrete wavelet variance estimation.
  * @source RS\_wav\_var.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_variance", time.series, transform.type, filter.type, filter.length, n.level, sdf))#
+ * @usage #itCall( "RS_wavelets_variance", time.series, transform.type, filter.type, filter.length, n.level, sdf))#
  * @return                An R ... containing ...
  * @param time.series     Pointer to an R object containing ... time.series
  * @param transform.type  Pointer to an R object containing ... transform.type
@@ -175,7 +175,7 @@ EXTERN_R SEXP RS_wavelets_variance(
 /** Confidence intervals for the unbiased and blocked averaged discrete wavelet variance estimates.
  * @source RS\_wav\_var.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_variance_confidence", variance, edof, probability, filter.length, n.level, sdf))#
+ * @usage #itCall( "RS_wavelets_variance_confidence", variance, edof, probability, filter.length, n.level, sdf))#
  * @return             An R ... containing ...
  * @param variance     Pointer to an R object containing ... variance
  * @param edof         Pointer to an R object containing ... edof
@@ -228,7 +228,7 @@ EXTERN_R SEXP RS_wavelets_variance_confidence(
 /** Equivalent degrees of freedom (EDOF) estimates for a chi-squared distribution assumption on the interior wavelet coefficients.
  * @source RS\_wav\_var.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_variance_edof", interior, num.coefs, variance, level, sdf, filter.type, filter.length))#
+ * @usage #itCall( "RS_wavelets_variance_edof", interior, num.coefs, variance, level, sdf, filter.type, filter.length))#
  * @return               An R ... containing ...
  * @param interior       Pointer to an R object containing ... interior
  * @param num.coefs      Pointer to an R object containing ... num.coefs

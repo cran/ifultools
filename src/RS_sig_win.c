@@ -23,7 +23,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Oracle function for obtaining a particular taper/window.
  * @source RS\_sig\_win.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_signal_taper", taper, nrow, ncol, param, normalize))#
+ * @usage #itCall( "RS_signal_taper", taper, nrow, ncol, param, normalize))#
  * @return           An R ... containing ...
  * @param taper      Pointer to an R object containing ... taper
  * @param nrow       Pointer to an R object containing ... nrow

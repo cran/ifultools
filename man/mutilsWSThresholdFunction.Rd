@@ -12,7 +12,7 @@
 \title{Converts wavelet shrinkage theshold function to MUTILS enum type}
 \concept{utilities}
 \usage{mutilsWSThresholdFunction(x)}
-\description{MUTILS is a C library used for certain \code{.Call} functions.
+\description{MUTILS is a C library used for certain \code{itCall} functions.
 This function maps a wavelet transform character string to the
 corresponding enum type in MUTILS.}
 

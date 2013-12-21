@@ -24,7 +24,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Local Lyapunov spectrum estimation.
  * @source RS\_fra\_lyap.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_local_lyapunov_spectrum", time.series, embedding.dimension, time.lag, orbital.lag, sampling.interval, local.dimension, polynomial.order, global.reference, n.reference.local, metric, scale))#
+ * @usage #itCall( "RS_fractal_local_lyapunov_spectrum", time.series, embedding.dimension, time.lag, orbital.lag, sampling.interval, local.dimension, polynomial.order, global.reference, n.reference.local, metric, scale))#
  * @return                     An R ... containing ...
  * @param time.series          Pointer to an R object containing ... time.series
  * @param embedding.dimension  Pointer to an R object containing ... embedding.dimension

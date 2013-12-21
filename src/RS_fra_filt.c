@@ -25,7 +25,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Median filtering of a time series.
  * @source RS\_fra\_filt.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_filter_median", time.series, order))#
+ * @usage #itCall( "RS_fractal_filter_median", time.series, order))#
  * @return             An R ... containing ...
  * @param time.series  Pointer to an R object containing ... time.series
  * @param order        Pointer to an R object containing ... order
@@ -70,7 +70,7 @@ EXTERN_R SEXP RS_fractal_filter_median(
 /** Nonlinear denoising via local projection.
  * @source RS\_fra\_filt.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_filter_nonlinear_local_projection", time.series, dim, delay, min.nneig, max.radius, distance.metric, noise.dim, correct.curvature))#
+ * @usage #itCall( "RS_fractal_filter_nonlinear_local_projection", time.series, dim, delay, min.nneig, max.radius, distance.metric, noise.dim, correct.curvature))#
  * @return                   An R ... containing ...
  * @param time.series        Pointer to an R object containing ... time.series
  * @param dim                Pointer to an R object containing ... dim

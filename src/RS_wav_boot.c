@@ -25,7 +25,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Find the whitest set of DWPT crystals.
  * @source RS\_wav\_boot.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_packet_whitest", dwpt, significance, white.noise.test))#
+ * @usage #itCall( "RS_wavelets_transform_packet_whitest", dwpt, significance, white.noise.test))#
  * @return                  An R ... containing ...
  * @param dwpt              Pointer to an R object containing ... dwpt
  * @param significance      Pointer to an R object containing ... significance
@@ -80,7 +80,7 @@ EXTERN_R SEXP RS_wavelets_transform_packet_whitest(
 /** Adaptive wavelet-based bootstrapping.
  * @source RS\_wav\_boot.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_bootstrap", dwpt, filters, white.indices, n.realization))#
+ * @usage #itCall( "RS_wavelets_bootstrap", dwpt, filters, white.indices, n.realization))#
  * @return               An R ... containing ...
  * @param dwpt           Pointer to an R object containing ... dwpt
  * @param filters        Pointer to an R object containing ... filters

@@ -28,7 +28,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Block-independent (instantaneous) estimation of fractionally differenced (FD) model parameters.
  * @source RS\_wav\_fdp.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_fdp_estimator_instantaneous", time.series, levels, filter.type, filter.length, estimator, biased, dof.order, delta.range))#
+ * @usage #itCall( "RS_wavelets_fdp_estimator_instantaneous", time.series, levels, filter.type, filter.length, estimator, biased, dof.order, delta.range))#
  * @return               An R ... containing ...
  * @param time.series    Pointer to an R object containing ... time.series
  * @param levels         Pointer to an R object containing ... levels
@@ -152,7 +152,7 @@ EXTERN_R SEXP RS_wavelets_fdp_estimator_instantaneous(
 /** Block-dependent estimation of fractionally differenced (FD) model parameters.
  * @source RS\_wav\_fdp.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_fdp_estimator_block", time.series, levels, filter.type, filter.length, estimator, boundary.mode, edof.mode, sdf, delta.range))#
+ * @usage #itCall( "RS_wavelets_fdp_estimator_block", time.series, levels, filter.type, filter.length, estimator, boundary.mode, edof.mode, sdf, delta.range))#
  * @return               An R ... containing ...
  * @param time.series    Pointer to an R object containing ... time.series
  * @param levels         Pointer to an R object containing ... levels
@@ -279,7 +279,7 @@ EXTERN_R SEXP RS_wavelets_fdp_estimator_block(
 /** Mid-octave spectral density function (SDF) estimation.
  * @source RS\_wav\_fdp.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_fdp_bandpass_variance", levels, delta, n.sample, filter.length, estimator, boundary.mode, edof.mode, sdf, delta.range))#
+ * @usage #itCall( "RS_wavelets_fdp_bandpass_variance", levels, delta, n.sample, filter.length, estimator, boundary.mode, edof.mode, sdf, delta.range))#
  * @return          An R ... containing ...
  * @param levels    Pointer to an R object containing ... levels
  * @param delta     Pointer to an R object containing ... delta

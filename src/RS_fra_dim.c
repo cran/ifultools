@@ -30,7 +30,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Delay embedding of a univariate time series.
  * @source RS\_fra\_dim.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_embed", time.series, embedding.dimension, time.lag))#
+ * @usage #itCall( "RS_fractal_embed", time.series, embedding.dimension, time.lag))#
  * @return                     An R ... containing ...
  * @param time.series          Pointer to an R object containing ... time.series
  * @param embedding.dimension  Pointer to an R object containing ... embedding.dimension
@@ -83,7 +83,7 @@ EXTERN_R SEXP RS_fractal_embed(
 /** Information dimension statistics.
  * @source RS\_fra\_dim.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_dimension_information", time.series, embedding.dimension, time.lag, orbital.lag, n.density, distance.metric, max.neighbors, n.reference))#
+ * @usage #itCall( "RS_fractal_dimension_information", time.series, embedding.dimension, time.lag, orbital.lag, n.density, distance.metric, max.neighbors, n.reference))#
  * @return                     An R ... containing ...
  * @param time.series          Pointer to an R object containing ... time.series
  * @param embedding.dimension  Pointer to an R object containing ... embedding.dimension
@@ -171,7 +171,7 @@ EXTERN_R SEXP RS_fractal_dimension_information(
 /** Discrete correlation integral estimation using a delay embedding of a single variable time series.
  * @source RS\_fra\_dim.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_dimension_correlation_summation", time.series, emb.dim, time.lag, orbital.lag, n.scale.octave, distance.metric, max.neighbors, n.reference))#
+ * @usage #itCall( "RS_fractal_dimension_correlation_summation", time.series, emb.dim, time.lag, orbital.lag, n.scale.octave, distance.metric, max.neighbors, n.reference))#
  * @return                An R ... containing ...
  * @param time.series     Pointer to an R object containing ... time.series
  * @param emb.dim         Pointer to an R object containing ... emb.dim
@@ -238,7 +238,7 @@ EXTERN_R SEXP RS_fractal_dimension_correlation_summation(
 /** Estimation of the proper embedding dimension for a single-variable time series.
  * @source RS\_fra\_dim.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_dimension_false_nearest_neighbors", time.series, embedding.dimension, time.lag, orbital.lag, rtol, atol, max.neighbors, n.reference))#
+ * @usage #itCall( "RS_fractal_dimension_false_nearest_neighbors", time.series, embedding.dimension, time.lag, orbital.lag, rtol, atol, max.neighbors, n.reference))#
  * @return                     An R ... containing ...
  * @param time.series          Pointer to an R object containing ... time.series
  * @param embedding.dimension  Pointer to an R object containing ... embedding.dimension
@@ -313,7 +313,7 @@ EXTERN_R SEXP RS_fractal_dimension_false_nearest_neighbors(
 /** Estimation of the proper embedding dimension for a single-variable time series.
  * @source RS\_fra\_dim.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_dimension_false_nearest_strands", time.series, embedding.dimension, time.lag, orbital.lag, iterate.tolerance, atol, max.neighbors, n.reference))#
+ * @usage #itCall( "RS_fractal_dimension_false_nearest_strands", time.series, embedding.dimension, time.lag, orbital.lag, iterate.tolerance, atol, max.neighbors, n.reference))#
  * @return                     An R ... containing ...
  * @param time.series          Pointer to an R object containing ... time.series
  * @param embedding.dimension  Pointer to an R object containing ... embedding.dimension
@@ -389,7 +389,7 @@ EXTERN_R SEXP RS_fractal_dimension_false_nearest_strands(
 /** Poincare map.
  * @source RS\_fra\_dim.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_poincare_map", time.series, extrema.type, denoise, orbital.lag, iterate.tolerance, atol, max.neighbors, n.reference))#
+ * @usage #itCall( "RS_fractal_poincare_map", time.series, extrema.type, denoise, orbital.lag, iterate.tolerance, atol, max.neighbors, n.reference))#
  * @return              An R ... containing ...
  * @param time.series   Pointer to an R object containing ... time.series
  * @param extrema.type  Pointer to an R object containing ... extrema.type
@@ -468,7 +468,7 @@ EXTERN_R SEXP RS_fractal_poincare_map(
 /** Space time separation plot.
  * @source RS\_fra\_dim.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_space_time_separation_plot", time.series, dim, delay, orbital.lags, frac.prob, atol, max.neighbors, n.reference))#
+ * @usage #itCall( "RS_fractal_space_time_separation_plot", time.series, dim, delay, orbital.lags, frac.prob, atol, max.neighbors, n.reference))#
  * @return              An R ... containing ...
  * @param time.series   Pointer to an R object containing ... time.series
  * @param dim           Pointer to an R object containing ... dim

@@ -26,7 +26,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** The modulus maxima of a continuous wavelet transform.
  * @source RRS\_wav\_wtmm.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_continuous_wavelet_modulus_maxima", cwt, tolerance))#
+ * @usage #itCall( "RS_wavelets_transform_continuous_wavelet_modulus_maxima", cwt, tolerance))#
  * @return           An R ... containing ...
  * @param cwt        Pointer to an R object containing ... cwt
  * @param tolerance  Pointer to an R object containing ... tolerance
@@ -124,7 +124,7 @@ EXTERN_R SEXP RS_wavelets_transform_continuous_wavelet_modulus_maxima(
 /** The modulus maxima tree of a continuous wavelet transform.
  * @source RRS\_wav\_wtmm.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_transform_continuous_wavelet_modulus_maxima_tree", wtmm.time.index, wtmm.scale.index, cwt, cwt.time, cwt.scale, bridge.gaps, n.octave.min, wtmm.strength.min))#
+ * @usage #itCall( "RS_wavelets_transform_continuous_wavelet_modulus_maxima_tree", wtmm.time.index, wtmm.scale.index, cwt, cwt.time, cwt.scale, bridge.gaps, n.octave.min, wtmm.strength.min))#
  * @return                   An R ... containing ...
  * @param wtmm.time.index    Pointer to an R object containing ... wtmm.time.index
  * @param wtmm.scale.index   Pointer to an R object containing ... wtmm.scale.index

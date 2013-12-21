@@ -26,7 +26,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Generate surrogate time series via Theiler's methods.
  * @source RS\_fra\_surr.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_bootstrap_theiler", time.series, method, seed))#
+ * @usage #itCall( "RS_fractal_bootstrap_theiler", time.series, method, seed))#
  * @return             An R ... containing ...
  * @param time.series  Pointer to an R object containing ... time.series
  * @param method       Pointer to an R object containing ... method
@@ -83,7 +83,7 @@ EXTERN_R SEXP RS_fractal_bootstrap_theiler(
 /** Generate surrogate time series via Davison-Hinkley method.
  * @source RS\_fra\_surr.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_bootstrap_davison_hinkley", time.series, seed, seed))#
+ * @usage #itCall( "RS_fractal_bootstrap_davison_hinkley", time.series, seed, seed))#
  * @return             An R ... containing ...
  * @param time.series  Pointer to an R object containing ... time.series
  * @param seed         Pointer to an R object containing ... seed
@@ -132,7 +132,7 @@ EXTERN_R SEXP RS_fractal_bootstrap_davison_hinkley(
 /** Generate surrogate time series via circulant embedding.
  * @source RS\_fra\_surr.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_fractal_bootstrap_circulant_embedding", sdf, seed, seed))#
+ * @usage #itCall( "RS_fractal_bootstrap_circulant_embedding", sdf, seed, seed))#
  * @return      An R ... containing ...
  * @param sdf   Pointer to an R object containing ... sdf
  * @param seed  Pointer to an R object containing ... seed

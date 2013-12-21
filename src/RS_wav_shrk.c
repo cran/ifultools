@@ -25,7 +25,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 /** Nonlinear noise reduction in a time series via wavelet shrinkage.
  * @source RS\_wav\_shrk.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_shrink", time.series, filters, threshold, threshold.function, threshold.scale, noise.variance, shrink.function, n.level, decimated))#
+ * @usage #itCall( "RS_wavelets_shrink", time.series, filters, threshold, threshold.function, threshold.scale, noise.variance, shrink.function, n.level, decimated))#
  * @return                    An R ... containing ...
  * @param time.series         Pointer to an R object containing ... time.series
  * @param filters             Pointer to an R object containing ... filters
@@ -142,7 +142,7 @@ EXTERN_R SEXP RS_wavelets_shrink(
 /** Waveshrink thresholds.
  * @source RS\_wav\_shrk.c
  * @author Copyright (c), 1988, 2006 Insightful Corp.  All rights reserved.
- * @usage #.Call( "RS_wavelets_shrink_threshold", wavelet.transform, decimated, threshold.type, shrink.fun, noise.variance, noise.variance, shrink.function, n.level, decimated))#
+ * @usage #itCall( "RS_wavelets_shrink_threshold", wavelet.transform, decimated, threshold.type, shrink.fun, noise.variance, noise.variance, shrink.function, n.level, decimated))#
  * @return                   An R ... containing ...
  * @param wavelet.transform  Pointer to an R object containing ... wavelet.transform
  * @param decimated          Pointer to an R object containing ... decimated

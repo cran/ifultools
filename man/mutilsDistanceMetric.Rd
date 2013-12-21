@@ -14,7 +14,7 @@
 \usage{mutilsDistanceMetric(metric)}
 \description{Converts a numeric value (p) representing an L-p metric to an enumerated index
 appropriate for Insightful's MUTILS C library, used by many functions in the FRACTAL package
-involving \code{.Call} calls.}
+involving \code{itCall} calls.}
 
 \arguments{
 \item{metric}{an integer (p) representing an L-p Euclidean distance metric.
