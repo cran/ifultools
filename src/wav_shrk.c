@@ -122,7 +122,7 @@ mutil_errcode wavuniv_shrink(
   sint32         j;
   sint32         n_sample;
   sint32         n_level_threshold;
-  sint32         iminimax;
+  /* sint32         iminimax; */
 
   MUTIL_INTERRUPT_INIT( intrp_ptr );
 
@@ -178,7 +178,7 @@ mutil_errcode wavuniv_shrink(
   /* initialize local variables */
 
   n_sample = MATUNIV_NELEM( time_series );
-  iminimax = MUTIL_MIN( LOCALDEF_ILOG2( n_sample ), 15 );
+  /* iminimax = MUTIL_MIN( LOCALDEF_ILOG2( n_sample ), 15 ); */
 
   /* switch on threshold function */
 

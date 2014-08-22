@@ -1013,7 +1013,7 @@ mutil_errcode wavuniv_variance_confidence(
   double           *low;
   double           *high;
   double            num_ops = 0.0;
-  double            temp;
+  /* double            temp; */
   mutil_errcode     err;
   sint32            j;
   sint32            n_dim = 1;

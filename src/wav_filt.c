@@ -190,28 +190,35 @@ mutil_errcode wavuniv_filters_continuous(
 
   switch( filter_type ){
 
-    case WAV_FILTER_GAUSSIAN_I:
-    case WAV_FILTER_GAUSSIAN_II:
+  case WAV_FILTER_GAUSSIAN_I:
+  case WAV_FILTER_GAUSSIAN_II:
 
-      std = filter_arg;
+    std = filter_arg;
 
-      if ( std <= 0.0 ){
-	      MUTIL_ERROR( "Standard deviation of Gaussian function must be a positive value." );
-	      return MUTIL_ERR_ILLEGAL_VALUE;
-      }
+    if ( std <= 0.0 ){
+      MUTIL_ERROR( "Standard deviation of Gaussian function must be a positive value." );
+      return MUTIL_ERR_ILLEGAL_VALUE;
+    }
+    
+    break;
+    
+  case WAV_FILTER_MORLET:
+    
+    omega0 = filter_arg;
+    
+    if ( omega0 <= 0.0 ){
+      MUTIL_ERROR( "Morlet frequency shift omega0 must be a positive value." );
+      return MUTIL_ERR_ILLEGAL_VALUE;
+    }
+    
+    break;
 
-      break;
-
-    case WAV_FILTER_MORLET:
-
-      omega0 = filter_arg;
-
-      if ( omega0 <= 0.0 ){
-	      MUTIL_ERROR( "Morlet frequency shift omega0 must be a positive value." );
-	      return MUTIL_ERR_ILLEGAL_VALUE;
-      }
-
-      break;
+  case WAV_FILTER_HAAR:
+    break;
+    
+  default:
+    MUTIL_ERROR( "Filter type is unsupported" );
+    return MUTIL_ERR_FEATURE_NOT_IMPLEMENTED;
   }
 
   /* end I/O check */
@@ -257,65 +264,70 @@ mutil_errcode wavuniv_filters_continuous(
 
     /* Check for interrupts */
     num_ops += (double) num_freqs;
-
+    
     if ( MUTIL_INTERRUPT( num_ops, intrp_ptr ) ) {
       MUTIL_ERROR( "user interrupt" );
       return MUTIL_ERR_INTERRUPT;
     }
     switch( filter_type ){
+      
+    case WAV_FILTER_HAAR:
 
-      case WAV_FILTER_HAAR:
-
-	      pc_result[i].re = (double) 0.0;
-
-	      if ( MUTIL_ABS( pd_freq[i] ) < MUTIL_DOUBLE_EPSILON ){
+      pc_result[i].re = (double) 0.0;
+      
+      if ( MUTIL_ABS( pd_freq[i] ) < MUTIL_DOUBLE_EPSILON ){
 	  pc_result[i].im = (double) 0.0;
-	}
-	else{
-	  pc_result[i].im = ampweight / pd_freq[i] * ( cos( pd_freq[i] ) - 1.0 );
-	}
-	break;
-
-      case WAV_FILTER_GAUSSIAN_I:
-
+      }
+      else{
+	pc_result[i].im = ampweight / pd_freq[i] * ( cos( pd_freq[i] ) - 1.0 );
+      }
+      break;
+	
+    case WAV_FILTER_GAUSSIAN_I:
+      
+      pc_result[i].re = (double) 0.0;
+      pc_result[i].im = ampweight * pd_freq[i] * exp( - pd_freq[i] * pd_freq[i] * std * std / 2.0 );
+      break;
+	
+    case WAV_FILTER_GAUSSIAN_II:
+	
+      pc_result[i].re = ampweight * pd_freq[i] * pd_freq[i] * exp( - pd_freq[i] * pd_freq[i] * std * std  / 2.0 );
+      pc_result[i].im = (double) 0.0;
+      break;
+      
+    case WAV_FILTER_MORLET:
+      
+      /*  morlet = C * sqrt( 2 * PI ) * exp( -W^2 / 2 ) * ( 1 - exp( ( W^2 - W0^2 ) / 4 ) )
+	  where W = w + W0
+      */
+      
+      Omega2 = pd_freq[i] + omega0;
+      
+      /* here we check the relation | w + w0 | > 38.0. If TRUE, then
+	 exp( ( W^2 - W0^2 ) / 4 ) is huge while exp( -W^2 / 2 ) is
+	 (asymptotically) zero. So, in these cases, we simply return
+	 a 0 + 0i value, otherwise we will have floating point overflow
+	 issues. */
+      
+      if ( MUTIL_ABS( Omega2 ) > 38.0 ){
+	
 	pc_result[i].re = (double) 0.0;
-	pc_result[i].im = ampweight * pd_freq[i] * exp( - pd_freq[i] * pd_freq[i] * std * std / 2.0 );
-	break;
-
-      case WAV_FILTER_GAUSSIAN_II:
-
-	pc_result[i].re = ampweight * pd_freq[i] * pd_freq[i] * exp( - pd_freq[i] * pd_freq[i] * std * std  / 2.0 );
 	pc_result[i].im = (double) 0.0;
-	break;
+      }
+      else{
+	
+	Omega2 *= Omega2;
+	
+	pc_result[i].re = ampweight * exp( - Omega2 / 2.0  ) * ( 1.0 - exp( ( Omega2 - omega0 * omega0 ) / 4.0 ) ) ;
+	pc_result[i].im = (double) 0.0;
+      }
 
-      case WAV_FILTER_MORLET:
+      break;
 
-	/*  morlet = C * sqrt( 2 * PI ) * exp( -W^2 / 2 ) * ( 1 - exp( ( W^2 - W0^2 ) / 4 ) )
-	    where W = w + W0
-	*/
+    default:
+      MUTIL_ERROR( "Filter type is unsupported" );
+      return MUTIL_ERR_FEATURE_NOT_IMPLEMENTED;
 
-	Omega2 = pd_freq[i] + omega0;
-
-	/* here we check the relation | w + w0 | > 38.0. If TRUE, then
-	   exp( ( W^2 - W0^2 ) / 4 ) is huge while exp( -W^2 / 2 ) is
-	   (asymptotically) zero. So, in these cases, we simply return
-	   a 0 + 0i value, otherwise we will have floating point overflow
-	   issues. */
-
-	if ( MUTIL_ABS( Omega2 ) > 38.0 ){
-
-	  pc_result[i].re = (double) 0.0;
-	  pc_result[i].im = (double) 0.0;
-	}
-	else{
-
-	  Omega2 *= Omega2;
-
-	  pc_result[i].re = ampweight * exp( - Omega2 / 2.0  ) * ( 1.0 - exp( ( Omega2 - omega0 * omega0 ) / 4.0 ) ) ;
-	  pc_result[i].im = (double) 0.0;
-	}
-
-	break;
     }
 
   }
@@ -1559,7 +1571,7 @@ mutil_errcode wavuniv_filters_zero_phase(
   void            *intrp_ptr,
   mat_set         *result )
 {
-  boolean         is_symmlet;
+  /* boolean         is_symmlet; */
   double          num_ops = 0.0;
   memlist         list;
   mutil_errcode   err;
@@ -1612,7 +1624,7 @@ mutil_errcode wavuniv_filters_zero_phase(
   switch ( filter_type ) {
     case WAV_FILTER_LEAST_ASYMMETRIC:
 
-      is_symmlet = TRUE;
+      /* is_symmlet = TRUE; */
 
       if ( ( filter_length < 8 ) || ( filter_length > 20 ) ){
         MUTIL_ERROR( "Unsupported filter length" );
@@ -1637,7 +1649,7 @@ mutil_errcode wavuniv_filters_zero_phase(
 
     case WAV_FILTER_COIFLET:
 
-      is_symmlet = FALSE;
+      /* is_symmlet = FALSE; */
 
       if ( ( filter_length != 6 ) &&
         ( filter_length != 12 ) &&

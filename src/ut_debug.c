@@ -48,7 +48,7 @@ mutil_errcode mutil_msg_print(mutil_msg_level level, const char *message,
       return MUTIL_ERR_INPUT_OUTPUT;
     }
   }
-  else if( sprintf( linstr, "" ) < 0 ) {
+  else if( sprintf(linstr, "%s", "") < 0 ) {
     return MUTIL_ERR_INPUT_OUTPUT;
   }
 

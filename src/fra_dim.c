@@ -74,7 +74,7 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 
 static void localdef_ipower( float *x, sint32 n );
 
-static uint32 localdef_exponent_biased( float num );
+/* static uint32 localdef_exponent_biased( float num ); */
 
 static mutil_errcode localfn_average_neighborhood_radius_constant_density(
   univ_mat           *embedding,
@@ -1263,6 +1263,8 @@ mutil_errcode frauniv_poincare_map(
 
   /* If ALL extrema are to be found then allocate memory to hold their
      concavity ( 1 = maxima, -1 = minima */
+  sint8 concval = 1;
+  concavity = &concval; /* BC: SET DEFAULT TO AVOID COMPILER WARNING */
 
   if ( extrema_type == FRA_EXTREMA_ALL ) {
     err = mutil_malloc_register(
@@ -1741,21 +1743,21 @@ static void localdef_ipower( float *x, sint32 n )
  * @see frauniv_dimension_correlation_summation
  * @private
  */
-static uint32 localdef_exponent_biased( float num ){
+/* static uint32 localdef_exponent_biased( float num ){ */
 
-  /* sint32 offset  = -127; */
-  /* Mask 0x7f800000: 0111 1111 1000 0000 0000 0000 0000 0000 */
+/*   /\* sint32 offset  = -127; *\/ */
+/*   /\* Mask 0x7f800000: 0111 1111 1000 0000 0000 0000 0000 0000 *\/ */
 
-  uint32 mask  = 0x7F800000;
-  /*   uint32 shift = 23; */
+/*   uint32 mask  = 0x7F800000; */
+/*   /\*   uint32 shift = 23; *\/ */
 
-  float  *pfNum = &num;
-  uint32 *plNum;
+/*   float  *pfNum = &num; */
+/*   uint32 *plNum; */
 
-  plNum = (uint32 *) pfNum;
+/*   plNum = (uint32 *) pfNum; */
 
-  return ( (*plNum & mask) >> 23 );
-}
+/*   return ( (*plNum & mask) >> 23 ); */
+/* } */
 
 /** Establishes the default values for for waveshrink options.
  * Waveshrink is used by the \Ref{frauniv_poincare_map}.
@@ -2659,7 +2661,7 @@ mutil_errcode frauniv_dimension_false_nearest_strands(
   univ_mat       neighbor_distances;
   univ_mat       neighbor_indices;
   univ_mat       original_indices;
-  sint32         n_sample;
+  /* sint32         n_sample; */
   sint32_mat     strand_class;
   sint32_mat     dindex;
   sint32_mat     n_pairs;
@@ -2723,7 +2725,7 @@ mutil_errcode frauniv_dimension_false_nearest_strands(
 
   /* initialize variables */
 
-  n_sample = MATUNIV_NELEM( time_series );
+  /* n_sample = MATUNIV_NELEM( time_series ); */
 
   /* calculate false nearest neighbors */
 

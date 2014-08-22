@@ -8,6 +8,8 @@ useDynLib(ifultools)
 # IMPORTS
 ###
 
+import(splus2R, MASS)
+
 ###
 # S3 Generics
 ###

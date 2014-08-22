@@ -396,6 +396,7 @@ mutil_errcode frauniv_time_delayed_mutual_information(
 
    default:
      /* will never get here because of error checks */
+     answer = 0.0; /* BC: avoid compiler warning */
 
      break;
    }

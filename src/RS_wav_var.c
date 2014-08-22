@@ -167,7 +167,8 @@ EXTERN_R SEXP RS_wavelets_variance(
   }
 
   /* free registered local memory */
-  MUTIL_FREE_WARN( memlist, &list );
+  MUTIL_FREE_WARN( memlist, &list )
+;
   
   return pr_ret_obj;
 }

@@ -1263,8 +1263,10 @@ static double localfn_random_uniform_deviate_marsaglia(
 
   /* Move elements 1 to 8 to 2 to 9 */
 
-  (void *) memmove( mother1 + 2, mother1 + 1, 8 * sizeof(short) );
-  (void *) memmove( mother2 + 2, mother2 + 1, 8 * sizeof(short) );
+  /* (void *) memmove( mother1 + 2, mother1 + 1, 8 * sizeof(short) ); */
+  /* (void *) memmove( mother2 + 2, mother2 + 1, 8 * sizeof(short) ); */
+  memmove( mother1 + 2, mother1 + 1, 8 * sizeof(short) );
+  memmove( mother2 + 2, mother2 + 1, 8 * sizeof(short) );
 
   /* Put the carry values in numberi */
 

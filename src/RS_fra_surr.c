@@ -67,7 +67,7 @@ EXTERN_R SEXP RS_fractal_bootstrap_theiler(
   MEMLIST_FREE_ON_ERROR_SPLUS( err, &list, "Unable to convert fra_surrogate type argument pr_method to method" );
 
   /* ... pr_seed to seed */
-  err = sint32_from_R( pr_seed, &seed );
+  err = sint32_from_R( pr_seed, (sint32 *) &seed );
   MEMLIST_FREE_ON_ERROR_SPLUS( err, &list, "Unable to convert uint32 type argument pr_seed to seed" );
 
   /* Call the function */
@@ -117,7 +117,7 @@ EXTERN_R SEXP RS_fractal_bootstrap_davison_hinkley(
   READ_MATRIX_REGISTER( pr_time_series, &time_series );
 
   /* ... pr_seed to seed */
-  err = sint32_from_R( pr_seed, &seed );
+  err = sint32_from_R( pr_seed, (sint32 *) &seed );
   MEMLIST_FREE_ON_ERROR_SPLUS( err, &list, "Unable to convert uint32 type argument pr_seed to seed" );
 
   /* Call the function */
@@ -170,7 +170,7 @@ EXTERN_R SEXP RS_fractal_bootstrap_circulant_embedding(
   READ_MATRIX_REGISTER( pr_sdf, &sdf );
 
   /* ... pr_seed to seed */
-  err = sint32_from_R( pr_seed, &seed );
+  err = sint32_from_R( pr_seed, (sint32 *) &seed );
   MEMLIST_FREE_ON_ERROR_SPLUS( err, &list, "Unable to convert uint32 type argument pr_seed to seed" );
 
   /* Call the function */

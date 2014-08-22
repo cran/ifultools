@@ -1493,7 +1493,7 @@ mutil_errcode memlist_print( FILE *out_file, memlist *list )
     if ( data ){
 
       (void) fprintf( out_file, "%ld\t0x%x\t%s (data: 0x%x, dim: %ld x %ld",
-		      count++, temp->data, memtype[ type ], data, nrow, ncol );
+		      (long) count++, temp->data, memtype[ type ], data, (long) nrow, (long) ncol );
 
       if ( type == 8 ){
 	(void) fprintf( out_file, ", type: %s )\n", umtype[ (sint32) ( (univ_mat *) ( temp->data ) )->type ] );
@@ -1506,7 +1506,7 @@ mutil_errcode memlist_print( FILE *out_file, memlist *list )
     else{
 
       (void) fprintf( out_file, "%ld\t0x%x\t%s\n",
-		      count++, temp->data, memtype[ type ] );
+		      (long) count++, temp->data, memtype[ type ] );
     }
 
     /* increment to next node */
