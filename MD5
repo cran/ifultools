@@ -1,9 +1,11 @@
-9042259888a207ab79cf287b3c8c07e8 *DESCRIPTION
-cf020248f23a0efa2756f58eb574865b *NAMESPACE
+92ff295a80e410175b387cdd8ee849a8 *DESCRIPTION
+e8c4e6541e7a3ca88535eb1979b713e1 *NAMESPACE
 dd0f3ad2c2612dd2ffb8ee52db7bc91a *R/it_calls.R
 93bbff47a90008bba0d39bd0898935f8 *R/it_mutils.R
 0aaceae3361009e2a1e814f457c144e4 *R/it_plot.R
 f8642b1bf39a724817fa0f368f95406a *R/it_util.R
+755d26fdcf79d4f4e7de5b86977ad831 *R/package.R
+eac4ab67be8e03e56fa257f963a48169 *README.md
 0cc64890e9b6f8b1209b09d17fa79ebc *inst/include/fra_dim.h
 784814ea3ebeabe956005e51ad40bd25 *inst/include/fra_fdp.h
 f77f6b2ecade966fa1efc226540c0a7f *inst/include/fra_filt.h
@@ -158,7 +160,7 @@ b6c3e81afd46b6e01441699e1f943246 *src/fra_lyap.c
 c6f60935b4370565ded4d9a7f38d2069 *src/fra_scale.c
 a25ab459a69e63e35548d2d6e7109b2d *src/fra_sdf.c
 0183fc88bf42b86b1c108e4dd1a23086 *src/fra_stat.c
-747d166b6abb19624e2fe6a8e297cdeb *src/fra_surr.c
+eb7dd6b5172480fa05bfed8b2bb25b9d *src/fra_surr.c
 9718ca151982ae466a0408181492c981 *src/fra_tdmi.c
 7eed144f7416e46c06654b8f4df6d9a8 *src/fra_util.c
 4ae04de7c6672a15bc8953d825060e03 *src/fra_util.h

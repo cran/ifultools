@@ -27,7 +27,8 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
-
+#include <stdint.h>
+#include <inttypes.h>
 
 /*
   This file contains function definitions for
@@ -56,27 +57,29 @@ static mutil_errcode localfn_recenter_data(
   const univ_mat *x, void *intrp_ptr, double *mean,
   double *variance, univ_mat *result );
 
-static mutil_errcode localfn_random_normal( double_mat *x, unsigned long seed);
-static mutil_errcode localfn_random_uniform_phase( dcomplex_mat *x, unsigned long seed );
-static mutil_errcode localfn_circulant_embedding_weights( dcomplex_mat *x, unsigned long seed );
-static mutil_errcode localfn_random_phase_weights( dcomplex_mat *x, unsigned long seed );
-static mutil_errcode localfn_davison_hinkley_weights( dcomplex_mat *x, unsigned long seed );
+static mutil_errcode localfn_random_normal( double_mat *x, uint32_t seed);
+static mutil_errcode localfn_random_uniform_phase( dcomplex_mat *x, uint32_t seed );
+static mutil_errcode localfn_circulant_embedding_weights( dcomplex_mat *x, uint32_t seed );
+static mutil_errcode localfn_random_phase_weights( dcomplex_mat *x, uint32_t seed );
+static mutil_errcode localfn_davison_hinkley_weights( dcomplex_mat *x, uint32_t seed );
 
 static mutil_errcode localfn_rank_and_sort( double_mat *x,
   void *intrp_ptr, double_mat *sorted, sint32_mat *rank );
 
-static long localfn_time_seed(void);
+static int32_t localfn_time_seed(void);
 
 static double localfn_random_uniform_deviate_marsaglia(
-  unsigned long *pSeed );
+  uint32_t *pSeed );
 
 static double localfn_random_normal_deviate_marsaglia(
-  unsigned long *pSeed );
+  uint32_t *pSeed );
 
 /* static variables for the random number generator */
 
-static short mother1[10];
-static short mother2[10];
+/* static short mother1[10]; */
+/* static short mother2[10]; */
+static int16_t mother1[10];
+static int16_t mother2[10];
 static boolean INITIALIZE_RANDOM_NUMBER_GENERATOR = FALSE;
 
 #define m16Long    65536L        /* 2^16                   */
@@ -91,10 +94,10 @@ static boolean INITIALIZE_RANDOM_NUMBER_GENERATOR = FALSE;
 
 #ifdef WIN32 /* ( */
 #include<windows.h>
-static long localfn_time_seed(void)
+static int32_t localfn_time_seed(void)
 {
-  long val;
-  long oldval;
+  int32_t val;
+  int32_t oldval;
 
   val = oldval = GetTickCount();
 
@@ -105,15 +108,15 @@ static long localfn_time_seed(void)
   while( val == oldval ){
     val =  GetTickCount();
   }
-  return( (long) MUTIL_ABS( val ) );
+  return( (int32_t) MUTIL_ABS( val ) );
 }
 #else /* )( */
 #include <sys/time.h>
-static long localfn_time_seed(void)
+static int32_t localfn_time_seed(void)
 {
   struct timeval tv ;
   (void)gettimeofday(&tv, (void*)NULL);
-  return( (long) MUTIL_ABS( tv.tv_usec ) );
+  return( (int32_t) MUTIL_ABS( tv.tv_usec ) );
 
 }
 #endif
@@ -241,7 +244,7 @@ mutil_errcode frauniv_bootstrap_theiler(
 	      indices of the original time series
       */
 
-      err = localfn_random_normal( &random, (unsigned long) seed );
+      err = localfn_random_normal( &random, (uint32_t) seed );
       MEMLIST_FREE_ON_ERROR( err, &list );
       
       err = localfn_rank_and_sort( &( time_series_recentered.mat.dblmat ), intrp_ptr,
@@ -609,7 +612,7 @@ mutil_errcode frauniv_bootstrap_circulant_embedding(
 
   /* calculate the circulant embedding weights */
 
-  err = localfn_circulant_embedding_weights( &random_weight, (unsigned long) seed );
+  err = localfn_circulant_embedding_weights( &random_weight, (uint32_t) seed );
   MEMLIST_FREE_ON_ERROR( err, &list );
 
   /* set pointers */
@@ -698,13 +701,13 @@ mutil_errcode frauniv_bootstrap_circulant_embedding(
  * @return Standard mutils error/OK code.
  * @param  x Pointer to a pre-allocated double matrix
  *           which upon return will contain the realization.
- * @param seed Unsigned long integer representing the initial
+ * @param seed uint32_t integer representing the initial
  *             random seed value. If zero, the seed is reset
  *             based on the current time.
  * @see localfn_random_uniform_phase
  * @private
  */
-static mutil_errcode localfn_random_normal( double_mat *x, unsigned long seed)
+static mutil_errcode localfn_random_normal( double_mat *x, uint32_t seed)
 {
   sint32         i;
   double        *pd_data;
@@ -742,13 +745,13 @@ static mutil_errcode localfn_random_normal( double_mat *x, unsigned long seed)
  * @param  x Pointer to a pre-allocated complex matrix
  *           which upon return will contain the complex weights
  *           needed for the circulant embedding technique.
- * @param seed Unsigned long integer representing the initial
+ * @param seed uint32_t integer representing the initial
  *             random seed value. If zero, the seed is reset
  *             based on the current time.
  * @see localfn_random_normal
  * @private
  */
-static mutil_errcode localfn_circulant_embedding_weights( dcomplex_mat *x, unsigned long seed )
+static mutil_errcode localfn_circulant_embedding_weights( dcomplex_mat *x, uint32_t seed )
 {
   dcomplex      *pz_weight;
   double         norm_real;
@@ -827,13 +830,13 @@ static mutil_errcode localfn_circulant_embedding_weights( dcomplex_mat *x, unsig
  *           containing the DFT of a time series.
  *           Upon return, the DFT series is replaced by one modulated
  *           with random phase.
- * @param seed Unsigned long integer representing the initial
+ * @param seed uint32_t integer representing the initial
  *             random seed value. If zero, the seed is reset
  *             based on the current time.
  * @see localfn_random_normal
  * @private
  */
-static mutil_errcode localfn_random_phase_weights( dcomplex_mat *x, unsigned long seed )
+static mutil_errcode localfn_random_phase_weights( dcomplex_mat *x, uint32_t seed )
 {
   dcomplex       product;
   dcomplex      *pz_phase;
@@ -926,13 +929,13 @@ static mutil_errcode localfn_random_phase_weights( dcomplex_mat *x, unsigned lon
  *           containing the DFT of a time series.
  *           Upon return, the DFT series is replaced by one modulated
  *           with random phase and amplitude.
- * @param seed Unsigned long integer representing the initial
+ * @param seed uint32_t integer representing the initial
  *             random seed value. If zero, the seed is reset
  *             based on the current time.
  * @see localfn_random_normal
  * @private
  */
-static mutil_errcode localfn_davison_hinkley_weights( dcomplex_mat *x, unsigned long seed )
+static mutil_errcode localfn_davison_hinkley_weights( dcomplex_mat *x, uint32_t seed )
 {
   dcomplex       z;
   dcomplex      *pz_phase;
@@ -1042,13 +1045,13 @@ static mutil_errcode localfn_davison_hinkley_weights( dcomplex_mat *x, unsigned 
  * @return Standard mutils error/OK code.
  * @param  x Pointer to a pre-allocated complex matrix
  *           which upon return will contain the realization.
- * @param seed Unsigned long integer representing the initial
+ * @param seed uint32_t integer representing the initial
  *             random seed value. If zero, the seed is reset
  *             based on the current time.
  * @see localfn_random_normal
  * @private
  */
-static mutil_errcode localfn_random_uniform_phase( dcomplex_mat *x, unsigned long seed )
+static mutil_errcode localfn_random_uniform_phase( dcomplex_mat *x, uint32_t seed )
 {
   sint32         i;
   double         deviate;
@@ -1224,19 +1227,20 @@ static mutil_errcode localfn_recenter_data(
 
 
 static double localfn_random_uniform_deviate_marsaglia(
-  unsigned long *pSeed )
+  uint32_t *pSeed )
 {
-  unsigned long number, number1, number2;
+  //uint32_t number, number1, number2;
+  uint32_t number, number1, number2;
+    
+  int16_t n, *p;
 
-  short n, *p;
-
-  unsigned short sNumber;
+  uint16_t sNumber;
 
   /* Initialize motheri with 9 random values the first time */
 
   if ( INITIALIZE_RANDOM_NUMBER_GENERATOR ){
 
-    sNumber = (unsigned short) (*pSeed & m16Mask);   /* The low 16 bits */
+    sNumber = (uint16_t) (*pSeed & m16Mask);   /* The low 16 bits */
     number  = *pSeed & m31Mask;   /* Only want 31 bits */
 
     p = mother1;
@@ -1245,12 +1249,12 @@ static double localfn_random_uniform_deviate_marsaglia(
 
       number = 30903 * sNumber + ( number >> 16 );   /* One line multiply-with-carry */
 
-      sNumber = (unsigned short) ( number & m16Mask );
+      sNumber = (uint16_t) ( number & m16Mask );
 
-      *p++ = (short) ( number & m16Mask );
+      *p++ = (int16_t) ( number & m16Mask );
 
       if ( n == 9 ){
-	p = mother2;
+	      p = mother2;
       }
     }
 
@@ -1265,13 +1269,15 @@ static double localfn_random_uniform_deviate_marsaglia(
 
   /* (void *) memmove( mother1 + 2, mother1 + 1, 8 * sizeof(short) ); */
   /* (void *) memmove( mother2 + 2, mother2 + 1, 8 * sizeof(short) ); */
-  memmove( mother1 + 2, mother1 + 1, 8 * sizeof(short) );
-  memmove( mother2 + 2, mother2 + 1, 8 * sizeof(short) );
+  memmove( mother1 + 2, mother1 + 1, 8 * sizeof(int16_t) );
+  memmove( mother2 + 2, mother2 + 1, 8 * sizeof(int16_t) );
 
   /* Put the carry values in numberi */
 
   number1 = mother1[ 0 ];
   number2 = mother2[ 0 ];
+  
+  /* printf("\nnumber1: %" PRIu32 ", mother1[0]: %" PRIi16 "\n", number1, mother1[0]); */
 
   /* Form the linear combinations */
 
@@ -1285,17 +1291,17 @@ static double localfn_random_uniform_deviate_marsaglia(
 
   /* Save the high bits of numberi as the new carry */
 
-  mother1[ 0 ] = (short) ( number1 / m16Long );
-  mother2[ 0 ] = (short) ( number2 / m16Long );
+  mother1[ 0 ] = (int16_t) ( number1 / m16Long );
+  mother2[ 0 ] = (int16_t) ( number2 / m16Long );
 
   /* Put the low bits of numberi into motheri[1] */
 
-  mother1[ 1 ] = (short) ( m16Mask & number1 );
-  mother2[ 1 ] = (short) ( m16Mask & number2 );
+  mother1[ 1 ] = (int16_t) ( m16Mask & number1 );
+  mother2[ 1 ] = (int16_t) ( m16Mask & number2 );
 
   /* Combine the two 16 bit random numbers into one 32 bit */
 
-  *pSeed = ( ( (long) mother1[ 1 ] ) << 16 ) + (long) mother2[ 1 ];
+  *pSeed = ( ( (int32_t) mother1[ 1 ] ) << 16 ) + (int32_t) mother2[ 1 ];
 
   /* Return a double value between 0 and 1 */
 
@@ -1312,7 +1318,7 @@ static double localfn_random_uniform_deviate_marsaglia(
  * per gaussian.
  */
 static double localfn_random_normal_deviate_marsaglia(
-  unsigned long *pSeed )
+  uint32_t *pSeed )
 {
 
   double rnormk, u, x2;
