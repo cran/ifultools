@@ -1711,6 +1711,7 @@ mutil_errcode matset_to_R_list( const mat_set *inset,
     trouble = matuniv_to_R_matrix( &(inset->mats[imat]),
       &tmpobj );
     if( trouble ){
+      UNPROTECT(1);
       return trouble;
     }
     /*LINTED: cast OK, checked range */
@@ -1984,6 +1985,7 @@ static int arrnum_get_pieces( SEXP robj, sint32 *ndim,
   if( !rdim ||
     !R_extract_integer( rdim, ndim, dims ) ||
     ( *ndim < 1 ) ){
+    UNPROTECT(1);
     return FALSE;
   }
   MUTIL_ASSERT( *dims );
@@ -1991,6 +1993,7 @@ static int arrnum_get_pieces( SEXP robj, sint32 *ndim,
   dimprod = 1;
   for( elem = 0; elem < *ndim; elem++ ){
     if( (*dims)[elem] <= 0 ){
+      UNPROTECT(1);
       return FALSE;
     }
     dimprod *= (*dims)[elem];
@@ -2002,6 +2005,7 @@ static int arrnum_get_pieces( SEXP robj, sint32 *ndim,
   if( R_extract_numeric( robj, &lngth, (double **) data_ptr ) ){
     *type = MUTIL_DOUBLE;
     MUTIL_ASSERT( *data_ptr );
+    UNPROTECT(1);
     if( lngth != dimprod ){
       return FALSE;
     }
@@ -2013,6 +2017,7 @@ static int arrnum_get_pieces( SEXP robj, sint32 *ndim,
   if( R_extract_integer( robj, &lngth, (sint32 **) data_ptr ) ){
     *type = MUTIL_SINT32;
     MUTIL_ASSERT( *data_ptr );
+    UNPROTECT(1);
     if( lngth != dimprod ){
       return FALSE;
     }
@@ -2024,6 +2029,7 @@ static int arrnum_get_pieces( SEXP robj, sint32 *ndim,
   if( R_extract_complex( robj, &lngth, (dcomplex **) data_ptr ) ){
     *type = MUTIL_DCOMPLEX;
     MUTIL_ASSERT( *data_ptr );
+    UNPROTECT(1);
     if( lngth != dimprod ){
       return FALSE;
     }

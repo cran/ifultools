@@ -1,4 +1,4 @@
-92ff295a80e410175b387cdd8ee849a8 *DESCRIPTION
+ac605d4325466811248826f0dcc5daa0 *DESCRIPTION
 e8c4e6541e7a3ca88535eb1979b713e1 *NAMESPACE
 dd0f3ad2c2612dd2ffb8ee52db7bc91a *R/it_calls.R
 93bbff47a90008bba0d39bd0898935f8 *R/it_mutils.R
@@ -183,7 +183,7 @@ ad5ce2d87accac6d059f92eef43f96fd *src/mth_stat.c
 0ec45ed2f942737ffa44cb6e02a7aa96 *src/sig_conv.c
 6086a12a8bdb8a95363c0338396fac65 *src/sig_tran.c
 cfaf9dd8c64a17d1b0da9e2703868a39 *src/sig_win.c
-f8fadfa391abfcb730736d88ccb6cbe4 *src/ut_RS.c
+bffc145ac1bec00a6214d3759820c7fe *src/ut_RS.c
 6f7c0901188fc50839356e900404dd99 *src/ut_alloc.c
 20cd62719fef26278a77b0c8215d0c80 *src/ut_debug.c
 a6d691a1878450ad80b6fc5d55a91339 *src/ut_err.c
