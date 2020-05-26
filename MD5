@@ -1,4 +1,4 @@
-ac605d4325466811248826f0dcc5daa0 *DESCRIPTION
+ee2f2e11f2235a6eae80c0e6d748d8fd *DESCRIPTION
 e8c4e6541e7a3ca88535eb1979b713e1 *NAMESPACE
 dd0f3ad2c2612dd2ffb8ee52db7bc91a *R/it_calls.R
 93bbff47a90008bba0d39bd0898935f8 *R/it_mutils.R
@@ -125,7 +125,7 @@ c9741a71782b30ede1495e3864724af7 *man/stackPlot.Rd
 2f4ab49548f5efbe966997c31b8cdc40 *man/stringSize.Rd
 7ece259c74bd900a1f696932ad726942 *man/variance.Rd
 0a7714b1194fe16c616061dda7c5188a *src/Makevars
-4036a37cfb1eee2526d5e4a6f1f18107 *src/RSInterface.h
+876f959354ff541e603f1a4690b4145e *src/RSInterface.h
 f9acded0dad332b71557507aefaf27e4 *src/RS_fra_dim.c
 a177aa2fc8b99dddc8a9ff12d3a0487a *src/RS_fra_fdp.c
 4f559c0b3642aa7118d0ff857b08a609 *src/RS_fra_filt.c
@@ -164,7 +164,7 @@ eb7dd6b5172480fa05bfed8b2bb25b9d *src/fra_surr.c
 9718ca151982ae466a0408181492c981 *src/fra_tdmi.c
 7eed144f7416e46c06654b8f4df6d9a8 *src/fra_util.c
 4ae04de7c6672a15bc8953d825060e03 *src/fra_util.h
-a37719476df6cc5f7ddc106abbc8ddf7 *src/init.c
+baacd9c5b82215093ef16c799cf8a82d *src/init.c
 891b6fd8c98399966b9cf5a40661c3d8 *src/mat_arit.c
 68f8a8071ba5ff56c324babf7e86dbcd *src/mat_assn.c
 e65d21660998067d84078e75eef7edc6 *src/mat_cast.c
@@ -200,7 +200,7 @@ fbc109356e1d5634afd8c18c45aca48c *src/wav_look.c
 caae40ce0c020742d79ec054fafb75b4 *src/wav_look.h
 04f8e34bafc00d29bba55d644214a031 *src/wav_math.c
 c42a5e198df7c292bde66eb1a11eeb73 *src/wav_math.h
-55d8b3f3b1fc6851a182f2ed5871d6ce *src/wav_modw.c
+78087cb29c1bad4d50ec8d6b56943f47 *src/wav_modw.c
 aabdae47765cfaac82966076cf40aa23 *src/wav_shrk.c
 9512aeb3e6302ace47e9332b640e0546 *src/wav_var.c
 a655ff99ed008b2893909268c8b06465 *src/wav_wtmm.c
