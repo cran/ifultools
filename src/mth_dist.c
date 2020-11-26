@@ -84,9 +84,11 @@ static double den[] = {
 #define ROOT_2PI     2.5066282746310005024157652848110452530070 /*2pi^1/2*/
 #define MVAR	     (sizeof(p_1)/sizeof(double))
 #define NVAR	     (sizeof(p_2)/sizeof(double))
+/*
 #define DOUBLE_EPS   2.2204460492503131E-16
 #define DOUBLE_XMIN  2.2250738585072014E-308
 #define DOUBLE_XMAX  1.7976931348623157E+308
+ */
 #define	IGAMMA_LARGE 1.0e30
 
 /* declare static functions */

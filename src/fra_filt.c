@@ -309,7 +309,7 @@ mutil_errcode frauniv_filter_nonlinear_local_projection(
   register sint32   *s32_ptr;
   register sint32    rdelay = delay;
   register sint32    rdim   = dim;
-  register sint32    idx;
+  register sint32    idx = 0 ;
   register sint32    nneig;
   register sint32    d;
   register sint32    i;

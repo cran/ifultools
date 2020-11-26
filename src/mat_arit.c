@@ -1425,8 +1425,8 @@ mutil_errcode matuniv_rescale( const univ_mat *mat_in,
 
   /* matrices must have same data types */
   if ( !MATUNIV_CHECK_TYPE( mat_in, mat_out ) ||
-       !MATUNIV_CHECK_TYPE( &max_val, mat_out ) ||
-       !MATUNIV_CHECK_TYPE( &min_val, mat_out ) ) {
+       !MATUNIV_CHECK_TYPE2( &max_val, mat_out ) ||
+       !MATUNIV_CHECK_TYPE2( &min_val, mat_out ) ) {
     MUTIL_ERROR( "Data types of operands and result must be the same" );
     return MUTIL_ERR_ILLEGAL_TYPE;
   }

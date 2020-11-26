@@ -363,6 +363,18 @@ extern mutil_errcode mutil_skip_comments( FILE *in_file, char sep_char,
           ERR_VAR = MUTIL_ERR_ILLEGAL_TYPE; \
         } \
         break; \
+      case MUTIL_FLOAT: \
+        MUTIL_ERROR( "Incompatible types for input and output, cannot cast" ); \
+        ERR_VAR = MUTIL_ERR_ILLEGAL_TYPE; \
+        break; \
+      case MUTIL_DOUBLE: \
+        MUTIL_ERROR( "Incompatible types for input and output, cannot cast" ); \
+        ERR_VAR = MUTIL_ERR_ILLEGAL_TYPE; \
+        break; \
+      case MUTIL_DCOMPLEX: \
+        MUTIL_ERROR( "Incompatible types for input and output, cannot cast" ); \
+        ERR_VAR = MUTIL_ERR_ILLEGAL_TYPE; \
+        break; \
     } /* end of switch on output type */ \
   } /* end of if/else to determine compatibility */
 

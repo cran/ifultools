@@ -121,8 +121,8 @@ mutil_errcode wavuniv_filters_continuous(
   double       *pd_freq;
   sint32        i;
   sint32        num_freqs;
-  double        std;
-  double        omega0;
+  double        std = 0.0;
+  double        omega0 = 0.0;
   double        num_ops = 0.0;
 
   MUTIL_INTERRUPT_INIT( intrp_ptr );
@@ -1583,7 +1583,7 @@ mutil_errcode wavuniv_filters_zero_phase(
   sint32          n;
   sint32          n_nodes;
   sint32          shift;
-  sint32          sym_case;
+  sint32          sym_case = 0;
   sint32          tauj;
   sint32         *ps_dwpt;
   sint32         *ps_dwt_scaling;

@@ -27,6 +27,8 @@ static char whatssi[] = "@(#) $File: //depot/Research/ifultools/pkg/ifultools/sr
 #include <stdio.h>
 #include <string.h>
 
+void *tmp ;
+
 /*
   This file contains function definitions for
   inferring deterministic structure in time series.
@@ -157,7 +159,6 @@ mutil_errcode frauniv_determinism_delta_epsilon(
   double        *pd_eps;
   double        *pd_cumeps;
   double        *pd_data;
-  void          *tmp;
 
   MUTIL_INTERRUPT_INIT( intrp_ptr );
 
@@ -530,7 +531,6 @@ static mutil_errcode localfn_calculate_Dij_I(
   mat_set       *result)
 {
   sint32 P;
-  sint32 Nr;
   sint32 d;
   sint32 bin;
   sint32 index;
@@ -543,7 +543,6 @@ static mutil_errcode localfn_calculate_Dij_I(
   double imagediffsum = 0.0;
 
   P  = n_embed - orbital_lag - 2 * image_lag;
-  Nr = P * ( P + 1 ) / 2;
     
   for ( d = 0; d < embedding_dimension; d++ ){
     

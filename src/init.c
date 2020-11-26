@@ -46,7 +46,7 @@ void R_init_rsmutils(DllInfo *dll)
 		{"RS_wavelets_filters_daubechies", 
 			(DL_FUNC) &RS_wavelets_filters_daubechies, 3},
 		{"RS_wavelets_filters_daubechies_gain", 
-			(DL_FUNC) &RS_wavelets_filters_daubechies_gain, 5},
+			(DL_FUNC) &RS_wavelets_filters_daubechies_gain, 6},
 		{"RS_wavelets_filter_zero_phase", 
 			(DL_FUNC) &RS_wavelets_filter_zero_phase, 3},
 		{"RS_wavelets_filters_continuous", 
@@ -122,10 +122,10 @@ void R_init_rsmutils(DllInfo *dll)
 			(DL_FUNC) &RS_fractal_kernel_density_estimate, 2},
 		// RS_fra_lyap.c
 		{"RS_fractal_local_lyapunov_spectrum", 
-			(DL_FUNC) &RS_fractal_local_lyapunov_spectrum, 11},
+			(DL_FUNC) &RS_fractal_local_lyapunov_spectrum, 10},
 		// RS_fra_modl.c
 		{"RS_fractal_determinism_delta_epsilon", 
-			(DL_FUNC) &RS_fractal_determinism_delta_epsilon, 9},
+			(DL_FUNC) &RS_fractal_determinism_delta_epsilon, 8},
 		// RS_fra.neig.c
 		{"RS_fractal_neighbor_find", 
 			(DL_FUNC) &RS_fractal_neighbor_find, 6},

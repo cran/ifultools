@@ -2498,8 +2498,6 @@ static mutil_errcode localfn_kdtree(
   void          *rand_ptr;
   mutil_errcode  err;
 
-  MUTIL_INTERRUPT_INIT( intrp_ptr );
-
   MUTIL_TRACE( "Start localfn_kdtree()" );
 
   /* initialize local memory list (this differs from the

@@ -286,10 +286,10 @@ MUTIL_WRAPEXPORT void mutil_abort();
  * The non-debug versions of the macros above -- expand to
  * null-operations if DEBUG is not defined.  See documentation above.
  */
-#define MUTIL_TRACE(MSG)
-#define MUTIL_WARN(MSG)
-#define MUTIL_ERROR(MSG)
-#define MUTIL_ASSERT(CONDITION)
+#define MUTIL_TRACE(MSG) do {} while (0)
+#define MUTIL_WARN(MSG) do {} while (0)
+#define MUTIL_ERROR(MSG) do {} while (0)
+#define MUTIL_ASSERT(CONDITION) do {} while (0)
 
 #endif /* ifdef DEBUG */
 

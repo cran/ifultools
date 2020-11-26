@@ -782,12 +782,13 @@ mutil_errcode wavuniv_transform_discrete_wavelet_convolution_inverse(
 
   /* set remaining pointers */
 
+  V      = Vtemp.mat.dblmat.data;
+  E = V ;
+  Vsynth = result->mat.dblmat.data;
+
   if ( n_extra > 0 ){
     E = dwt->mats[ n_level + 1 ].mat.dblmat.data;
   }
-
-  V      = Vtemp.mat.dblmat.data;
-  Vsynth = result->mat.dblmat.data;
 
   /* copy last level scaling coefficients into
      a temporary scaling vector*/
@@ -1375,7 +1376,7 @@ mutil_errcode wavuniv_transform_packet_inverse(
   sint32         parent_osc;
   sint32_mat     isort;
   univ_mat      *parent;
-  sint32         p;
+  sint32         p = 0;
   boolean        append_extra;
   boolean        any_extra;
 

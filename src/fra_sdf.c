@@ -103,7 +103,7 @@ mutil_errcode frauniv_spectral_density_function_direct(
   sint32         j;
   sint32         t;
   univ_mat       tapered_series;
-  sint32         nsdf;
+/*  sint32         nsdf; */
   sint32         n_sample;
   double_mat     mean;
 
@@ -161,7 +161,7 @@ mutil_errcode frauniv_spectral_density_function_direct(
   n_sample    = MATUNIV_NROW( time_series );
   n_series    = MATUNIV_NCOL( time_series );
   n_frequency = single_sided ? npad / 2 + 1 : npad;
-  nsdf       = n_series * ( n_series + 1 ) / 2;
+/*  nsdf       = n_series * ( n_series + 1 ) / 2; */
 
   /* allocate memory */
 
@@ -259,7 +259,7 @@ mutil_errcode frauniv_spectral_density_function_lag_window(
   sint32         j;
   sint32         N;
   sint32         nelem;
-  sint32         n_series;
+/*  sint32         n_series; */
   sint32         nsdf;
   sint32         t;
   univ_mat       sdf_direct;
@@ -327,7 +327,7 @@ mutil_errcode frauniv_spectral_density_function_lag_window(
   N = MATUNIV_NROW( time_series );
 
   nelem    = single_sided ? npad / 2 + 1 : npad;
-  n_series = MATUNIV_NCOL( time_series );
+/*  n_series = MATUNIV_NCOL( time_series ); */
   nsdf     = MATUNIV_NCOL( &sdf_direct );
 
   /* allocate memory */
@@ -474,9 +474,9 @@ mutil_errcode frauniv_spectral_density_function_wosa(
   sint32         block_size;
   sint32         i;
   sint32         j;
-  sint32         nelem;
+  /* sint32         nelem; */
   sint32         n_series;
-  sint32         nsdf;
+  /* sint32         nsdf; */
   sint32         n;
   sint32         row_start;
   univ_mat       sdf_direct;
@@ -532,9 +532,9 @@ mutil_errcode frauniv_spectral_density_function_wosa(
   n_block    = 1 + (sint32) floor( (double) ( n_sample - block_size ) /
     ( (double) block_size * ( 1.0 - overlap ) ) );
 
-  nelem    = single_sided ? npad / 2 + 1 : npad;
+  /* nelem    = single_sided ? npad / 2 + 1 : npad; */
   n_series = MATUNIV_NCOL( time_series );
-  nsdf    = n_series * ( n_series + 1 ) / 2;
+  /* nsdf    = n_series * ( n_series + 1 ) / 2; */
 
   fac = ( n_block == 1 ) ? 0.0 : (double) ( n_sample - block_size ) /
     (double) ( n_block - 1 );
@@ -692,7 +692,7 @@ mutil_errcode frauniv_spectral_density_function_multitaper(
   mutil_errcode  err;
   sint32         N;
   sint32         i;
-  sint32         nelem;
+/*  sint32         nelem; */
   sint32         ntaper;
   univ_mat       sdf_direct;
   univ_mat       subtaper;
@@ -715,7 +715,7 @@ mutil_errcode frauniv_spectral_density_function_multitaper(
   /* initialize variables */
 
   N     = MATUNIV_NROW( time_series );
-  nelem = single_sided ? npad / 2 + 1 : npad;
+/*  nelem = single_sided ? npad / 2 + 1 : npad; */
   ntaper = MATUNIV_NROW( taper );
 
   if ( MATUNIV_NCOL( taper ) != N ){
@@ -1044,8 +1044,6 @@ static mutil_errcode localfn_recenter_columns(
   mutil_errcode  err;
   sint32         i;
   sint32         j;
-
-  MUTIL_INTERRUPT_INIT( intrp_ptr );
 
   /* initialize memory list */
 

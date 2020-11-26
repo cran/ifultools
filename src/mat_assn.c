@@ -176,7 +176,7 @@ mutil_errcode matuniv_assign_scalar( univ_scalar scalar, void *intrp_ptr,
     return MUTIL_ERR_NULL_POINTER;
   }
 
-  if(!MATUNIV_CHECK_TYPE(mat, &scalar)){
+  if(!MATUNIV_CHECK_TYPE2(&scalar, mat)){
     MUTIL_ERROR("Data types of operand and result are inconsistent");
     return MUTIL_ERR_ILLEGAL_TYPE;
   }
@@ -927,7 +927,7 @@ mutil_errcode matuniv_translate( const univ_mat *matrix,
     return MUTIL_ERR_ILLEGAL_TYPE;
   }
 
-  if(!MATUNIV_CHECK_TYPE(matrix, &pad_value )) {
+  if(!MATUNIV_CHECK_TYPE2(&pad_value, matrix)) {
     MUTIL_ERROR("Data types of matrix and pad value are inconsistent");
     return MUTIL_ERR_ILLEGAL_TYPE;
   }

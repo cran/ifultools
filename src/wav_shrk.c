@@ -121,7 +121,7 @@ mutil_errcode wavuniv_shrink(
   mat_set        wavelet_transform;
   sint32         j;
   sint32         n_sample;
-  sint32         n_level_threshold;
+  sint32         n_level_threshold = 0;
   /* sint32         iminimax; */
 
   MUTIL_INTERRUPT_INIT( intrp_ptr );
@@ -784,7 +784,7 @@ static mutil_errcode localdef_sure(
   memlist        list;
   mutil_errcode  err;
   sint32         Nj;
-  sint32         irisk_min;
+  sint32         irisk_min = 0;
   sint32         j;
   sint32         ncol;
   sint32         nrow;

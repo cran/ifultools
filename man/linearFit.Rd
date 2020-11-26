@@ -1,16 +1,17 @@
-%%  WARNING: This file was automatically generated from the associated 
-%%  it_util.mid file. Do NOT edit this Rd file to make a change. Instead, 
-%%  edit the it_util.mid file in the project MID directory. Once the 
-%%  it_util.mid file has been updated, this Rd file, and all other 
-%%  documentation (such as corresponding LaTeX, SGML and HTML documentation) 
-%%  should be regenerated using the mid.pl Perl script. 
+%%  WARNING: This file was automatically generated from the associated
+%%  it_util.mid file. Do NOT edit this Rd file to make a change. Instead,
+%%  edit the it_util.mid file in the project MID directory. Once the
+%%  it_util.mid file has been updated, this Rd file, and all other
+%%  documentation (such as corresponding LaTeX, SGML and HTML documentation)
+%%  should be regenerated using the mid.pl Perl script.
 
 %% R documentation for the linearFit function
 
 \name{linearFit}
 \alias{linearFit}
 \title{Linear regression of a segmented time series}
-\concept{segmentation, linear}
+\concept{segmentation}
+\concept{linear}
 \usage{linearFit(x, y, fit=lmsreg, method="widest",
     n.fit=5, angle.tolerance=5, aspect=TRUE)}
 \description{Segments the time series in approximately linear regions
@@ -74,17 +75,16 @@ the regression model.
 \code{\link{logScale}}.}
 
 \examples{
-## obtain some data with approximately 
-## piecewise-linear trends 
+## obtain some data with approximately
+## piecewise-linear trends
 x <- seq(0,2*pi,length=100)
 y <- sin(x)
 
-## perform linear segmentation with aspect ratio 
-## dilation using a 5 degree tolerance and 5 
-## point windows. regress the widest of these 
-## segments with the lm() function. 
+## perform linear segmentation with aspect ratio
+## dilation using a 5 degree tolerance and 5
+## point windows. regress the widest of these
+## segments with the lm() function.
 linearFit(x, y, n.fit=5, angle.tolerance=5, aspect=TRUE,
     method="widest", fit=lm)
 }
 \keyword{utilities}
-

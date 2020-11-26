@@ -1,15 +1,21 @@
 Package: ifultools
 Title: Insightful Research Tools
-Version: 2.0-5.1
-Authors@R: person("William", "Constantine", email = "wlbconstan@gmail.com", role = c("cre", "aut"))
+Version: 2.0-19
+Authors@R: c(person(given = "William", family = "Constantine", role = "aut"),
+  person(given = "Stephen", family = "Kaluzny", role = c("aut", "cre"),
+    email = "spkaluzny@gmail.com"))
 Depends: R (>= 3.0.2)
 Imports: MASS, methods, splus2R (>= 1.2-0)
-Description: Insightful Research Tools.
+Description: Insightful Research Tools is a collection of signal processing,
+  image processing, and time series modeling routines written in the C
+  language for speed and efficency. The routines were originally developed at
+  Insightful for use in S-PLUS. 
 License: GPL-2
 Collate: it_mutils.R it_plot.R it_util.R it_calls.R package.R
 Repository: CRAN
 NeedsCompilation: yes
-Packaged: 2020-05-26 07:57:59 UTC; ripley
-Author: William Constantine [cre, aut]
-Maintainer: ORPHANED
-Date/Publication: 2020-05-26 09:59:47
+Packaged: 2020-11-26 02:15:46 UTC; spk
+Author: William Constantine [aut],
+  Stephen Kaluzny [aut, cre]
+Maintainer: Stephen Kaluzny <spkaluzny@gmail.com>
+Date/Publication: 2020-11-26 11:00:02 UTC

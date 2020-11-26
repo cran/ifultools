@@ -588,7 +588,7 @@ mutil_errcode wavuniv_transform_packet_detail(
   sint32         j;
   sint32         k;
   sint32         l;
-  sint32         level_max;
+  sint32         level_max = 0;
   sint32         m;
   sint32         n;
   sint32         n_extra;
@@ -791,8 +791,8 @@ mutil_errcode wavuniv_transform_packet_detail(
      i.e. we need to access the stored extra
      scaling coefficients in reverse order. */
 
+  pd_extra = transform->mats[ transform->nelem - 1 ].mat.dblmat.data ;
   if ( is_dwt & ( n_extra > 0 ) ){
-
     pd_extra =
       transform->mats[ transform->nelem - 1 ].mat.dblmat.data +
       n_extra - 1;
@@ -963,7 +963,7 @@ mutil_errcode wavuniv_transform_packet_detail(
 
           /*          is_child = (boolean) ( ( level - j ) == 0 ); */
 
-          if ( ( (!is_child) && is_multiply_inheritable ) | is_child ){
+          if ( ( (!is_child) & is_multiply_inheritable ) | is_child ){
 
           /* the current level is separated from the original
             by at least two and we are multiply inheritable */
