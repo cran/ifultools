@@ -1,6 +1,6 @@
 Package: ifultools
 Title: Insightful Research Tools
-Version: 2.0-19
+Version: 2.0-22
 Authors@R: c(person(given = "William", family = "Constantine", role = "aut"),
   person(given = "Stephen", family = "Kaluzny", role = c("aut", "cre"),
     email = "spkaluzny@gmail.com"))
@@ -11,11 +11,13 @@ Description: Insightful Research Tools is a collection of signal processing,
   language for speed and efficency. The routines were originally developed at
   Insightful for use in S-PLUS. 
 License: GPL-2
+URL: https://github.com/spkaluzny/ifultools
+BugReports: https://github.com/spkaluzny/ifultools/issues
 Collate: it_mutils.R it_plot.R it_util.R it_calls.R package.R
 Repository: CRAN
 NeedsCompilation: yes
-Packaged: 2020-11-26 02:15:46 UTC; spk
+Packaged: 2020-12-03 23:08:29 UTC; spk
 Author: William Constantine [aut],
   Stephen Kaluzny [aut, cre]
 Maintainer: Stephen Kaluzny <spkaluzny@gmail.com>
-Date/Publication: 2020-11-26 11:00:02 UTC
+Date/Publication: 2020-12-07 22:30:06 UTC
