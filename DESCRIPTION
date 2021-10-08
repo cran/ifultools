@@ -1,6 +1,6 @@
 Package: ifultools
 Title: Insightful Research Tools
-Version: 2.0-22
+Version: 2.0-23
 Authors@R: c(person(given = "William", family = "Constantine", role = "aut"),
   person(given = "Stephen", family = "Kaluzny", role = c("aut", "cre"),
     email = "spkaluzny@gmail.com"))
@@ -16,8 +16,8 @@ BugReports: https://github.com/spkaluzny/ifultools/issues
 Collate: it_mutils.R it_plot.R it_util.R it_calls.R package.R
 Repository: CRAN
 NeedsCompilation: yes
-Packaged: 2020-12-03 23:08:29 UTC; spk
+Packaged: 2021-10-07 01:18:10 UTC; spk
 Author: William Constantine [aut],
   Stephen Kaluzny [aut, cre]
 Maintainer: Stephen Kaluzny <spkaluzny@gmail.com>
-Date/Publication: 2020-12-07 22:30:06 UTC
+Date/Publication: 2021-10-08 08:10:06 UTC

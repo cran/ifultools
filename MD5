@@ -1,4 +1,4 @@
-25d30820d7dd5b0325e4a48f3aa963d1 *DESCRIPTION
+f4fa20360caf2c351e2419064e99d573 *DESCRIPTION
 e8c4e6541e7a3ca88535eb1979b713e1 *NAMESPACE
 bfe142a773f422e8e425fa139ff7d19f *R/it_calls.R
 93bbff47a90008bba0d39bd0898935f8 *R/it_mutils.R
@@ -124,7 +124,7 @@ cca9aca0d8942ce3c4e0403d661b44ac *man/splitplot.Rd
 c9741a71782b30ede1495e3864724af7 *man/stackPlot.Rd
 2f4ab49548f5efbe966997c31b8cdc40 *man/stringSize.Rd
 7ece259c74bd900a1f696932ad726942 *man/variance.Rd
-0a7714b1194fe16c616061dda7c5188a *src/Makevars
+7892cce768937fe27e8f1db19dae2592 *src/Makevars
 876f959354ff541e603f1a4690b4145e *src/RSInterface.h
 f9acded0dad332b71557507aefaf27e4 *src/RS_fra_dim.c
 a177aa2fc8b99dddc8a9ff12d3a0487a *src/RS_fra_fdp.c
