@@ -16,7 +16,7 @@
 integration scheme.}
 
 \arguments{
-\item{FUN}{a function defining the sytem of ODEs. This function should have as an
+\item{FUN}{a function defining the system of ODEs. This function should have as an
 input X, where X is a vector whose length is equal to the order of the ODEs. It should
 return a value for each order (state) of the system.}
 \item{...}{additional arguments sent directly to \code{FUN}.}
@@ -28,7 +28,7 @@ By default, this value is \code{NULL}, in which case \code{FUN} is called with a
 \item{n.sample}{the number of desired samples for each state beyond that specified for the
 transient ala \code{n.transient}. Default: 1000.}
 
-\item{n.transient}{the numeber of transient points. These points are excluded from the
+\item{n.transient}{the number of transient points. These points are excluded from the
 output. Default: 100.}
 
 \item{step}{a numerical integration time step. Default: 0.1.}

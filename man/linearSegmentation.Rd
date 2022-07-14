@@ -50,11 +50,11 @@ of the data (defined by \code{range(y) / range(x)}) is used to adjust
 the \code{angle.tolerance}. Specifically, the new angle tolerance becomes
 \code{angle.tolerance / aspect.ratio}. Using the
 aspect ratio to dilate \code{angle.tolerance} allows the user
-to specify the degree of variablity they wish to impose
+to specify the degree of variability they wish to impose
 on the data vis-a-vis a standard plot of the data, i.e. what
 you would see if you issued \code{plot(xdata, ydata)}.
 The idea is that when looking at such plots, one might
-decide (for example) that a 5 degree variablity on the plot
+decide (for example) that a 5 degree variability on the plot
 would be acceptable. But if that range of \code{y} is vastly
 different from that of \code{x}, then the true change in angle
 from one section to the other will be much different than 5 degrees.

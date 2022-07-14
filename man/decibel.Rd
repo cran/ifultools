@@ -20,9 +20,9 @@
 zero values are replaced with NAs prior to converting to decibels, avoiding an error when
 attempting to take the logarithm of zero.}
 
-\item{type}{an integer signifying the decible form to use in the conversion.
+\item{type}{an integer signifying the decibel form to use in the conversion.
 If \code{type=1} \eqn{10 * log10(x)} is used to convert the input
-and \eqn{20 * log10(x)} isued for \code{type=2}.}
+and \eqn{20 * log10(x)} is used for \code{type=2}.}
 }
 
 \value{

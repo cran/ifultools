@@ -12,7 +12,7 @@
 \title{Time series aggregation}
 \concept{data aggregation}
 \usage{aggregateData(x, by, FUN, moving=FALSE, ...)}
-\description{Partitions data into blocks and and applies the specifed function to each of the bocks.}
+\description{Partitions data into blocks and and applies the specified function to each of the blocks.}
 
 \arguments{
 \item{x}{a numeric vector.}

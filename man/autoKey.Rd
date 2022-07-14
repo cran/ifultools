@@ -54,7 +54,7 @@ quadrant (as defined by \code{sparsetQuadrant})
 is used to place the key. This function
 does not take into consideration lines connecting
 the data points and only considers the spatial distribution
-of the points in the x-y plane. Futhermore, this function
+of the points in the x-y plane. Furthermore, this function
 assumes that \code{par("usr")} is approximately \code{c(range(x),range(y))},
 i.e., that the user will not explicitly make space outside
 span of the data to place the key. In this case, the user

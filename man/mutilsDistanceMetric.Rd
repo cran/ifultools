@@ -23,7 +23,7 @@ Supported values are 1, 2 and \code{Inf}.}
 }
 
 \value{
-an integer representing the equivalent MUTILS enumerated type for the specifed metric.
+an integer representing the equivalent MUTILS enumerated type for the specified metric.
 }
 \seealso{
 \code{\link{mutilsFilterType}}, \code{\link{mutilsFilterTypeContinuous}}, \code{\link{mutilsSDF}}, \code{\link{mutilsTransformPeakType}}, \code{\link{mutilsTransformType}}, \code{\link{mutilsWSShrinkageFunction}}, \code{\link{mutilsWSThresholdFunction}}.}

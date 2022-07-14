@@ -89,6 +89,12 @@ static double den[] = {
 #define DOUBLE_XMIN  2.2250738585072014E-308
 #define DOUBLE_XMAX  1.7976931348623157E+308
  */
+
+/* DOUBLE_* defines were deprecated in R 4.2.0 and removed in 4.3.0 */
+#define DOUBLE_DIGITS  DBL_MANT_DIG
+#define DOUBLE_EPS     DBL_EPSILON
+#define DOUBLE_XMAX    DBL_MAX
+#define DOUBLE_XMIN    DBL_MIN
 #define	IGAMMA_LARGE 1.0e30
 
 /* declare static functions */

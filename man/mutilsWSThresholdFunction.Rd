@@ -9,7 +9,7 @@
 
 \name{mutilsWSThresholdFunction}
 \alias{mutilsWSThresholdFunction}
-\title{Converts wavelet shrinkage theshold function to MUTILS enum type}
+\title{Converts wavelet shrinkage threshold function to MUTILS enum type}
 \concept{utilities}
 \usage{mutilsWSThresholdFunction(x)}
 \description{MUTILS is a C library used for certain \code{itCall} functions.
@@ -23,7 +23,7 @@ Choices are \code{"universal"}, \code{"minimax"}, and \code{"adaptive"}.}
 }
 
 \value{
-a list containg objects \code{index} and \code{threshfun},
+a list containing objects \code{index} and \code{threshfun},
 containing an integer corresponding to the MUTILS enum and name
 of the waveshrink threshold function, respectively.
 }

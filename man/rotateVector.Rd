@@ -12,7 +12,7 @@
 \title{Circularly vector rotation}
 \concept{utilities}
 \usage{rotateVector(x, shift=1)}
-\description{Circularly rotates elememnts in a vector.}
+\description{Circularly rotates elements in a vector.}
 
 \arguments{
 \item{x}{a vector.}

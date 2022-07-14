@@ -5,6 +5,7 @@
 #ifndef IN_UT_RS_H
 #define IN_UT_RS_H
 
+
 /* This file contains definitions of functions used to convert
    R and S-PLUS objects to and from MUTILS data structures, so that
    R and S-PLUS functions can access MUTILS libraries.  The functions are
@@ -16,7 +17,6 @@ extern "C" {
 #endif
 
 // COMMENTED OUT
-//
 // /* S.h has a typedef for boolean -- ours is different.  If you
 //   want to use the S.h version, call it LOCAL_S5_boolean in
 //   any functions that include this header file */
@@ -57,6 +57,10 @@ it is defined */
 #include "fra_type.h"
 #include "mat_type.h"
 #include "sig_type.h"
+
+
+/* Added for R-4.2.0 as PROBLEM/ERROR macros were dropped from R */
+#include "r_S_Error.h"
 
 /** R PROBLEM/ERROR messaging for the err message returned
  * by a call to any of the MUTILS libraries.

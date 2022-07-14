@@ -32,7 +32,7 @@ its placement in a plot. Default: 0.5 (center aligned).}
 a list of x- and y-vectors that can be used to estimate the
 width and height, respectively, of the input character string in the current
 par("usr") coordinates. Each vector contains a relative starting and ending
-value and the absolute difference between the two values repesents the span
+value and the absolute difference between the two values represents the span
 in the corresponding direction.
 }
 \note{A graphics window will open up if one is not already opened.}
